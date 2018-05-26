@@ -1,0 +1,164 @@
+export CONFIG_HOME=$HOME/dotbox/config
+
+if [[ -x /usr/local/bin/brew ]]; then
+  export BREW_PREFIX=/usr/local
+else
+  export BREW_PREFIX=/home/linuxbrew/.linuxbrew
+fi
+
+for f in $CONFIG_HOME/shell/*.sh; do
+  [[ -f $f ]] && source "$f"
+done
+
+if [[ -d $HOME/repos/mackup/bin ]]; then
+  for f in $HOME/repos/mackup/bin/env-*.sh; do
+    [[ -f $f ]] && source "$f"
+  done
+fi
+
+#=-> oh-my-zsh
+export ZSH=/opt/bundles/zsh
+DISABLE_AUTO_UPDATE=true
+ZSH_DISABLE_COMPFIX=true
+# ZSH_THEME="spaceship"
+
+plugins=(
+  # conda-zsh-completion
+  # direnv
+  # docker
+  # docker-compose
+  # git-auto-fetch
+  # golang
+  # history
+  # z
+  common-aliases
+  extract
+  git
+  pip
+  systemadmin
+  zsh-autosuggestions
+  zsh-completions
+  zsh-syntax-highlighting
+)
+
+#=-> [zsh-theme] space-ship
+# SPACESHIP_DIR_TRUNC=5
+# SPACESHIP_DIR_TRUNC_REPO=false
+# SPACESHIP_CHAR_PREFIX="%F{cyan}(${MARK}) "
+# SPACESHIP_CHAR_SUFFIX=" "
+# SPACESHIP_USER_COLOR=blue
+# SPACESHIP_DOCKER_SHOW=false
+# SPACESHIP_DOTNET_SHOW=false
+# SPACESHIP_ELIXIR_SHOW=false
+# SPACESHIP_ELM_SHOW=false
+# SPACESHIP_GOLANG_SHOW=false
+# SPACESHIP_JULIA_SHOW=false
+# SPACESHIP_PHP_SHOW=false
+# SPACESHIP_RUBY_SHOW=false
+# SPACESHIP_RUST_SHOW=false
+# SPACESHIP_SWIFT_SHOW_LOCAL=false
+# SPACESHIP_TIME_SHOW=true
+# SPACESHIP_XCODE_SHOW_LOCAL=false
+
+#=-> [zsh-plugin] z
+# _Z_CMD=j
+# _Z_DATA="conf/.z/$MY_HOST_NAME.$(id -u).z"
+# _Z_NO_RESOLVE_SYMLINKS=1
+
+#=-> [zsh-plugin] zsh-autosuggestions
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=40
+ZSH_AUTOSUGGEST_USE_ASYNC=1
+# for hyper-hypest/iterm2 https://jonasjacek.github.io/colors/
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=244"
+
+#=-> start oh-my-zsh
+source ${ZSH}/oh-my-zsh.sh
+
+eval "$(starship init zsh)"
+command -v direnv >/dev/null && eval "$(direnv hook zsh)"
+# command -v atuin >/dev/null && eval "$(atuin init zsh)"
+command -v navi >/dev/null && eval "$(navi widget zsh)"
+command -v zoxide >/dev/null && eval "$(zoxide init zsh --hook prompt --cmd j)"
+
+#=-> acme
+# CHECK_AND_SOURCE /opt/acme/acme.sh.env
+
+#=-> pip
+# Autogen by: pip completion --zsh
+# function _pip_completion {
+#   local words cword
+#   read -Ac words
+#   read -cn cword
+#   reply=($(COMP_WORDS="$words[*]" \
+#     COMP_CWORD=$((cword - 1)) \
+#     PIP_AUTO_COMPLETE=1 $words[1] 2>/dev/null))
+# }
+# compctl -K _pip_completion pip
+# compctl -K _pip_completion pip3
+
+#=-> fzf, NOTE: must after start oh-my-zsh
+# for linux
+# CHECK_AND_SOURCE /usr/share/doc/fzf/examples/completion.zsh
+# CHECK_AND_SOURCE /usr/share/doc/fzf/examples/key-bindings.zsh
+# for homebrew
+CHECK_AND_SOURCE $BREW_PREFIX/opt/fzf/shell/completion.zsh
+CHECK_AND_SOURCE $BREW_PREFIX/opt/fzf/shell/key-bindings.zsh
+
+#=-> conda, GEN by `conda init zsh`, https://stackoverflow.com/questions/40370467/anaconda-not-found-in-zsh
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/conda/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
+if [ $? -eq 0 ]; then
+  eval "$__conda_setup"
+else
+  if [ -f "/opt/conda/etc/profile.d/conda.sh" ]; then
+    . "/opt/conda/etc/profile.d/conda.sh"
+  else
+    export PATH="/opt/conda/bin:$PATH"
+  fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+# FIXME: remove -u
+# why: why add -u to compinit?
+# ref: https://stackoverflow.com/questions/13762280/zsh-compinit-insecure-directories
+# for error:
+#   zsh compinit: insecure directories, run compaudit for list.
+#   Ignore insecure directories and continue [y] or abort compinit [n]?
+# autoload -zU compinit && compinit -u
+autoload -U compinit && compinit -u
+
+compdef _bb bb bbup bb4 bb4up bbcl bbclup
+
+# zstyle ':completion:*' menu select
+# unset zle_bracketed_paste
+
+#=-> zsh history
+# https://zsh.sourceforge.io/Doc/Release/Options.html
+# setopt | grep hist
+# export HISTORY_IGNORE="(?|??|???|????|* --help|* --version|agf *)"
+# export HISTORY_IGNORE="(?|??)"
+# HISTFILE="conf/.history/$MY_HOST_NAME.$(id -u).zsh_history"
+HISTSIZE=30000
+SAVEHIST=20000
+setopt EXTENDED_HISTORY
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_FIND_NO_DUPS
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_BEEP
+# setopt noextendedhistory
+# setopt nosharehistory
+
+unalias ls
+alias ls=exa
+unalias l
+alias l='ls -lFh --git'
+unalias la
+alias la='ls -lFha --git'
+# unalias fd
+# test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+export LS_COLORS=
