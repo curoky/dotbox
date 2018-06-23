@@ -1,0 +1,42 @@
+name: clover
+version: '1'
+sort: by_weight
+
+import_tables:
+  - ../../../../../../../opt/bundles/rime/clover.base
+  - ../../../../../../../opt/bundles/rime/clover.phrase
+  # - ../../../../../../../opt/bundles/rime/s.luna_pinyin.anime
+  - ../../../../../../../opt/bundles/rime/s.luna_pinyin.basis
+  - ../../../../../../../opt/bundles/rime/s.luna_pinyin.biaoqing
+  - ../../../../../../../opt/bundles/rime/s.luna_pinyin.chat
+  - ../../../../../../../opt/bundles/rime/s.luna_pinyin.classical
+  # - ../../../../../../../opt/bundles/rime/s.luna_pinyin.cn_en
+  - ../../../../../../../opt/bundles/rime/s.luna_pinyin.computer
+  - ../../../../../../../opt/bundles/rime/s.luna_pinyin.daily
+  # - ../../../../../../../opt/bundles/rime/s.luna_pinyin.diet
+  # - ../../../../../../../opt/bundles/rime/s.luna_pinyin.game
+  # - ../../../../../../../opt/bundles/rime/s.luna_pinyin.gd
+  - ../../../../../../../opt/bundles/rime/s.luna_pinyin.hanyu
+  - ../../../../../../../opt/bundles/rime/s.luna_pinyin.history
+  - ../../../../../../../opt/bundles/rime/s.luna_pinyin.idiom
+  # - ../../../../../../../opt/bundles/rime/s.luna_pinyin.moba
+  # - ../../../../../../../opt/bundles/rime/s.luna_pinyin.movie
+  # - ../../../../../../../opt/bundles/rime/s.luna_pinyin.music
+  - ../../../../../../../opt/bundles/rime/s.luna_pinyin.name
+  - ../../../../../../../opt/bundles/rime/s.luna_pinyin.net
+  - ../../../../../../../opt/bundles/rime/s.luna_pinyin.poetry
+  - ../../../../../../../opt/bundles/rime/s.luna_pinyin.practical
+  - ../../../../../../../opt/bundles/rime/s.luna_pinyin.sougou
+  - ../../../../../../../opt/bundles/rime/s.luna_pinyin.website
+  - ../../../../../../../opt/bundles/rime/sogou_new_words
+  - ../../../../../../../opt/bundles/rime/THUOCL_animal
+  - ../../../../../../../opt/bundles/rime/THUOCL_caijing
+  - ../../../../../../../opt/bundles/rime/THUOCL_car
+  - ../../../../../../../opt/bundles/rime/THUOCL_chengyu
+  - ../../../../../../../opt/bundles/rime/THUOCL_diming
+  - ../../../../../../../opt/bundles/rime/THUOCL_food
+  - ../../../../../../../opt/bundles/rime/THUOCL_IT
+  - ../../../../../../../opt/bundles/rime/THUOCL_law
+  - ../../../../../../../opt/bundles/rime/THUOCL_lishimingren
+  - ../../../../../../../opt/bundles/rime/THUOCL_medical
+  - ../../../../../../../opt/bundles/rime/THUOCL_poem

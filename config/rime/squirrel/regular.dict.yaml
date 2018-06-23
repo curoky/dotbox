@@ -1,0 +1,12 @@
+name: regular
+version: '1'
+sort: by_weight
+use_preset_vocabulary: true
+
+---
+吧	ba	100000000
+是	shi	100000000
+确实	que shi	100000000
+必现	bi xian	100000000
+是的	shi de	100000000
+确实	que shi	100000000
