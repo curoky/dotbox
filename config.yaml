@@ -1,0 +1,304 @@
+actions:
+  fix-sshd-host-key-permissions: chmod 600 /etc/ssh/ssh_host*
+  fix-ssh_config-permissions: chmod 600 config/ssh/config
+config:
+  banner: false
+  dotpath: config
+  link_dotfile_default: link
+  link_on_import: link
+trans_read:
+  _decrypt:
+    openssl enc -aes-256-cbc -nosalt -d -pbkdf2 -in {0} -out {1} -pass pass:{{@@
+    env['SECRET'] @@}}
+trans_write:
+  _encrypt:
+    openssl enc -aes-256-cbc -nosalt -pbkdf2 -in {0} -out {1} -pass pass:{{@@
+    env['SECRET'] @@}}
+dotfiles:
+  apt-proxy:
+    dst: /etc/apt/apt.conf.d/proxy
+    link: nolink
+    src: apt/proxy
+  bash_logout:
+    dst: ~/.bash_logout
+    src: shell/bash_logout
+  bashrc:
+    dst: ~/.bashrc
+    src: shell/bashrc
+  bat:
+    dst: ~/.config/bat
+    src: bat
+  bazel:
+    dst: ~/.bazelrc
+    src: bazelrc
+  cargo:
+    dst: ~/.cargo/config.toml
+    src: cargo/config.toml
+  ccache:
+    dst: ~/.config/ccache
+    src: ccache
+  clang-format:
+    dst: ~/.clang-format
+    src: clang-format
+  cmake-format:
+    dst: ~/.cmake-format.json
+    src: cmake-format.json
+  conan:
+    dst: ~/.conan
+    src: conan
+  conda:
+    dst: ~/.condarc
+    src: condarc
+  crontab:
+    dst: /etc/cron.d/custom.crontab
+    link: nolink
+    src: crontab/custom.crontab
+  dircolors:
+    dst: ~/.dircolors
+    src: dircolors
+  docker:
+    dst: ~/.docker/config.json
+    src: docker/config.json
+  docker-d:
+    dst: /etc/docker/daemon.json
+    link: nolink
+    src: docker/daemon.json
+  docker-proxy:
+    dst: /etc/systemd/system/docker.service.d/http-proxy.conf
+    link: nolink
+    src: docker/http-proxy.conf
+  dolthub:
+    dst: ~/.dolt/config_global.json
+    src: dolthub/config_global.json
+  git-config:
+    dst: ~/.gitconfig
+    src: git/.gitconfig
+  git-key:
+    dst: ~/dotbox/config/ssh/id_rsa-github.origin
+    src: ssh/id_rsa-github
+    trans_read: _decrypt
+    trans_write: _encrypt
+    link: nolink
+    chmod: '600'
+  go:
+    dst: ~/.config/go
+    src: go
+  golangci:
+    dst: ~/.golangci.yaml
+    src: golangci.yaml
+  goproxy-systemd:
+    dst: /lib/systemd/system/goproxy.service
+    link: nolink
+    src: goproxy/goproxy.service
+  gost-d:
+    dst: /etc/gost/daemon.json
+    link: nolink
+    src: gost/daemon.json
+  gost-systemd:
+    dst: /lib/systemd/system/gost.service
+    link: nolink
+    src: gost/gost.service
+  gradle:
+    dst: ~/.gradle/gradle.properties
+    src: gradle/gradle.properties
+  helix:
+    dst: ~/.config/helix/config.toml
+    src: helix/config.toml
+  httpbin:
+    dst: /lib/systemd/system/go-httpbin.service
+    link: nolink
+    src: httpbin/go-httpbin.service
+  hyper:
+    dst: ~/.hyper.js
+    src: hyper.js
+  isort:
+    dst: ~/.isort.cfg
+    src: isort.cfg
+  jupyter:
+    dst: ~/.jupyter
+    src: jupyter
+  linux-environment:
+    dst: /etc/environment
+    link: nolink
+    src: linux/environment
+  linux-journal:
+    dst: /etc/systemd/journald.conf
+    link: nolink
+    src: linux/journald.conf
+  linux-profile:
+    dst: /etc/profile.d/custom.sh
+    link: nolink
+    src: linux/profile.d/custom.sh
+  linux-sudoers:
+    dst: /etc/sudoers.d/custom
+    link: nolink
+    src: linux/sudoers.d/custom
+  linux-sysctl-1:
+    dst: /etc/sysctl.d/10-ptrace.conf
+    link: nolink
+    src: linux/sysctl.d/10-ptrace.conf
+  linux-sysctl-2:
+    dst: /etc/sysctl.d/custom.conf
+    link: nolink
+    src: linux/sysctl.d/custom.conf
+  markdownlint:
+    dst: ~/.markdownlintrc
+    src: markdownlintrc
+  maven:
+    dst: ~/.m2/settings.xml
+    src: maven/settings.xml
+  navi:
+    dst: ~/.config/navi
+    src: navi
+  navi-cheats:
+    dst: ~/.local/share/navi/cheats/local
+    src: navi-cheats
+  neofetch:
+    dst: ~/.config/neofetch
+    src: neofetch
+  pip:
+    dst: ~/.config/pip
+    src: pip
+  prettier:
+    dst: ~/.prettierrc.yaml
+    src: prettierrc.yaml
+  procps:
+    dst: ~/.config/procps
+    src: procps
+  profile:
+    dst: ~/.profile
+    src: shell/profile
+  pylintrc:
+    dst: ~/.config/pylintrc
+    src: pylintrc
+  rime:
+    dst: ~/Library/Rime
+    src: rime/squirrel
+  rubocop:
+    dst: ~/.rubocop.yml
+    src: rubocop.yml
+  shellcheck:
+    dst: ~/.shellcheckrc
+    src: shellcheckrc
+  snipaste:
+    dst: ~/.snipaste/config.ini
+    src: snipaste/config.ini
+  ssh-authorized-key:
+    dst: ~/.ssh/authorized_keys
+    src: ssh/authorized_keys
+  ssh-d:
+    dst: /etc/ssh/sshd_config.d/custom.conf
+    link: nolink
+    src: ssh/sshd-custom.conf
+  ssh-host-key:
+    actions:
+      - fix-sshd-host-key-permissions
+    dst: /etc/ssh
+    link: nolink
+    src: ssh/host-key
+  ssh-config:
+    dst: ~/.ssh/config
+    actions:
+      - fix-ssh_config-permissions
+    src: ssh/config
+  startship:
+    dst: ~/.config/starship.toml
+    src: starship.toml
+  tabby:
+    dst: ~/Library/Application Support/tabby
+    src: tabby
+  terminalizer:
+    dst: ~/.terminalizer
+    src: terminalizer
+  tmux:
+    dst: ~/.tmux.conf
+    src: tmux/tmux.conf
+  tmux-local:
+    dst: ~/.tmux.conf.local
+    src: tmux/tmux.conf.local
+  vimrc:
+    dst: ~/.vimrc
+    src: vimrc
+  vscode:
+    dst: ~/Library/Application Support/Code/User
+    src: vscode/app
+  vscode-server:
+    dst: ~/.vscode-server/data/Machine/settings.json
+    src: vscode/remote-server-settings.json
+  vscode-remote:
+    dst: ~/.vscode-remote/data/Machine/settings.json
+    src: vscode/remote-server-settings.json
+  yapf:
+    dst: ~/.style.yapf
+    src: style.yapf
+  yarn:
+    dst: ~/.yarnrc
+    src: yarnrc
+  zprofile:
+    dst: ~/.zprofile
+    src: shell/zprofile
+  zshrc:
+    dst: ~/.zshrc
+    src: shell/zshrc
+profiles:
+  sysconf:
+    dotfiles:
+      - docker-d
+      - linux-environment
+      - linux-journal
+      - linux-profile
+      - linux-sudoers
+      - linux-sysctl-1
+      - linux-sysctl-2
+      - ssh-d
+      - ssh-host-key
+
+  sysconf-proxy:
+    dotfiles:
+      - apt-proxy
+      - docker-proxy
+
+  devbox:
+    dotfiles:
+      - bazel
+      - cargo
+      - clang-format
+      - conan
+      - conda
+      - docker
+      - dolthub
+      - git-config
+      - gradle
+      - helix
+      - isort
+      - maven
+      - prettier
+      - procps
+      - profile
+      - ssh-authorized-key
+      - ssh-config
+      - tmux
+      - vimrc
+      - vscode-remote
+      - vscode-server
+      - yapf
+      - zprofile
+      - zshrc
+
+  macos:
+    dotfiles:
+      - git-config
+      - git-key
+      - helix
+      - prettier
+      - profile
+      - ssh-authorized-key
+      - ssh-config
+      - yapf
+      - zprofile
+      - zshrc
+      # GUI-APP
+      - hyper
+      - rime
+      - snipaste
+      - vscode
