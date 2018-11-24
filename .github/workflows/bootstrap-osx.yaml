@@ -1,0 +1,37 @@
+name: Bootstrap OSX
+
+on:
+  push:
+  schedule:
+    - cron: '0 0 28 * *'
+  workflow_dispatch:
+
+jobs:
+  main:
+    runs-on: macos-latest
+    env:
+      HOMEBREW_NO_ANALYTICS: 1
+      HOMEBREW_NO_AUTO_UPDATE: 1
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v3
+        if: 'false'
+        with:
+          python-version: '3.x'
+          cache: 'pip'
+
+      - run: pip3 install opencc
+
+      - run: bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+      - run: curl -sSL https://raw.githubusercontent.com/curoky/dotbox/master/config/brew/Brewfile.osx | brew bundle --file=- --cleanup
+
+      # - run: script/osx-hack.sh
+
+      - run: sudo mkdir /opt/bundles && sudo chown -R $(whoami) /opt/bundles
+
+      - run: ./images/script/setup-bundles.sh /opt/bundles
+
+      - run: ./bootstrap.sh
+        env:
+          SECRET: ${{ secrets.BOOTSTRAP_TOKEN }}
