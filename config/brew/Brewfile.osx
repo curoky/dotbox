@@ -1,0 +1,59 @@
+tap 'homebrew/cask'
+tap 'homebrew/cask-fonts'
+tap 'go-task/tap'
+tap 'tidwall/jj'
+tap 'helix-editor/helix'
+tap 'thought-machine/please'
+tap 'facebook/fb'
+tap 'curoky/python2'
+
+# brew list --cask | xargs -n 1 | sort -u | awk '{ print "\x27"$1"\x27""," }'
+casks = [
+  'android-platform-tools',
+  'db-browser-for-sqlite',
+  'disk-drill',
+  # 'flameshot',
+  'font-fira-code-nerd-font',
+  'font-ubuntu-mono-nerd-font',
+  'google-chrome',
+  'google-drive',
+  'hyper',
+  'istat-menus',
+  'netnewswire',
+  'notion',
+  'snipaste',
+  'sqlitestudio',
+  'squirrel',
+  'visual-studio-code',
+]
+extend_casks = [
+  # launcher & command palette
+  'sol',
+  # screen shot
+  'flameshot',
+  # menu bar
+  'anybar',
+  # download manager
+  'motrix',
+  # terminal
+  'warp',
+  # calendar
+  'itsycal',
+  'michaelvillar-timer', 'chromedriver',
+]
+
+casks.each do |b|
+  cask b
+end
+
+brews = [
+  'git-absorb', 'starship', 'node', 'fzf', 'python@3', 'openssl', 'exa', 'bat'
+]
+
+extend_brews = [
+  'yapf', 'shfmt', 'prettier', 'pre-commit', 'ncdu', 'mas', 'gost', 'git-extras',
+]
+
+brews.each do |b|
+  brew b
+end

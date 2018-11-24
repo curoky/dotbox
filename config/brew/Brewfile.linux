@@ -1,0 +1,46 @@
+tap 'go-task/tap'
+tap 'tidwall/jj'
+tap 'helix-editor/helix'
+tap 'thought-machine/please'
+tap 'facebook/fb'
+tap 'curoky/python2'
+tap 'charmbracelet/tap'
+
+brews_core = [
+  # build system
+  'autoconf', 'automake', 'libtool', 'pkg-config', 'make', 'cmake', 'ninja', 'distcc', 'ccache',
+  'scons', 'meson', 'ant', 'thought-machine/please/please', 'bazel',
+  'conan', 'poetry', 'yarn', 'pipenv', 'gradle', 'maven', 'spack',
+  # linter
+  'pre-commit', 'prettier', 'yapf', 'shfmt', 'buildifier', 'eslint', # 'clang-format',
+  # language
+  'gcc', 'llvm', 'lua', 'python@2', 'python@3', 'node', 'go', 'perl', 'ruby', 'rustup-init',
+  'openjdk@8', 'openjdk@11', 'openjdk', 'thrift', 'vlang', 'dotnet',
+  # git
+  'git', 'lazygit', 'git-absorb', 'git-extras', 'git-lfs',
+  # compression
+  'bzip2', 'xz', 'zstd', 'zip', 'unzip',
+  # network tools
+  'iproute2', 'iputils', 'net-tools', 'netcat', 'lsof', 'htop', 'connect', 'procps', 'gost', 'goproxy',
+  # shell tools
+  'zsh', 'dotdrop', 'starship', 'direnv', 'asciinema', 'tmux', 'tmuxinator',
+  # text editor
+  'flex', 'bison', 'gettext', 'm4', 'gpatch', 'tidwall/jj/jj', 'jq',
+  'vim', 'helix-editor/helix/helix',
+  # others
+  'wget', 'aria2', 'rsync',
+  'gdb', 'ncdu', 'file', 'the_silver_searcher', 'gperf', 'watchman', 'nnn', 'ranger',
+  'exa', 'fzf', 'bat', 'cloc', 'atuin', 'go-task', 'krb5', 'less', 'navi', 'ghq', 'lcov', 'gcovr',
+  'docker-compose', 'opencc', 'dolt', 'include-what-you-use', 'mold', 'parallel', 'fd',
+  'wishlist', 'coreutils', 'sqlcipher', 'sqlite3',
+  # static website generator
+  'hexo', 'mkdocs', 'sphinx-doc', 'hugo'
+]
+
+brews_ext = [
+  'facebook/fb/buck',
+]
+
+brews_core.each do |b|
+  brew b
+end

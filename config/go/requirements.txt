@@ -1,0 +1,38 @@
+# For vscode go extensions
+# curl -sSL "https://raw.githubusercontent.com/golang/vscode-go/master/src/goToolsInformation.ts" | grep "importPath: '" | grep --only-matching "'[^']*'" | tr -d "'" | awk '{print $0 "@latest"}'
+github.com/mdempsky/gocode@latest
+github.com/stamblerre/gocode@latest
+github.com/ramya-rao-a/go-outline@latest
+github.com/acroca/go-symbols@latest
+golang.org/x/tools/cmd/guru@latest
+golang.org/x/tools/cmd/gorename@latest
+github.com/fatih/gomodifytags@latest
+github.com/haya14busa/goplay/cmd/goplay@latest
+github.com/josharian/impl@latest
+github.com/tylerb/gotype-live@latest
+github.com/rogpeppe/godef@latest
+github.com/zmb3/gogetdoc@latest
+mvdan.cc/gofumpt/gofumports@v0.1.1
+mvdan.cc/gofumpt@latest
+golang.org/x/tools/cmd/goimports@latest
+github.com/sqs/goreturns@latest
+winterdrache.de/goformat/goformat@latest
+github.com/cweill/gotests/gotests@latest
+golang.org/x/lint/golint@latest
+honnef.co/go/tools/cmd/staticcheck@latest
+github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+github.com/mgechev/revive@latest
+golang.org/x/tools/gopls@latest
+github.com/go-delve/delve/cmd/dlv@latest
+github.com/davidrjenni/reftools/cmd/fillstruct@latest
+github.com/godoctor/godoctor@latest
+
+# Some tools
+github.com/abice/go-enum@latest
+github.com/apache/skywalking-eyes/cmd/license-eye@latest
+github.com/bazelbuild/bazel-gazelle/cmd/gazelle@latest
+github.com/gobuffalo/packr/v2/packr2@latest
+github.com/mccutchen/go-httpbin/v2/cmd/go-httpbin@latest
+github.com/mna/pigeon@latest
+github.com/onsi/ginkgo/v2/ginkgo@latest
+github.com/google/wire/cmd/wire@latest

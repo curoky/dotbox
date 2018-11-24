@@ -1,0 +1,90 @@
+absl-py
+aiofiles
+aiohttp[speedups]
+bqplot
+cmakelang
+conan
+dynaconf[all]
+fastapi[all]
+gevent
+GitPython
+giturlparse
+gpxpy
+icalendar
+icecream
+id-validator
+ipykernel
+ipyleaflet
+ipywidgets
+jinja2
+kafka-python
+lxml
+lz4
+matplotlib
+memray
+mljar-mercury
+msgpack
+numpy
+opencc
+pandas
+parse
+plotly
+psutil
+pydantic
+pydantic_yaml
+PyGithub
+pypinyin
+PySocks
+pytest
+python-consul
+python-dateutil
+pytz
+requests
+rich
+scikit-learn
+seaborn
+six
+srtm.py
+thrift
+thriftpy2
+tornado
+tqdm
+typer[all]
+virtualenv
+voila
+yapf
+zhdate
+
+git+https://github.com/pinterest/thrift-tools
+
+# deepdiff
+# anytree
+# pypinyin
+# pysnooper
+# scrapy
+# selenium
+# bullet
+# colorama
+# cryptography
+# diagrams
+# eliot
+# fabric
+# importlib_metadata
+# jieba
+# kazoo
+# prettytable
+# prompt_toolkit
+# pyfiglet
+# pymongo
+# pynacl
+# python-frontmatter
+# raven
+# schedule
+# tabula-py
+# tensorflow
+# thrift==0.9.2
+# typer-cli
+# types-fb303
+
+# https://gith1ub.com/curoky/DockerHub-API/archive/master.zip
+# git+https://github.com/facebook/fbthrift.git#subdirectory=thrift/lib/py/
