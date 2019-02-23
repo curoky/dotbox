@@ -1,0 +1,59 @@
+ARG OS="ubuntu:21.04"
+ARG OS_SHORT="ubuntu21.04"
+
+FROM curoky/homebrew:${OS_SHORT} AS homebrew
+FROM curoky/vcpkg:${OS_SHORT} AS vcpkg
+FROM ${OS}
+
+LABEL Author=cccuroky@gmail.com
+
+ARG BOOTSTRAP_TOKEN=
+
+ENV PATH=/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH \
+  LANG=en_US.UTF-8 \
+  LANGUAGE=en_US.UTF-8 \
+  LC_ALL=en_US.UTF-8 \
+  HOMEBREW_NO_ANALYTICS=1 \
+  HOMEBREW_NO_AUTO_UPDATE=1 \
+  HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1 \
+  DEBIAN_FRONTEND=noninteractive \
+  SECRET=${BOOTSTRAP_TOKEN}
+
+# g=u doesn't really work. https://github.com/moby/buildkit/issues/1951
+COPY --chown=root:adm --chmod=g=u ./script /opt/dotbox/script
+
+RUN apt-get update -qq \
+  && apt-get dist-upgrade -y -qq \
+  && apt-get install -y -qq --no-install-recommends \
+    sudo ca-certificates curl git \
+    gcc g++ gcc-11 g++-11 \
+    man iptables locales tzdata gnupg2 init systemd openssh-server rsyslog cron \
+    language-pack-zh-hans \
+  && /opt/dotbox/script/setup-locale.sh \
+  && /opt/dotbox/script/setup-timezone.sh \
+  && /opt/dotbox/script/setup-docker.sh \
+  && /opt/dotbox/script/setup-user.sh \
+  && /opt/dotbox/script/setup-tools.sh \
+  && yes | unminimize
+
+COPY --chown=curoky:curoky --chmod=g=u --from=homebrew /home/linuxbrew /home/linuxbrew
+COPY --chown=curoky:curoky --chmod=g=u --from=vcpkg /opt/vcpkg /opt/vcpkg
+
+USER curoky
+RUN sudo chown curoky:curoky /opt \
+  && git clone -b dev --depth=1 https://github.com/curoky/dotbox.git ~/dotbox \
+  && /opt/dotbox/script/setup-pkg-brew.sh \
+  && /opt/dotbox/script/setup-pkg-py.sh 'pip3' \
+  && ~/dotbox/bootstrap.sh devbox \
+  && /opt/dotbox/script/setup-pkg-rust.sh \
+  && /opt/dotbox/script/setup-pkg-go.sh
+
+USER worker
+RUN git clone -b dev --depth=1 https://github.com/curoky/dotbox.git ~/dotbox \
+  && ~/dotbox/bootstrap.sh devbox
+
+USER root
+RUN /home/curoky/dotbox/bootstrap.sh sysconf \
+  && systemctl enable go-httpbin
+
+ENTRYPOINT ["/opt/dotbox/script/entrypoint.sh"]

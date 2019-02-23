@@ -1,0 +1,34 @@
+FROM ubuntu:22.04
+
+LABEL org.opencontainers.image.authors="cccuroky@gmail.com"
+
+ENV PATH=/opt/conda/bin:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH \
+  LANG=en_US.UTF-8 \
+  LANGUAGE=en_US.UTF-8 \
+  LC_ALL=en_US.UTF-8 \
+  HOMEBREW_NO_ANALYTICS=1 \
+  HOMEBREW_NO_AUTO_UPDATE=1 \
+  HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1 \
+  DEBIAN_FRONTEND=noninteractive
+
+# g=u doesn't really work. https://github.com/moby/buildkit/issues/1951
+COPY --chown=1000:1000 --chmod=g=u --from=homebrew/brew:latest /home/linuxbrew /home/linuxbrew
+COPY --chown=1000:1000 --chmod=g=u --from=curoky/vcpkg:ubuntu22.04 /opt/vcpkg /opt/vcpkg
+COPY --chown=1000:1000 --chmod=g=u --from=ghcr.io/conda/conda-ci:master-linux-python3.10 /opt/conda /opt/conda
+COPY ./script /opt/dotbox/script
+COPY ./site.yaml /opt/dotbox/site.yaml
+COPY ./config /opt/dotbox/config
+COPY ./config.yaml /opt/dotbox/config.yaml
+
+RUN apt-get update -qq \
+  && apt-get install -y -qq --no-install-recommends \
+    ansible python3-apt file \
+  && yes | unminimize \
+  && ansible-galaxy collection install community.general \
+  && ansible-playbook -vvv /opt/dotbox/site.yaml \
+  # clean cache and temporary package
+  && apt-get purge -y ansible python3-apt file git \
+  && apt-get autoremove -y \
+  && rm -rf /root/.ansible
+
+ENTRYPOINT ["/opt/dotbox/script/entrypoint.sh"]

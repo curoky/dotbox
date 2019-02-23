@@ -1,0 +1,190 @@
+- hosts: localhost
+  vars:
+    users:
+      - {
+          name: cicada,
+          id: 1000,
+          groups: 'sudo,adm,docker',
+          dotbox: /home/cicada/dotbox,
+        }
+      - {
+          name: worker,
+          id: 1001,
+          groups: 'sudo,adm,docker,cicada',
+          dotbox: /home/worker/dotbox,
+        }
+
+  environment:
+    PATH: /opt/conda/bin:/home/linuxbrew/.linuxbrew/bin:{{ ansible_env.PATH }}
+    # SECRET: '{{ ansible_env.SECRET }}'
+    # HOMEBREW_STDERR: '1'
+    HOMEBREW_NO_ANALYTICS: '1'
+    HOMEBREW_NO_AUTO_UPDATE: '1'
+    HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: '1'
+
+  tasks:
+    - name: Install software with APT
+      apt:
+        pkg:
+          - sudo
+          - ca-certificates
+          - curl
+          - git
+          - gcc
+          - g++
+          - gcc-12
+          - g++-12
+          - man
+          - iptables
+          - locales
+          - tzdata
+          - gnupg2
+          - init
+          - systemd
+          - openssh-server
+          - rsyslog
+          # - language-pack-zh-hans
+          # - cron
+          # - xfce4
+          # - xfce4-goodies
+          # - tightvncserver
+
+    - name: Ensure a locale exists
+      community.general.locale_gen:
+        name: en_US.UTF-8
+
+    - name: Set timezone to Asia/Shanghai
+      community.general.timezone:
+        name: Asia/Shanghai
+
+    - name: Install docker
+      ansible.builtin.shell: sh -c "$(curl -fsSL https://get.docker.com/)"
+
+    - name: Prepare users
+      block:
+        - name: Update root password
+          user:
+            name: root
+            password: 123456
+
+        - name: Add groups
+          ansible.builtin.group:
+            name: '{{ item.name }}'
+            gid: '{{ item.id }}'
+          with_items: '{{ users }}'
+
+        - name: Add users
+          ansible.builtin.user:
+            name: '{{ item.name }}'
+            uid: '{{ item.id }}'
+            group: '{{ item.name }}'
+            password: 123456
+            groups: '{{ item.groups }}'
+            append: yes
+            shell: /home/linuxbrew/.linuxbrew/bin/zsh
+          with_items: '{{ users }}'
+
+        - name: Add the user to sudoers
+          community.general.sudoers:
+            name: ansible_sudoers_{{ item.name }}
+            user: '{{ item.name }}'
+            runas: ALL:ALL
+            commands: ALL
+            state: present
+          with_items: '{{ users }}'
+
+    - name: Setup dotdrop
+      ansible.builtin.shell: brew install dotdrop
+      become: true
+      become_user: cicada
+
+    - name: Setup dotbox
+      block:
+        - ansible.builtin.git:
+            repo: https://github.com/curoky/dotbox.git
+            dest: '{{ item }}/dotbox'
+            version: master
+          with_items:
+            - /root
+            - /home/cicada
+            - /home/worker
+
+        - ansible.builtin.file:
+            path: '{{ item.dotbox }}'
+            owner: '{{ item.name }}'
+            group: '{{ item.name }}'
+            recurse: true
+          with_items: '{{ users }}'
+
+        - ansible.builtin.shell:
+            cmd: cd ~/dotbox && dotdrop install --force --profile=devbox
+          become: true
+          become_user: '{{ item }}'
+          with_items:
+            - root
+            - cicada
+            - worker
+
+    - name: Setup sysconf
+      ansible.builtin.shell: dotdrop install --force --profile=sysconf
+
+    - name: Change /opt ownership
+      ansible.builtin.file:
+        path: /opt
+        owner: cicada
+        group: cicada
+
+    - block:
+        - name: Brew doctor
+          ansible.builtin.shell: brew doctor || echo ignore
+
+        - name: Install brew package
+          ansible.builtin.shell: /opt/dotbox/script/setup-pkg-brew.sh
+
+        - name: Install python package
+          ansible.builtin.shell: pip3 install --no-cache-dir -q -r /opt/dotbox/config/pip/requirements.txt
+
+        - name: Install npm package
+          ansible.builtin.shell: npm i -g docsify-cli
+
+        - name: Install rust package
+          ansible.builtin.shell: |
+            rustup-init -y --no-modify-path --component rls
+            # rustup component add rls
+
+        - name: Install go package
+          ansible.builtin.shell: CC=gcc CXX=g++ /opt/dotbox/script/setup-pkg-go.sh
+
+        - name: Download bundles
+          ansible.builtin.shell: /opt/dotbox/script/setup-bundles.sh /opt/bundles
+
+        - name: Prepare conda environment
+          ansible.builtin.shell: echo
+
+      become: true
+      become_user: cicada
+
+    - block:
+        - name: Noop
+          ansible.builtin.shell: echo
+
+      become: true
+      become_user: worker
+
+    # - name: Checkout repo mackup
+    #   git:
+    #     repo: git@github.com:curoky/mackup
+    #     version: dev
+    #     dest: /home/curoky/repos/mackup
+
+    # - name: Setup mackup
+    #   ansible.builtin.shell: cd ~/repos/mackup && ./bootstrap.sh
+
+    # - name: Download tools
+    #   get_url:
+    #     url: https://github.com/curoky/static-binaries/releases/download/v1.2.0/{{ item }}
+    #     dest: /usr/local/bin/{{ item }}
+    #     mode: '0755'
+    #   with_items:
+    #     - clang-format-14.0.0
+    #     - thrift-0.15.0
