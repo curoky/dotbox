@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -xeuo pipefail
+
+if [[ $1 == "enable" ]]; then
+  sudo cp ~/dotbox/config/docker/http-proxy.conf \
+    /etc/systemd/system/docker.service.d/http-proxy.conf
+elif [[ $1 == "disable" ]]; then
+  sudo rm -rf /etc/systemd/system/docker.service.d/http-proxy.conf
+else
+  echo "Usage: docker-switch-proxy [enable|disable]"
+  exit 1
+fi
+
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+sudo systemctl show --property=Environment docker
