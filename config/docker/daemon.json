@@ -1,0 +1,11 @@
+{
+  "experimental": true,
+  "features": {
+    "buildkit": true
+  },
+  "ipv6": false,
+  "insecure-registries": [],
+  "max-concurrent-downloads": 16,
+  "max-concurrent-uploads": 16,
+  "data-root": "/opt/docker"
+}
