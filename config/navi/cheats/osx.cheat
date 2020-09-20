@@ -1,0 +1,32 @@
+% osx, clean-dns
+
+# OS X 12 (Sierra) and later
+sudo killall -HUP mDNSResponder \
+  && sudo killall mDNSResponderHelper \
+  && sudo dscacheutil -flushcache
+
+# OS X 11 (El Capitan) and OS X 12 (Sierra)
+sudo killall -HUP mDNSResponder
+
+# Versions 10.10.4+
+sudo dscacheutil -flushcache \
+  && sudo killall -HUP mDNSResponder
+
+# Versions 10.10.1, 10.10.2, 10.10.3
+sudo discoveryutil udnsflushcaches
+
+# OS X 10.9 (Mavericks)
+dscacheutil -flushcache \
+  && sudo killall -HUP mDNSResponder
+
+# OS X 10.7 (Lion) and 10.8 (Mountain Lion)
+sudo killall -HUP mDNSResponder
+
+# OS X 10.5 (Leopard) and 10.6 (Snow Leopard)
+dscacheutil -flushcache
+
+# OS X 10.4 (Tiger)
+lookupd -flushcache
+
+% osx, restart audio
+sudo launchctl kickstart -kp system/com.apple.audio.coreaudiod

@@ -1,0 +1,23 @@
+% linux, get-ip
+
+# show ip with ip
+ip route | grep 'eth2' | grep -v default | awk '{print $NF}'
+
+# show ipv4 with ifconfig
+ifconfig 'eth2' | grep 'inet ' | awk '{print $2}'
+
+# show ipv6 with ifconfig
+⁣ifconfig 'eth2' | grep 'inet6' | grep global | awk '{print $2}'
+
+% linux, http-server
+
+# python2
+python -m SimpleHTTPServer 8000
+
+# python3
+python3 -m http.server 8000 --bind 127.0.0.1
+
+% systemd, show
+
+# list unit files
+sudo systemctl list-unit-files

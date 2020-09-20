@@ -1,0 +1,20 @@
+% docker, proxy
+
+# show http proxy
+systemctl show --property=Environment docker
+
+% docker, clean
+# remove all docker images
+docker rmi "$(docker images -q)"
+
+% docker, install
+sh -c "$(curl -fsSL https://get.docker.com/)"
+
+% docker, uninstall
+# Uninstall old versions
+# Older versions of Docker were called docker, docker.io, or docker-engine. If these are installed, uninstall them:
+apt-get remove docker docker-engine docker.io containerd runc
+
+# Uninstall Docker Engine
+# Uninstall the Docker Engine, CLI, and Containerd packages:
+apt-get purge docker-ce docker-ce-cli containerd.io

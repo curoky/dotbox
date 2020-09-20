@@ -1,0 +1,9 @@
+% json, format
+
+# format json
+python -m json.tool <json_file>
+
+% gcc, info
+
+# show gcc info
+gcc -E -xc++ - -v

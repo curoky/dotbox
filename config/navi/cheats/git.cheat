@@ -1,0 +1,38 @@
+% git, reauthor
+
+# git reauthor --use-config --old-email $WORK_EMAIL
+# git reauthor --use-config --old-email $OLD_EMAIL
+git reauthor --all --use-config
+
+% git, patch
+
+# curl https://github.com/Homebrew/brew/compare/master...curoky:custom_path.diff | git -C ./brew apply -v
+curl <url> | git apply -v
+
+% git, commit
+
+# absolute date => git commit --date="May 7 9:05:20 2016 +0800" -m "commit"
+git commit --date="<date>" -m "<commit>"
+
+# relative date => git commit --date="$(date -d "+6 hour" -R)" -m "commit"
+git commit --date="$(date -d "<rel> hour" -R)" -m "<commit>"
+
+% git, log
+
+# show file list on special commit id (git diff-tree)
+git diff-tree --no-commit-id --name-only -r <commit_id>
+
+# show file list on special commit id (git show)
+git show --pretty="" --name-only <commit_id>
+
+# https://stackoverflow.com/questions/31997999/number-of-commits-between-two-commitishes
+# number-of-commits-between-two-commitishes
+git rev-list --count <A>..<B>
+
+% git, show
+
+# show cloned repo's default branch
+git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'
+
+# show github repo's default branch
+git ls-remote --symref <github_url> HEAD
