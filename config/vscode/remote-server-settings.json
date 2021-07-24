@@ -1,0 +1,55 @@
+{
+  "C_Cpp.clang_format_path": "/home/linuxbrew/.linuxbrew/bin/clang-format",
+  "C_Cpp.codeAnalysis.maxConcurrentThreads": 32,
+  "C_Cpp.codeAnalysis.maxMemory": 50000,
+  "C_Cpp.intelliSense.maxCachedProcesses": 120,
+  "C_Cpp.intelliSense.maxMemory": 50000,
+  "C_Cpp.intelliSenseCacheSize": 51200,
+  "C_Cpp.intelliSenseMemoryLimit": 16384,
+  "C_Cpp.maxCachedProcesses": 120,
+  "C_Cpp.maxConcurrentThreads": 32,
+  "C_Cpp.maxMemory": 50000,
+  "[cpp]": {
+    "editor.tabSize": 2
+  },
+  "bazel.buildifierExecutable": "/home/linuxbrew/.linuxbrew/opt/buildifier/bin/buildifier",
+  "bazel.executable": "/home/linuxbrew/.linuxbrew/opt/bazelisk/bin/bazel",
+  "clang-format.executable": "/home/linuxbrew/.linuxbrew/bin/clang-format",
+  "clang-format.fallbackStyle": "Google",
+  "cmake.cmakePath": "/home/linuxbrew/.linuxbrew/bin/cmake",
+  "cmake.ctestPath": "/home/linuxbrew/.linuxbrew/bin/ctest",
+  "cmakeFormat.exePath": "/home/linuxbrew/.linuxbrew/bin/cmake-format",
+  "cpplint.cpplintPath": "/home/linuxbrew/.linuxbrew/bin/cpplint",
+  "git.path": "/home/linuxbrew/.linuxbrew/bin/git",
+  "go.alternateTools": {
+    "go": "/home/linuxbrew/.linuxbrew/opt/go/bin/go"
+  },
+  "http.proxySupport": "off",
+  "java.configuration.runtimes": [
+    // {
+    //   "name": "JavaSE-11",
+    //   "path": "/home/linuxbrew/.linuxbrew/opt/openjdk@11/libexec"
+    // },
+    {
+      "default": true,
+      "name": "JavaSE-18",
+      "path": "/home/linuxbrew/.linuxbrew/opt/openjdk/libexec"
+    }
+  ],
+  "java.import.gradle.home": "/home/linuxbrew/.linuxbrew/opt/gradle/libexec/",
+  "java.jdt.ls.java.home": "/home/linuxbrew/.linuxbrew/opt/openjdk/",
+  "jupyter.widgetScriptSources": ["jsdelivr.com", "unpkg.com"],
+  "markdown-preview-enhanced.pandocPath": "/home/linuxbrew/.linuxbrew/opt/pandoc/bin/pandoc",
+  "prettier.prettierPath": "/home/linuxbrew/.linuxbrew/opt/prettier/libexec/lib/node_modules/prettier/",
+  "python.defaultInterpreterPath": "/opt/conda/bin/python",
+  "python.formatting.yapfPath": "/home/linuxbrew/.linuxbrew/opt/yapf/bin/yapf",
+  "remote.autoForwardPortsSource": "output",
+  "ruby.interpreter.commandPath": "/home/linuxbrew/.linuxbrew/opt/ruby/bin/ruby",
+  "ruby.pathToBundler": "/home/linuxbrew/.linuxbrew/opt/ruby/bin/bundle",
+  // "ruby.useBundler": true,
+  "shellcheck.executablePath": "/home/linuxbrew/.linuxbrew/opt/shellcheck/bin/shellcheck",
+  "shellformat.path": "/home/linuxbrew/.linuxbrew/opt/shfmt/bin/shfmt",
+  "sqlite.sqlite3": "/home/linuxbrew/.linuxbrew/opt/sqlite/bin/sqlite3",
+  "typescript.npm": "/home/linuxbrew/.linuxbrew/bin/npm",
+  "xml.java.home": "/home/linuxbrew/.linuxbrew/opt/openjdk/"
+}
