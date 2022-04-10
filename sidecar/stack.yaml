@@ -1,0 +1,105 @@
+version: '3.9'
+
+volumes:
+  data-volume:
+
+services:
+  httpbin:
+    image: kennethreitz/httpbin
+    restart: unless-stopped
+    ports:
+      - '3200:80'
+
+  local-http-proxy:
+    image: ginuerzh/gost
+    restart: unless-stopped
+    network_mode: 'host'
+    logging:
+      driver: none
+    # ports:
+    #   - '3004:3004'
+    command: -L http://:3004
+
+  bazel-remote-cache:
+    image: buchgr/bazel-remote-cache
+    restart: unless-stopped
+    user: root
+    volumes:
+      - data-volume:/data/cache
+    ports:
+      - '3100:8080'
+      - '3101:9092'
+    command: --max_size=10 --dir=/data/cache
+
+  voila-1:
+    image: curoky/my-own-x:jupyter-voila
+    restart: unless-stopped
+    # user: root
+    ports:
+      - '3301:8866'
+    command: https://raw.githubusercontent.com/curoky/my-own-x/dev/app/jupyter/voila/timestamp.ipynb
+
+  voila-2:
+    image: curoky/my-own-x:jupyter-voila
+    restart: unless-stopped
+    # user: root
+    ports:
+      - '3302:8866'
+    command: https://raw.githubusercontent.com/curoky/my-own-x/dev/app/jupyter/voila/encoding.ipynb
+
+  voila-3:
+    image: curoky/my-own-x:jupyter-voila
+    restart: unless-stopped
+    # user: root
+    ports:
+      - '3303:8866'
+    command: https://raw.githubusercontent.com/curoky/my-own-x/dev/app/jupyter/voila/id-card.ipynb
+
+  # zeronet:
+  #   image: nofish/zeronet
+  #   restart: unless-stopped
+  #   ports:
+  #     - '43110:43110'
+  #     - '15441:15441'
+  #   volumes:
+  #     - data-volume:/root/data
+
+  # atuin:
+  #   restart: always
+  #   image: ghcr.io/ellie/atuin:main
+  #   command: server start
+  #   volumes:
+  #     - './config:/config'
+  #   links:
+  #     - atuin-db:db
+  #   ports:
+  #     - 8888:8888
+  #   environment:
+  #     ATUIN_HOST: '0.0.0.0'
+  #     ATUIN_OPEN_REGISTRATION: 'true'
+  #     ATUIN_DB_URI: postgres://atuin:atuin_password@db/atuin
+
+  # atuin-db:
+  #   image: postgres:14
+  #   restart: unless-stopped
+  #   ports:
+  #     - 5432:5432
+  #   volumes: # Don't remove permanent storage for index database files!
+  #     - './atuin-db:/var/lib/postgresql/data/'
+  #   environment:
+  #     POSTGRES_USER: atuin
+  #     POSTGRES_PASSWORD: atuin_password
+  #     POSTGRES_DB: atuin
+
+  # transmission:
+  #   image: linuxserver/transmission
+  #   restart: unless-stopped
+  #   volumes:
+  #     - ~/repos/transmission/config:/config
+  #     - ~/repos/transmission/downloads:/downloads
+  #     - ~/repos/transmission/watch:/watch
+  #   environment:
+  #     PUID: 1000
+  #     PGID: 1000
+  #     TZ: China/Beijing
+  #     TRANSMISSION_WEB_HOME: /combustion-release/
