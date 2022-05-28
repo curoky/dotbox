@@ -1,0 +1,17 @@
+body.flex {
+  background: #fdf6e3;
+}
+
+section.main textarea,
+section.main .markdown-body {
+  color: black;
+  font-size: 25px;
+}
+
+.button {
+  background-color: #268bd2;
+}
+
+.markdown-body a {
+  color: #268bd2;
+}
