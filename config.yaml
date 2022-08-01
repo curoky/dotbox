@@ -258,7 +258,7 @@ profiles:
       - apt-proxy
       - docker-proxy
 
-  devbox:
+  image:
     dotfiles:
       - bazel
       - cargo
@@ -285,15 +285,12 @@ profiles:
       - zprofile
       - zshrc
 
-  macos:
+  darwin:
     dotfiles:
-      - git-config
-      - git-key
       - helix
       - prettier
       - profile
       - ssh-authorized-key
-      - ssh-config
       - yapf
       - zprofile
       - zshrc

@@ -66,12 +66,12 @@ simplifier:
   opencc_config: s2t.json
 
 emoji_suggestion:
-  opencc_config: /usr/local/opt/rime-bundle/opencc/emoji.json
+  opencc_config: /opt/bundles/rime/opencc/emoji.json
   option_name: emoji_suggestion
   tips: all
 
 symbol_support:
-  opencc_config: /usr/local/opt/rime-bundle/opencc/symbol.json
+  opencc_config: /opt/bundles/rime/opencc/symbol.json
   option_name: symbol_support
   tips: all
 

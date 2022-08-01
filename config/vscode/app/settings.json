@@ -380,5 +380,6 @@
   "yaml.format.singleQuote": true,
   "sqltools.useNodeRuntime": true,
   "graphviz-interactive-preview.renderLockAdditionalTimeout": 10000,
-  "remote.SSH.connectTimeout": 3600
+  "remote.SSH.connectTimeout": 36000,
+  "remote.SSH.maxReconnectionAttempts": 8
 }
