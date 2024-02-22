@@ -3,7 +3,6 @@ tap 'tidwall/jj'
 tap 'helix-editor/helix'
 tap 'thought-machine/please'
 tap 'facebook/fb'
-tap 'curoky/python2'
 tap 'charmbracelet/tap'
 tap 'curoky/dotbox', 'https://github.com/curoky/dotbox'
 
@@ -28,8 +27,8 @@ brews = [
   # 'iproute2', 'iputils', 'netcat', 'lsof', 'htop', 'connect', 'procps', 'gost', 'inetutils',
   # 'goproxy', 'net-tools',
   # shell tools
-  # 'zsh', 'starship', 'direnv', 'asciinema', 'tmux', 'tmuxinator',
-  'dotdrop', 'zsh-bundle', 'vim-bundle', 'git-mv-with-history', 'exa-wrapper',
+  # 'zsh', 'starship', 'direnv', 'asciinema', 'tmux', 'tmuxinator', 'dotdrop',
+  'zsh-bundle', 'vim-bundle', 'git-mv-with-history', 'exa-wrapper',
   # text editor
   # 'flex', 'bison', 'gettext', 'm4', 'gpatch', 'jq', 'vim', 'helix-editor/helix/helix',
   # 'tidwall/jj/jj',
