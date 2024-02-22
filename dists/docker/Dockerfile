@@ -1,5 +1,6 @@
-FROM homebrew/brew:4.2.1 as homebrew
+FROM homebrew/brew:latest as homebrew
 COPY images/script/setup-pkg-brew.sh setup-pkg-brew.sh
+COPY Formula/ /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps/curoky/homebrew-dotbox/Formula/
 COPY images/config/brew/Brewfile.linux Brewfile.linux
 ENV HOMEBREW_NO_ANALYTICS=1
 RUN ./setup-pkg-brew.sh Brewfile.linux \
@@ -49,12 +50,12 @@ RUN apt-get update \
   && apt-get install -y --no-install-recommends \
     curl gnupg2 ca-certificates locales tzdata sudo init systemd \
     openssh-server rsyslog cron lsb-release \
-    gcc-10 g++-10 \
-    libsnappy-dev libxml2 libexpat1 \
+    # gcc-8 g++-8
+    gcc-9 g++-9 perl libxml2 \
+    # libsnappy-dev libexpat1 \
     # xfce4 xfce4-goodies tightvncserver
   && apt-get autoremove -y \
-  && locale-gen en_US.UTF-8 \
-  && userdel ubuntu && rm -rf /home/ubuntu
+  && locale-gen en_US.UTF-8
 
 COPY images/script/setup-sys-*.sh /tmp/
 

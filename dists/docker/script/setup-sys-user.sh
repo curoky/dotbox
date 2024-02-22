@@ -35,4 +35,8 @@ function CreateUser() {
 
 echo "root:123456" | chpasswd
 
+if id ubuntu; then
+  userdel ubuntu && rm -rf /home/ubuntu
+fi
+
 CreateUser 1000 cicada 123456
