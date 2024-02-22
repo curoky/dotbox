@@ -63,7 +63,8 @@ RUN /tmp/setup-sys-locale.sh \
   && /tmp/setup-sys-timezone.sh \
   && /tmp/setup-sys-backport-pkg.sh \
   && /tmp/setup-sys-update-gcc-version.sh \
-  && /tmp/setup-sys-cuda.sh
+  && /tmp/setup-sys-cuda.sh \
+  && /tmp/setup-sys-nv-ns.sh
 
 # Note: g=u doesn't really work. https://github.com/moby/buildkit/issues/1951
 # COPY --chown=1000:1000 --chmod=g=u --from=vcpkg /opt/vcpkg /opt/vcpkg
