@@ -87,7 +87,7 @@ function wip() {
 }
 
 function commit() {
-  git commit -v -m "$(date --rfc-3339=seconds)"
+  git commit -v -m "$(date --rfc-3339=seconds)" "$@"
 }
 
 function git-show-deleted-files() {
