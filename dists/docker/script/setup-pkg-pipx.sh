@@ -17,6 +17,10 @@
 # limitations under the License.
 
 set -xeuo pipefail
+export PIPX_HOME=/opt/pipx
+export PIPX_BIN_DIR=/opt/pipx/bin
+export PIPX_MAN_DIR=/opt/pipx/share/man
 
 pipx install conan==1.62.0
 pipx install licenseheaders
+pipx install dotdrop

@@ -95,7 +95,6 @@ nix-env -iA -p /nix/var/nix/profiles/llvm16 nixpkgs.clang-tools_16
 nix-env -iA -p /nix/var/nix/profiles/llvm16 nixpkgs.llvmPackages_16.llvm
 nix-env -iA -p /nix/var/nix/profiles/llvm16-bintools nixpkgs.llvmPackages_16.bintools-unwrapped
 nix-env -iA -p /nix/var/nix/profiles/inetutils nixpkgs.inetutils
-nix-env -iA -p /nix/var/nix/profiles/dotdrop dotdrop -f default.nix
 nix-env -iA -p /nix/var/nix/profiles/protobuf_3_8_0 protobuf_3_8_0 -f default.nix
 nix-env -iA -p /nix/var/nix/profiles/protobuf_3_9_2 protobuf_3_9_2 -f default.nix
 nix-env -iA -p /nix/var/nix/profiles/protobuf_3_20 nixpkgs.protobuf3_20
@@ -108,8 +107,5 @@ nix-env -iA -p /nix/var/nix/profiles/protobuf_3_20 nixpkgs.protobuf3_20
 # nixpkgs.cudaPackages_11_8.nsight_compute \
 # nixpkgs.cudaPackages_11_8.nsight_systems
 # nixpkgs.cudaPackages_11_8.cuda_nvvp
-
-# TODO(curoky): remove this trick
-ln -sf /nix/var/nix/profiles/dotdrop/bin/dotdrop /nix/var/nix/profiles/default/bin/dotdrop
 
 nix-collect-garbage

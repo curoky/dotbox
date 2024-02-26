@@ -6,12 +6,18 @@ ENV HOMEBREW_NO_ANALYTICS=1
 RUN ./setup-pkg-brew.sh Brewfile.linux \
   && rm -rf "$(brew --cache)"
 
-FROM ghcr.io/conda/conda-ci:main-linux-python3.11 as conda
+FROM ghcr.io/conda/conda-ci:main-linux-python3.12 as conda
 USER root
 COPY images/config/pip/*.txt .
 COPY images/script/setup-pkg-py.sh .
 RUN apt-get -y update && apt-get install -y procps libsnappy-dev \
   && ./setup-pkg-py.sh .
+
+FROM ghcr.io/conda/conda-ci:main-linux-python3.12 as pipx
+USER root
+COPY images/script/setup-pkg-pipx.sh .
+RUN pip3 install pipx \
+  && ./setup-pkg-pipx.sh .
 
 FROM ubuntu:latest as vcpkg
 RUN apt-get update -qq \
@@ -38,7 +44,7 @@ RUN nix-channel --update \
 FROM ubuntu:23.10
 LABEL org.opencontainers.image.authors="cccuroky@gmail.com"
 
-ENV PATH=$PATH:/nix/var/nix/profiles/default/bin:/home/linuxbrew/.linuxbrew/bin \
+ENV PATH=$PATH:/nix/var/nix/profiles/default/bin:/home/linuxbrew/.linuxbrew/bin:/opt/pipx/bin \
   DEBIAN_FRONTEND=noninteractive \
   # NIX_SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
   LANG=en_US.UTF-8 \
@@ -73,6 +79,7 @@ COPY --chown=1000:1000 --chmod=g=u --from=homebrew /home/linuxbrew /home/linuxbr
 COPY --chown=1000:1000 --chmod=g=u --from=golang /root/go/bin /home/cicada/go/bin
 COPY --chown=1000:1000 --chmod=g=u --from=conda /opt/conda /opt/conda
 COPY --chown=1000:1000 --chmod=g=u --from=nixpkgs /nix /nix
+COPY --chown=1000:1000 --chmod=g=u --from=pipx /opt/pipx /opt/pipx
 COPY --chown=1000:1000 --chmod=g=u ./ /opt/dotbox
 COPY --chown=1000:1000 --chmod=g=u ./ /home/cicada/dotbox
 COPY --chown=root:adm --chmod=g=u ./ /root/dotbox

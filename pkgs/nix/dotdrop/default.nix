@@ -1,55 +1,44 @@
 { lib
-, buildPythonApplication
-, fetchPypi
-
-# build-system
-, setuptools
-
-# dependencies
-, docopt
-, jinja2
-, ruamel-yaml
-, python_magic
-, packaging
-, requests
-, tomli
-, tomli-w
-, distro
-
-# tests
-, pytestCheckHook
+, python3
+, fetchFromGitHub
 }:
 
-buildPythonApplication rec {
+python3.pkgs.buildPythonApplication rec {
   pname = "dotdrop";
   version = "1.14.0";
-  format = "setuptools";
+  pyproject = true;
 
-  src = fetchPypi {
-    inherit pname version;
-    hash = "sha256-Z3Nhrzeu9XWs1SM946ixs9i3vPHzWHlG0InjRFA6ok0=";
+  src = fetchFromGitHub {
+    owner = "deadc0de6";
+    repo = "dotdrop";
+    rev = "v${version}";
+    hash = "sha256-l7FBiyrQJJieeYNdpE1MGWs3X8wXbTKfEo7meAxqNWc=";
   };
 
   nativeBuildInputs = [
-    setuptools
+    python3.pkgs.setuptools
+    python3.pkgs.wheel
   ];
 
-  propagatedBuildInputs = [
+  propagatedBuildInputs = with python3.pkgs; [
+    distro
     docopt
     jinja2
-    ruamel-yaml
-    python_magic
     packaging
+    python-magic
     requests
+    ruamel-yaml
     tomli
     tomli-w
-    distro
   ];
 
-  doCheck = false;
+  pythonImportsCheck = [ "dotdrop" ];
 
-  meta = {
-    homepage = "https://github.com/deadc0de6/dotdrop";
+  meta = with lib; {
     description = "Save your dotfiles once, deploy them everywhere";
+    homepage = "https://github.com/deadc0de6/dotdrop";
+    license = licenses.gpl3Only;
+    maintainers = with maintainers; [ ];
+    mainProgram = "dotdrop";
   };
 }
