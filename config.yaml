@@ -176,8 +176,8 @@ dotfiles:
     link: nolink
     src: nixpkgs/nix-mirror-cn.conf
   nixpkgs:
-    dst: ~/.config/nixpkgs
-    src: nixpkgs
+    dst: ~/.config/nixpkgs/config.nix
+    src: nixpkgs/config.nix
   pip:
     dst: ~/.config/pip
     src: pip
