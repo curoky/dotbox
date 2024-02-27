@@ -21,5 +21,6 @@ set -xeuo pipefail
 # curl -sSL -o libtinfo5_6.4-2_amd64.deb http://security.ubuntu.com/ubuntu/pool/universe/n/ncurses/libtinfo5_6.4-2_amd64.deb
 
 # ln -s /nix/var/nix/profiles/default/lib/libz.so* /usr/lib/x86_64-linux-gnu/
-# ln -s /nix/var/nix/profiles/default/lib/libtinfo.so* /usr/lib/x86_64-linux-gnu/
-ln -s /nix/var/nix/profiles/default/lib/libsnappy.so* /usr/lib/x86_64-linux-gnu/
+ln -s /nix/var/nix/profiles/default/lib/libtinfo.so* /usr/lib/x86_64-linux-gnu/
+ln -s /nix/var/nix/profiles/default/lib/libsnappy.* /usr/lib/x86_64-linux-gnu/
+ln -s /nix/var/nix/profiles/libxml2/lib/libxml2.* /usr/lib/x86_64-linux-gnu/

@@ -17,7 +17,7 @@ FROM ghcr.io/conda/conda-ci:main-linux-python3.12 as pipx
 USER root
 COPY images/script/setup-pkg-pipx.sh .
 RUN pip3 install pipx \
-  && ./setup-pkg-pipx.sh .
+  && ./setup-pkg-pipx.sh
 
 FROM ubuntu:latest as vcpkg
 RUN apt-get update -qq \
@@ -55,14 +55,20 @@ ENV PATH=$PATH:/nix/var/nix/profiles/default/bin:/home/linuxbrew/.linuxbrew/bin:
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
     curl gnupg2 ca-certificates locales tzdata sudo init systemd \
-    openssh-server rsyslog cron lsb-release \
-    # gcc-8 g++-8
-    gcc-9 g++-9 perl libxml2 \
-    # libsnappy-dev libexpat1 \
+    openssh-server rsyslog cron lsb-release gcc-9 g++-9 \
     # xfce4 xfce4-goodies tightvncserver
-  && apt-get autoremove -y \
-  && locale-gen en_US.UTF-8
+  && apt-get autoremove -y
 
+# Note: g=u doesn't really work. https://github.com/moby/buildkit/issues/1951
+# COPY --chown=1000:1000 --chmod=g=u --from=vcpkg /opt/vcpkg /opt/vcpkg
+COPY --chown=1000:1000 --chmod=g=u --from=pipx /opt/pipx /opt/pipx
+COPY --chown=1000:1000 --chmod=g=u --from=golang /root/go/bin /home/cicada/go/bin
+COPY --chown=1000:1000 --chmod=g=u --from=homebrew /home/linuxbrew /home/linuxbrew
+COPY --chown=1000:1000 --chmod=g=u --from=conda /opt/conda /opt/conda
+COPY --chown=1000:1000 --chmod=g=u --from=nixpkgs /nix /nix
+COPY --chown=1000:1000 --chmod=g=u ./ /opt/dotbox
+COPY --chown=1000:1000 --chmod=g=u ./ /home/cicada/dotbox
+COPY --chown=root:adm --chmod=g=u ./ /root/dotbox
 COPY images/script/setup-sys-*.sh /tmp/
 
 RUN /tmp/setup-sys-locale.sh \
@@ -70,24 +76,9 @@ RUN /tmp/setup-sys-locale.sh \
   && /tmp/setup-sys-timezone.sh \
   && /tmp/setup-sys-backport-pkg.sh \
   && /tmp/setup-sys-update-gcc-version.sh \
-  && /tmp/setup-sys-cuda.sh \
-  && /tmp/setup-sys-nv-ns.sh
-
-# Note: g=u doesn't really work. https://github.com/moby/buildkit/issues/1951
-# COPY --chown=1000:1000 --chmod=g=u --from=vcpkg /opt/vcpkg /opt/vcpkg
-COPY --chown=1000:1000 --chmod=g=u --from=homebrew /home/linuxbrew /home/linuxbrew
-COPY --chown=1000:1000 --chmod=g=u --from=golang /root/go/bin /home/cicada/go/bin
-COPY --chown=1000:1000 --chmod=g=u --from=conda /opt/conda /opt/conda
-COPY --chown=1000:1000 --chmod=g=u --from=nixpkgs /nix /nix
-COPY --chown=1000:1000 --chmod=g=u --from=pipx /opt/pipx /opt/pipx
-COPY --chown=1000:1000 --chmod=g=u ./ /opt/dotbox
-COPY --chown=1000:1000 --chmod=g=u ./ /home/cicada/dotbox
-COPY --chown=root:adm --chmod=g=u ./ /root/dotbox
-
-RUN /opt/dotbox/images/script/setup-bazel-registry.sh \
+  && /opt/dotbox/images/script/setup-bazel-registry.sh \
   && dotdrop install --cfg=~/dotbox/config.yaml --force --profile=devbox-sysconf \
   && dotdrop install --cfg=~/dotbox/config.yaml --force --profile=devbox-userconf-outofbox \
-  && ln -s /nix/var/nix/profiles/default/bin/bazelisk /nix/var/nix/profiles/default/bin/bazel \
   && mkdir /data /data_shared \
   && chown cicada:cicada /data /data_shared /opt
 
@@ -95,8 +86,7 @@ USER cicada
 
 RUN git -C ~/dotbox remote set-url origin git@github.com:curoky/dotbox \
   && dotdrop install --cfg=~/dotbox/config.yaml --force --profile=devbox-userconf-base \
-  && curl -L https://nixos.org/nix/install | sh -s -- --no-daemon \
-  && /opt/dotbox/images/script/setup-pkg-pipx.sh
+  && curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
 
 USER root
 ENTRYPOINT ["/opt/dotbox/images/script/entrypoint.sh"]

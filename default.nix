@@ -9,8 +9,13 @@
 { pkgs ? import <nixpkgs> { } }:
 
 {
-
   protobuf_3_8_0 = pkgs.callPackage ./pkgs/nix/protobuf/3.8.0.nix { };
   protobuf_3_9_2 = pkgs.callPackage ./pkgs/nix/protobuf/3.9.2.nix { };
+
   dotdrop = pkgs.python3Packages.callPackage ./pkgs/nix/dotdrop/default.nix { };
+
+  libxml2_dev = pkgs.libxml2.override {
+    enableShared = true;
+    enableStatic = false;
+  };
 }
