@@ -7,14 +7,7 @@ config:
   link_dotfile_default: link
   link_on_import: link
   template_dotfile_default: false
-trans_read:
-  _decrypt:
-    openssl enc -aes-256-cbc -nosalt -d -pbkdf2 -in {0} -out {1} -pass pass:{{@@
-    env['SECRET'] @@}}
-trans_write:
-  _encrypt:
-    openssl enc -aes-256-cbc -nosalt -pbkdf2 -in {0} -out {1} -pass pass:{{@@
-    env['SECRET'] @@}}
+  minversion: 1.14.0
 dotfiles:
   apt-proxy:
     dst: /etc/apt/apt.conf.d/proxy
@@ -345,13 +338,13 @@ profiles:
   macos-userconf:
     dotfiles:
       - bat
-      # - cargo
-      # - clang-format
-      # - conda
+        # - cargo
+        # - clang-format
+        # - conda
       - git-config
-      # - gradle
-      # - isort
-      # - maven
+        # - gradle
+        # - isort
+        # - maven
       - pip
       - prettier
       - procps
@@ -365,5 +358,13 @@ profiles:
       - vscode-keybindings
       - vscode-settings
       - vscode-snippets
-      # - yapf
+        # - yapf
       - zshrc
+trans_install:
+  _decrypt:
+    openssl enc -aes-256-cbc -nosalt -d -pbkdf2 -in {0} -out {1} -pass pass:{{@@
+    env['SECRET'] @@}}
+trans_update:
+  _encrypt:
+    openssl enc -aes-256-cbc -nosalt -pbkdf2 -in {0} -out {1} -pass pass:{{@@
+    env['SECRET'] @@}}
