@@ -23,7 +23,7 @@ export PATH=/nix/var/nix/profiles/default/bin:$PATH
 pkg_list=(
   # for build
   nixpkgs.automake nixpkgs.autoconf nixpkgs.libtool nixpkgs.pkg-config nixpkgs.gnumake
-  nixpkgs.ninja nixpkgs.distcc nixpkgs.ccache
+  nixpkgs.ninja nixpkgs.distcc nixpkgs.ccache nixpkgs.scons nixpkgs.meson
   nixpkgs.clang-tools_16 nixpkgs.lld_16 nixpkgs.mold
   nixpkgs.cmake nixpkgs.cmake-format nixpkgs.bazelisk nixpkgs.buildifier
   nixpkgs.zsh nixpkgs.bash nixpkgs.shfmt nixpkgs.go nixpkgs.perl nixpkgs.ruby
@@ -43,11 +43,10 @@ pkg_list=(
   nixpkgs.flex nixpkgs.bison nixpkgs.gnupatch nixpkgs.gettext nixpkgs.m4
   nixpkgs.jq nixpkgs.vim nixpkgs.bat nixpkgs.less nixpkgs.gnused nixpkgs.gnugrep nixpkgs.gzip
   nixpkgs.graphviz nixpkgs.asciinema nixpkgs.gdu nixpkgs.ncdu nixpkgs.silver-searcher nixpkgs.parallel
-  nixpkgs.eza nixpkgs.fzf nixpkgs.cloc nixpkgs.go-task nixpkgs.krb5 nixpkgs.sqlite
+  nixpkgs.eza nixpkgs.fzf nixpkgs.cloc nixpkgs.go-task nixpkgs.krb5 nixpkgs.sqlite nixpkgs.tree
   nixpkgs.ncurses5 nixpkgs.snappy nixpkgs.libxml2.out
-  # nixpkgs.gost nixpkgs.htop nixpkgs.cron
+  # nixpkgs.gost nixpkgs.htop
   # nixpkgs.shellcheck
-  # nixpkgs.scons nixpkgs.meson
   # nixpkgs.mkdocs nixpkgs.sphinx nixpkgs.hugo
   # nixpkgs.tmuxinator nixpkgs.direnv
   # nixpkgs.ansible
@@ -69,11 +68,9 @@ nix-env -iA -p /nix/var/nix/profiles/protobuf_3_8_0 protobuf_3_8_0 -f default.ni
 nix-env -iA -p /nix/var/nix/profiles/protobuf_3_9_2 protobuf_3_9_2 -f default.nix
 nix-env -iA -p /nix/var/nix/profiles/protobuf_3_20 nixpkgs.protobuf3_20
 nix-env -iA -p /nix/var/nix/profiles/cuda11_4 nixpkgs.cudaPackages_11_4.cudatoolkit nixpkgs.cudaPackages_11_4.cudatoolkit.lib
-nix-env -iA -p /nix/var/nix/profiles/cuda12_2 nixpkgs.cudaPackages_12_2.cudatoolkit nixpkgs.cudaPackages_12_2.cudatoolkit.lib
+# nix-env -iA -p /nix/var/nix/profiles/cuda12_2 nixpkgs.cudaPackages_12_2.cudatoolkit nixpkgs.cudaPackages_12_2.cudatoolkit.lib
 ln -s /nix/var/nix/profiles/cuda11_4/lib/libcudart.* /nix/var/nix/profiles/cuda11_4/lib64/
 ln -s /nix/var/nix/profiles/default/bin/bazelisk /nix/var/nix/profiles/default/bin/bazel
-ln -s /nix/var/nix/profiles/default/bin/less /usr/bin/less
-ln -s /nix/var/nix/profiles/default/bin/git /usr/bin/git
 # nix-env -iA -p /nix/var/nix/profiles/cuda11_42 nixpkgs.cudaPackages_11_4.cuda_nvcc nixpkgs.cudaPackages_11_4.cuda_cudart
 # nixpkgs.cudaPackages.nsight_systems nsight_compute cuda_nvvp
 

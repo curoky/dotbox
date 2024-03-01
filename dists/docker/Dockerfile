@@ -38,10 +38,10 @@ ENV NIXPKGS_ALLOW_UNFREE=1 \
 COPY pkgs/nix pkgs/nix
 COPY default.nix default.nix
 COPY images/script/setup-pkg-nix.sh setup-pkg-nix.sh
-RUN nix-channel --update \
-  && ./setup-pkg-nix.sh
+RUN nix-channel --update && ./setup-pkg-nix.sh
+COPY images/script/setup-pkg-nix-patch.sh setup-pkg-nix-patch.sh
+RUN ./setup-pkg-nix-patch.sh
 
-FROM ubuntu:23.10
 LABEL org.opencontainers.image.authors="cccuroky@gmail.com"
 
 ENV PATH=$PATH:/nix/var/nix/profiles/default/bin:/home/linuxbrew/.linuxbrew/bin:/opt/pipx/bin \
