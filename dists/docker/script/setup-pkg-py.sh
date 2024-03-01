@@ -16,7 +16,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -euo pipefail
+set -xeuo pipefail
 
 # $(readlink -f
 conf_path=${1:-~/dotbox/images/config/pip}
@@ -26,7 +26,7 @@ function create_conda_env() {
   local env_name=$1
   local py_version=$2
   echo "create $env_name($py_version)"
-  /opt/conda/bin/conda env remove -n $env_name
+  /opt/conda/bin/conda env remove -y -n $env_name
   /opt/conda/bin/conda create -n $env_name python=$py_version --yes
   /opt/conda/envs/$env_name/bin/pip install --no-cache-dir -r $conf_path/requirements-${env_name}.txt
 }
@@ -39,16 +39,15 @@ function insert_tf_ldpath() {
   echo "export LD_LIBRARY_PATH=/opt/conda/envs/$env_name/lib/python$py_version/site-packages/nvidia/cudnn/lib:\$LD_LIBRARY_PATH" >>/opt/conda/envs/$env_name/etc/conda/activate.d/env_vars.sh
 }
 
-create_conda_env default '3.11'
-create_conda_env ml-tf1.15 '3.7'
-create_conda_env ml-tf2.5 '3.8'
-create_conda_env ml-tf2.9.2 '3.10'
-create_conda_env ml-tf2.x '3.11'
 create_conda_env py2 '2'
-
-insert_tf_ldpath ml-tf1.15 '3.7'
-insert_tf_ldpath ml-tf2.5 '3.8'
-insert_tf_ldpath ml-tf2.9.2 '3.10'
-insert_tf_ldpath ml-tf2.x '3.11'
+create_conda_env py3 '3.11'
+# create_conda_env tf1.15 '3.7'
+# insert_tf_ldpath tf1.15 '3.7'
+# create_conda_env tf2.5 '3.8'
+# insert_tf_ldpath tf2.5 '3.8'
+# create_conda_env tf2.9.2 '3.10'
+# insert_tf_ldpath tf2.9.2 '3.10'
+create_conda_env tf2.15 '3.11'
+insert_tf_ldpath tf2.15 '3.11'
 
 /opt/conda/bin/conda clean --all -y
