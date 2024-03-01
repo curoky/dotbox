@@ -457,5 +457,11 @@
   "xml.server.vmargs": "-Xmx1024M",
   "xml.symbols.maxItemsComputed": 400000,
   "yaml.format.enable": false,
-  "yaml.format.singleQuote": true
+  "yaml.format.singleQuote": true,
+  "remote.SSH.remotePlatform": {
+    "sg_gpu_p": "linux"
+  },
+  "tabby.usage.anonymousUsageTracking": true,
+  "tabby.api.endpoint": "http://[fdbd:dc53:4:135::21]:9898",
+  "python.analysis.autoFormatStrings": true
 }

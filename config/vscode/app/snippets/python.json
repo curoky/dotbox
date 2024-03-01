@@ -4,39 +4,6 @@
   // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the
   // same ids are connected.
   // Example:
-
-  // https://github.com/Rpinski/vscode-shebang-snippets/blob/master/snippets/shebang-python.json
-  "shebang-python-r": {
-    "prefix": "shebang",
-    "body": ["#!/usr/bin/env ${1|python3,python|}"],
-    "description": "Adds a shebang for Python scripts"
-  },
-  "shebang-python-encoding-r": {
-    "prefix": "shebang+encoding",
-    "body": [
-      "#!/usr/bin/env ${1|python3,python|}",
-      "# -*- coding: ${2|utf-8,latin-1,ascii|} -*-"
-    ],
-    "description": "Adds a shebang and an encoding magic comment for Python scripts"
-  },
-  "shebang-python": {
-    "prefix": "#!python",
-    "body": ["#!/usr/bin/env ${1|python3,python|}"],
-    "description": "Adds a shebang for Python scripts"
-  },
-  "shebang-python-encoding": {
-    "prefix": "#!python+encoding",
-    "body": [
-      "#!/usr/bin/env ${1|python3,python|}",
-      "# -*- coding: ${2|utf-8,latin-1,ascii|} -*-"
-    ],
-    "description": "Adds a shebang and an encoding magic comment for Python scripts"
-  },
-  "shebang-encoding": {
-    "prefix": "#encoding",
-    "body": ["# -*- coding: ${1|utf-8,latin-1,ascii|} -*-"],
-    "description": "Adds a magic comment for Python file encoding"
-  },
   "logging-basicConfig": {
     "prefix": "logging.basicConfig",
     "body": [
