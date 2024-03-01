@@ -1,3 +1,5 @@
+ARG BASE_IMAGE=
+
 FROM homebrew/brew:latest as homebrew
 COPY images/script/setup-pkg-brew.sh setup-pkg-brew.sh
 COPY Formula/ /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps/curoky/homebrew-dotbox/Formula/
@@ -57,6 +59,28 @@ USER cicada
 RUN git -C ~/dotbox remote set-url origin git@github.com:curoky/dotbox \
   && dotdrop install --cfg=~/dotbox/config.yaml --force --profile=devbox-userconf-base
 
+FROM debian:stretch-backports as base_debian9
+# RUN echo "deb http://security.debian.org/debian-security bullseye-security main contrib non-free" >> /etc/apt/sources.list \
+# deb http://archive.debian.org/debian/ stretch main contrib
+RUN sed -i 's/deb.debian.org/archive.debian.org/g' /etc/apt/sources.list \
+  && sed -i '/debian stretch-updates/d' /etc/apt/sources.list \
+  && sed -i 's/security.debian.org/archive.debian.org/g' /etc/apt/sources.list \
+  && sed -i 's/deb.debian.org/archive.debian.org/g' /etc/apt/sources.list.d/backports.list \
+  && apt-get update \
+  && apt-get install -y --no-install-recommends \
+    curl gnupg2 ca-certificates locales tzdata sudo init systemd \
+    openssh-server rsyslog cron lsb-release gcc g++ \
+  && apt-get autoremove -y
+
+FROM ubuntu:23.10 as base_ubuntu23.10
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends \
+    curl gnupg2 ca-certificates locales tzdata sudo init systemd \
+    openssh-server rsyslog cron lsb-release gcc-9 g++-9 \
+    # xfce4 xfce4-goodies tightvncserver
+  && apt-get autoremove -y
+
+FROM base_${BASE_IMAGE}
 LABEL org.opencontainers.image.authors="cccuroky@gmail.com"
 
 ENV PATH=$PATH:/nix/var/nix/profiles/default/bin:/home/linuxbrew/.linuxbrew/bin:/opt/pipx/bin \
@@ -66,13 +90,6 @@ ENV PATH=$PATH:/nix/var/nix/profiles/default/bin:/home/linuxbrew/.linuxbrew/bin:
   LANGUAGE=en_US.UTF-8 \
   LC_ALL=en_US.UTF-8 \
   LOCALE_ARCHIVE=/usr/lib/locale/locale-archive
-
-RUN apt-get update \
-  && apt-get install -y --no-install-recommends \
-    curl gnupg2 ca-certificates locales tzdata sudo init systemd \
-    openssh-server rsyslog cron lsb-release gcc-9 g++-9 \
-    # xfce4 xfce4-goodies tightvncserver
-  && apt-get autoremove -y
 
 # Note: g=u doesn't really work. https://github.com/moby/buildkit/issues/1951
 # COPY --chown=1000:1000 --chmod=g=u --from=vcpkg /opt/vcpkg /opt/vcpkg
