@@ -21,13 +21,17 @@ else
   export BREW_PREFIX=/home/linuxbrew/.linuxbrew
 fi
 
-export WORKSPACE=~/workspace
+if [[ -d /data/workspace ]]; then
+  export WORKSPACE=/data/workspace
+else
+  export WORKSPACE=~/workspace
+fi
 
 export MY_HOST_NAME=$(hostname)
 
 #=-> basic config
-export EDITOR=hx
-command -v vim >/dev/null && export EDITOR=vim
+export EDITOR=vim
+# command -v vim >/dev/null && export EDITOR=vim
 
 #=-> XDG
 export XDG_CACHE_HOME=$HOME/.cache
