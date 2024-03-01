@@ -24,3 +24,5 @@ set -xeuo pipefail
 ln -s /nix/var/nix/profiles/default/lib/libtinfo.so* /usr/lib/x86_64-linux-gnu/
 ln -s /nix/var/nix/profiles/default/lib/libsnappy.* /usr/lib/x86_64-linux-gnu/
 ln -s /nix/var/nix/profiles/libxml2/lib/libxml2.* /usr/lib/x86_64-linux-gnu/
+ln -s /nix/var/nix/profiles/default/bin/less /usr/bin/less
+ln -s /nix/var/nix/profiles/default/bin/git /usr/bin/git

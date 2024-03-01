@@ -18,11 +18,17 @@
 
 set -xeuo pipefail
 
-# Note: sometimes we want to mount ~/.cache to /dev/shm/..., so need changing owner.
-[[ -f /home/cicada/.cache ]] && chown cicada:cicada -R /home/cicada/.cache
+echo "export DEVBOX_PROFILE=$DEVBOX_PROFILE" >>/etc/zshenv
+echo "export DEVBOX_REGION=$DEVBOX_REGION" >>/etc/zshenv
+/opt/dotbox/images/script/setup-sshd-port.sh ${DEVBOX_SSHD_PORT:-61000}
 
 sudo -i -u cicada bash <<EOF
-  dotdrop install --cfg=~/dotbox/config.yaml --force --profile=devbox-userconf-outofbox
+  bash /opt/dotbox/images/script/setup-datadir.sh
+  cd ~/dotbox
+  dotdrop install --force --cfg=~/dotbox/config.yaml --profile=devbox-userconf-outofbox
 EOF
 
-exec /lib/systemd/systemd
+# Note: sometimes we want to mount ~/.cache to /dev/shm/..., so need changing owner.
+# [[ -f /home/cicada/.cache ]] && chown cicada:cicada -R /home/cicada/.cache
+
+# exec /lib/systemd/systemd
