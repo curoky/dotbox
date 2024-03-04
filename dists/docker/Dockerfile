@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1.4
 ARG BASE_IMAGE=
 
 FROM homebrew/brew:latest as homebrew
@@ -45,9 +46,9 @@ COPY images/script/setup-pkg-nix-patch.sh setup-pkg-nix-patch.sh
 RUN ./setup-pkg-nix-patch.sh
 
 FROM ghcr.io/conda/conda-ci:main-linux-python3.12 as dotbox
-COPY --chown=root:adm --chmod=g=u ./ /root/dotbox
-COPY --chown=1000:1000 --chmod=g=u ./ /opt/dotbox
-COPY --chown=1000:1000 --chmod=g=u ./ /home/cicada/dotbox
+COPY ./ /root/dotbox
+COPY ./ /opt/dotbox
+COPY --chown=1000:1000 ./ /home/cicada/dotbox
 USER root
 RUN apt-get update -y \
   && apt-get install -y sudo git file \
@@ -60,8 +61,6 @@ RUN git -C ~/dotbox remote set-url origin git@github.com:curoky/dotbox \
   && dotdrop install --cfg=~/dotbox/config.yaml --force --profile=devbox-userconf-base
 
 FROM debian:stretch-backports as base_debian9
-# RUN echo "deb http://security.debian.org/debian-security bullseye-security main contrib non-free" >> /etc/apt/sources.list \
-# deb http://archive.debian.org/debian/ stretch main contrib
 RUN sed -i 's/deb.debian.org/archive.debian.org/g' /etc/apt/sources.list \
   && sed -i '/debian stretch-updates/d' /etc/apt/sources.list \
   && sed -i 's/security.debian.org/archive.debian.org/g' /etc/apt/sources.list \
@@ -93,14 +92,14 @@ ENV PATH=$PATH:/nix/var/nix/profiles/default/bin:/home/linuxbrew/.linuxbrew/bin:
 
 # Note: g=u doesn't really work. https://github.com/moby/buildkit/issues/1951
 # COPY --chown=1000:1000 --chmod=g=u --from=vcpkg /opt/vcpkg /opt/vcpkg
-COPY --chown=1000:1000 --chmod=g=u --from=nixpkgs /nix /nix
-COPY --chown=1000:1000 --chmod=g=u --from=conda /opt/conda /opt/conda
-COPY --chown=1000:1000 --chmod=g=u --from=homebrew /home/linuxbrew /home/linuxbrew
-COPY --chown=1000:1000 --chmod=g=u --from=golang /root/go/bin /home/cicada/go/bin
-COPY --chown=1000:1000 --chmod=g=u --from=pipx /opt/pipx /opt/pipx
-COPY --chown=1000:1000 --chmod=g=u --from=dotbox /root/dotbox /root/dotbox
-COPY --chown=1000:1000 --chmod=g=u --from=dotbox /opt/dotbox /opt/dotbox
-COPY --chown=1000:1000 --chmod=g=u --from=dotbox /home/cicada/dotbox /home/cicada/dotbox
+COPY --link --chown=1000:1000 --from=nixpkgs /nix /nix
+COPY --link --chown=1000:1000 --from=conda /opt/conda /opt/conda
+COPY --link --from=homebrew /home/linuxbrew /home/linuxbrew
+COPY --link --from=golang /root/go/bin /home/cicada/go/bin
+COPY --link --from=pipx /opt/pipx /opt/pipx
+COPY --link --from=dotbox /root /root
+COPY --link --from=dotbox /opt/dotbox /opt/dotbox
+COPY --link --from=dotbox /home/cicada /home/cicada
 
 RUN /opt/dotbox/images/script/setup-sys-locale.sh \
   && /opt/dotbox/images/script/setup-sys-user.sh \
@@ -109,8 +108,8 @@ RUN /opt/dotbox/images/script/setup-sys-locale.sh \
   && /opt/dotbox/images/script/setup-sys-update-gcc-version.sh \
   && /opt/dotbox/images/script/setup-bazel-registry.sh \
   && dotdrop install --cfg=~/dotbox/config.yaml --force --profile=devbox-sysconf \
-  && mkdir -p /data/share /data/cache /data/workspace \
-  && chown cicada:cicada /data/share /data/cache /data/workspace /opt
+  && mkdir -p /data/{share,cache,workspace} \
+  && chown cicada:cicada /data/{share,cache,workspace} /opt /home/cicada
 
 USER cicada
 RUN curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
