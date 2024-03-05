@@ -16,9 +16,9 @@
 # limitations under the License.
 
 if [[ -x /opt/homebrew/bin/brew ]]; then
-  export BREW_PREFIX=/opt/homebrew
+  export HOMEBREW_PREFIX=/opt/homebrew
 else
-  export BREW_PREFIX=/home/linuxbrew/.linuxbrew
+  export HOMEBREW_PREFIX=/home/linuxbrew/.linuxbrew
 fi
 
 if [[ -d /data/workspace ]]; then

@@ -51,7 +51,7 @@ export NPM_CONFIG_CACHE=$XDG_CACHE_HOME/npm
 # export NPM_CONFIG_REGISTRY=https://registry.npm.taobao.org
 
 #=-> git
-export FILTER_BRANCH_SQUELCH_WARNING=1
+# export FILTER_BRANCH_SQUELCH_WARNING=1
 
 #=-> docker
 # export DOCKER_CLIENT_TIMEOUT=120
@@ -76,14 +76,14 @@ export DISTCC_LOG=$XDG_CACHE_HOME/distcc.log
 # export CCACHE_DIR=$XDG_CACHE_HOME/ccache
 
 #=-> vim-plugin
-export VIM_PLUGIN_PATH=$BREW_PREFIX/opt/vim-bundle/vim-plugin
+export VIM_PLUGIN_PATH=$HOMEBREW_PREFIX/opt/vim-bundle/vim-plugin
 # export VIM_PLUGIN_PATH=/opt/bundles/vim/vim-plugin/
 # https://stackoverflow.com/questions/4618151/how-to-reference-source-a-custom-vimrc-file
 # export VIMINIT="source ${__VIM_RC_PATH}"
 # alias vim="vim -u ${__VIM_RC_PATH}"
 
 #=-> python & pip
-export PYTHONWARNINGS=ignore:DEPRECATION
+# export PYTHONWARNINGS=ignore:DEPRECATION
 # export PYTHONWARNINGS="ignore::DeprecationWarning"
 # https://pip.pypa.io/en/latest/topics/configuration/#environment-variables
 # https://pip.pypa.io/en/latest/topics/caching/#default-paths
@@ -155,4 +155,4 @@ if [[ ! -d $JAVA_HOME ]]; then
 fi
 
 #-> cuda
-export CUDA_HOME=/nix/var/nix/profiles/cuda11_8/
+export CUDA_HOME=/nix/var/nix/profiles/cuda11_4

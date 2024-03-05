@@ -16,14 +16,22 @@
 # limitations under the License.
 
 #=-> oh-my-zsh
-export ZSH=$BREW_PREFIX/opt/zsh-bundle/
+export ZSH=$HOMEBREW_PREFIX/opt/zsh-bundle
 DISABLE_AUTO_UPDATE=true
 ZSH_DISABLE_COMPFIX=true
 DISABLE_LS_COLORS=true # we use exa not ls
 # ZSH_THEME="spaceship"
 
 plugins=(
+  common-aliases
   conda-zsh-completion
+  extract
+  fzf
+  git
+  systemadmin
+  zsh-autosuggestions
+  zsh-completions
+  zsh-syntax-highlighting
   # direnv
   # docker
   # docker-compose
@@ -33,15 +41,7 @@ plugins=(
   # pip
   # z
   # zoxide
-  common-aliases
   # direnv
-  extract
-  fzf
-  git
-  systemadmin
-  zsh-autosuggestions
-  zsh-syntax-highlighting
-  zsh-completions
 )
 
 #=-> [zsh-syntax-highlighting]
@@ -80,7 +80,7 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=244"
 
 #-> fzf
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/fzf
-FZF_BASE=$BREW_PREFIX/opt/fzf
+FZF_BASE=$HOMEBREW_PREFIX/opt/fzf
 if [[ ! -d $FZF_BASE ]]; then
   FZF_BASE=/nix/var/nix/profiles/default/share/fzf
 fi

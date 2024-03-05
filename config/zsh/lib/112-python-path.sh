@@ -15,8 +15,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ENV_PATHS=(
-  "$WORKSPACE/thriftoy"
-  "/data/share/thriftoy"
+  # "$WORKSPACE/thriftoy"
+  # "/data/share/thriftoy"
 )
 
 for p in "${ENV_PATHS[@]}"; do

@@ -16,33 +16,33 @@
 # limitations under the License.
 
 ENV_PATHS=(
-  "$BREW_PREFIX/opt/coreutils/libexec/gnubin"
-  "$BREW_PREFIX/opt/findutils/libexec/gnubin"
-  "$BREW_PREFIX/opt/gawk/libexec/gnubin"
-  "$BREW_PREFIX/opt/gnu-getopt/bin"
-  "$BREW_PREFIX/opt/gnu-indent/libexec/gnubin"
-  "$BREW_PREFIX/opt/gnu-sed/libexec/gnubin"
-  "$BREW_PREFIX/opt/gnu-tar/libexec/gnubin"
-  "$BREW_PREFIX/opt/grep/libexec/gnubin"
-  "$BREW_PREFIX/opt/openssl@3/bin"
-  "$BREW_PREFIX/opt/unzip/bin"
-  "$BREW_PREFIX/opt/ruby/bin"
+  "$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin"
+  "$HOMEBREW_PREFIX/opt/findutils/libexec/gnubin"
+  "$HOMEBREW_PREFIX/opt/gawk/libexec/gnubin"
+  "$HOMEBREW_PREFIX/opt/gnu-getopt/bin"
+  "$HOMEBREW_PREFIX/opt/gnu-indent/libexec/gnubin"
+  "$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin"
+  "$HOMEBREW_PREFIX/opt/gnu-tar/libexec/gnubin"
+  "$HOMEBREW_PREFIX/opt/grep/libexec/gnubin"
+  "$HOMEBREW_PREFIX/opt/openssl@3/bin"
+  "$HOMEBREW_PREFIX/opt/unzip/bin"
+  "$HOMEBREW_PREFIX/opt/ruby/bin"
 
-  "/opt/conda/envs/default/bin"
+  # "/opt/conda/envs/default/bin"
 )
 for p in "${ENV_PATHS[@]}"; do
   [[ -d $p ]] && export PATH=$p:$PATH
 done
 
 ENV_PATHS=(
-  "/nix/var/nix/profiles/default/lib/ruby/gems/2.7.0/bin"
-  "/opt/vcpkg"
-  "$BREW_PREFIX/lib/ruby/gems/3.1.0/bin"
-  # "$HOME/.cargo/bin" # already source in ~/.zshenv
   "$HOME/.local/bin"
   "$HOME/.npm-global/bin"
   "$HOME/dotbox/tools"
   "$HOME/go/bin"
+  # "/nix/var/nix/profiles/default/lib/ruby/gems/2.7.0/bin"
+  # "/opt/vcpkg"
+  # "$HOMEBREW_PREFIX/lib/ruby/gems/3.1.0/bin"
+  # "$HOME/.cargo/bin" # already source in ~/.zshenv
   # "/nix/var/nix/profiles/cuda11_8/bin"
 )
 for p in "${ENV_PATHS[@]}"; do
