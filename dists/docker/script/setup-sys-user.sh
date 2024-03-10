@@ -23,13 +23,13 @@ function CreateUser() {
   gid=$uid
   name=$2
   pass=$3
+  echo "create user $name($uid:$gid) with password: $pass"
   groupadd -g $gid -o $name
   useradd -m -s /nix/var/nix/profiles/default/bin/zsh -u $uid -g $gid $name
-  usermod -aG sudo $name
+  echo "$name:$pass" | chpasswd
   usermod -aG adm $name
   # usermod -aG docker $name
-  echo "$name:$pass" | chpasswd
-  echo "create user $name($uid:$gid) with password: $pass"
+  usermod -aG sudo $name
   echo "$name ALL=(ALL:ALL) NOPASSWD:ALL" >>/etc/sudoers.d/nopasswd_user
 }
 

@@ -22,7 +22,9 @@ for f in "$CONFIG_HOME"/zsh/lib/*.sh; do
 done
 
 #=-> homebrew
-eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
+if [[ -f $HOMEBREW_PREFIX/bin/brew ]]; then
+  eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
+fi
 
 #=-> nix
 source_if_exists ~/.nix-profile/etc/profile.d/nix.sh

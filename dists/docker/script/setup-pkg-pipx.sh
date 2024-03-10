@@ -24,3 +24,4 @@ export PIPX_MAN_DIR=/opt/pipx/share/man
 # pipx install conan==1.62.0
 pipx install licenseheaders
 pipx install dotdrop
+pipx install git+https://github.com/curoky/conan

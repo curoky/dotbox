@@ -17,5 +17,9 @@
 # limitations under the License.
 
 set -xeuo pipefail
+cd "$(dirname $0)" || exit 1
 
-export PATH=/nix/var/nix/profiles/default/bin:$PATH
+docker buildx build .. --network=host --file Dockerfile.data "${@:1}" \
+  --cache-to=type=inline \
+  --cache-from=type=registry,ref=curoky/dotbox-data \
+  --tag curoky/dotbox-data

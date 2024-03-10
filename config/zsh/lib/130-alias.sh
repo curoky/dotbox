@@ -22,7 +22,7 @@ alias penv='env | sort'
 
 alias t='tail -f'
 
-# alias ls=exa
+alias ls=eza-wrapper.sh
 # alias l='ls -lFh --git'
 # alias la='ls -lFha --git'
 
@@ -51,9 +51,6 @@ alias -s log=less
 
 alias cfmt='clang-format -style=file -fallback-style=google -sort-includes=1 -i '
 
-# https://dpaste.readthedocs.io/en/latest/api.html
-alias dpaste="curl -F 'expires=2073600' -F 'format=url' -F 'content=<-' https://paste.mozilla.org/api/"
-
 alias ssync="rsync --partial --progress --archive --human-readable --rsh=ssh"
 # --checksum --bwlimit=4000
 alias mirror="rsync --partial --progress --archive --human-readable --rsh=ssh --delete --delete-excluded"
@@ -65,8 +62,6 @@ alias mux=tmuxinator
 
 alias agf='ag --case-sensitive --word-regexp --hidden --silent -g'
 
-alias todo="ag --color-line-number '1;36' --color-path '1;36' --ignore-case --print-long-lines --silent '(?:<!-- *)?(?:#|//|/\*+|<!--|--) *(TODO|FIXME|FIX|BUG|UGLY|HACK|NOTE|IDEA|REVIEW|DEBUG|OPTIMIZE)(?:\([^(]+\))?:?(?!\w)(?: *-->| *\*/|(?= *(?:[^:]//|/\*+|<!--|@|--))|((?: +[^\n@]*?)(?= *(?:[^:]//|/\*+|<!--|@|--))|(?: +[^@\n]+)?))'"
-
 alias lint="pre-commit run --all-files"
 
 alias ggpf='git push origin "$(git_current_branch)" --force'
@@ -75,3 +70,6 @@ alias dctemp="docker run --rm --tty --network=host --interactive --entrypoint /b
 
 # https://gist.github.com/elventear/7640982
 # alias wget="curl -O --retry 999 --retry-max-time 0 -C -"
+
+alias py3="conda activate py3"
+alias py2="conda activate py2"

@@ -1,0 +1,84 @@
+# FROM ubuntu:latest as ubuntu_with_user
+# COPY images/script/setup-sys-user.sh .
+# RUN apt-get -y update \
+#   && apt-get install -y curl sudo git gcc g++ \
+#   && ./setup-sys-user.sh
+# USER o
+
+# FROM homebrew/brew:latest as homebrew
+# COPY images/script/setup-pkg-brew.sh setup-pkg-brew.sh
+# COPY Formula/ /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps/curoky/homebrew-dotbox/Formula/
+# COPY images/config/brew/Brewfile.linux Brewfile.linux
+# ENV HOMEBREW_NO_ANALYTICS=1
+# RUN ./setup-pkg-brew.sh Brewfile.linux \
+#   && rm -rf "$(brew --cache)"
+
+# FROM ghcr.io/conda/conda-ci:main-linux-python3.12 as conda
+# USER root
+# COPY images/config/pip/*.txt .
+# COPY images/script/setup-pkg-conda.sh .
+# RUN apt-get -y update && apt-get install -y procps libsnappy-dev \
+#   && ./setup-pkg-conda.sh .
+
+# FROM ghcr.io/conda/conda-ci:main-linux-python3.12 as pipx
+# USER root
+# COPY images/script/setup-pkg-pipx.sh .
+# RUN pip3 install pipx \
+#   && ./setup-pkg-pipx.sh
+
+# FROM ubuntu:latest as vcpkg
+# RUN apt-get update -qq \
+#   && apt-get install -y -qq --no-install-recommends \
+#     ca-certificates git curl zip unzip tar \
+#   && git clone https://github.com/microsoft/vcpkg /opt/vcpkg \
+#   && cd /opt/vcpkg \
+#   && ./bootstrap-vcpkg.sh -disableMetrics
+
+# FROM golang:latest as golang
+# COPY images/config/go/requirements.txt requirements.txt
+# COPY images/script/setup-pkg-go.sh setup-pkg-go.sh
+# RUN ./setup-pkg-go.sh requirements.txt
+
+# FROM ghcr.io/conda/conda-ci:main-linux-python3.12 as dotbox
+# COPY ./ /root/dotbox
+# COPY ./ /opt/dotbox
+# COPY --chown=1000:1000 ./ /home/o/dotbox
+# USER root
+# RUN apt-get update -y \
+#   && apt-get install -y sudo git file \
+#   && pip3 install dotdrop \
+#   && /opt/dotbox/images/script/setup-sys-user.sh \
+#   && git -C ~/dotbox remote set-url origin git@github.com:curoky/dotbox \
+#   && dotdrop install --cfg=~/dotbox/config.yaml --force --profile=devbox-userconf-outofbox
+# USER o
+# RUN git -C ~/dotbox remote set-url origin git@github.com:curoky/dotbox \
+#   && dotdrop install --cfg=~/dotbox/config.yaml --force --profile=devbox-userconf-base
+
+FROM nixos/nix as nixpkgs
+ENV NIXPKGS_ALLOW_UNFREE=1 \
+  NIXPKGS_ALLOW_BROKEN=1
+COPY pkgs/nix pkgs/nix
+COPY default.nix default.nix
+COPY images/script/setup-pkg-nix.sh setup-pkg-nix.sh
+RUN nix-channel --update
+RUN ./setup-pkg-nix.sh
+
+FROM ubuntu:latest as conda
+COPY images/config/pip/*.txt .
+COPY images/script/setup-pkg-conda.sh .
+RUN apt-get update -y && apt-get install -y curl gcc g++ git procps libsnappy-dev \
+  && mkdir -p /o/conda \
+  && curl -sSL -o miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
+  && bash miniconda.sh -b -u -p /o/conda \
+  && ./setup-pkg-conda.sh . /o/conda
+
+FROM ubuntu:latest
+ENV PATH=$PATH:/nix/var/nix/profiles/default/bin
+
+# Note: g=u doesn't really work. https://github.com/moby/buildkit/issues/1951
+# COPY --chown=1000:1000 --chmod=g=u --from=vcpkg /opt/vcpkg /opt/vcpkg
+# COPY --link --from=homebrew /home/linuxbrew /home/linuxbrew
+# COPY --link --from=pipx /opt/pipx /opt/pipx
+# COPY --link --from=golang /root/go/bin /home/o/go/bin
+COPY --link --chown=1000:1000 --from=nixpkgs /nix /nix
+COPY --link --chown=1000:1000 --from=conda /o/conda /o/conda

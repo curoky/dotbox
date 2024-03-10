@@ -26,3 +26,6 @@ ln -s /nix/var/nix/profiles/default/lib/libsnappy.* /usr/lib/x86_64-linux-gnu/
 ln -s /nix/var/nix/profiles/libxml2/lib/libxml2.* /usr/lib/x86_64-linux-gnu/
 ln -s /nix/var/nix/profiles/default/bin/less /usr/bin/less
 ln -s /nix/var/nix/profiles/default/bin/git /usr/bin/git
+ln -fs /nix/var/nix/profiles/default/share/zoneinfo/Singapore /etc/localtime
+mkdir -p /etc/ssl/certs/
+cp /nix/var/nix/profiles/default/etc/ssl/certs/ca-bundle.crt /etc/ssl/certs/ca-certificates.crt
