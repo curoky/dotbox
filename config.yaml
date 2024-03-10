@@ -44,6 +44,9 @@ dotfiles:
   conan:
     dst: ~/.conan/conan.conf
     src: conan/conan.conf
+  conan2:
+    dst: ~/.conan2/global.conf
+    src: conan2/global.conf
   conda:
     dst: ~/.config/conda/condarc
     src: conda/condarc
@@ -307,6 +310,7 @@ profiles:
       - cargo
       - ccache
       - clang-format
+      - conan2
       - conda
       - dolthub
       - gdb
