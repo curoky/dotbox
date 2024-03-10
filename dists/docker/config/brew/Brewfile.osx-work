@@ -10,7 +10,6 @@ casks = [
   'font-lxgw-wenkai',
   'iina',
   'istat-menus',
-  'notion',
   'snipaste',
   'squirrel',
   'drawio',

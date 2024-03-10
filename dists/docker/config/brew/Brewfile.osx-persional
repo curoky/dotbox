@@ -18,7 +18,8 @@ casks = [
   'dupeguru',
   'db-browser-for-sqlite',
   'adrive',
-  'obs',
+  'pika',
+  # 'obs',
 
   # 'android-platform-tools',
   # 'charles',
