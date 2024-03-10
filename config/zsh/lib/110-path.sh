@@ -27,8 +27,6 @@ ENV_PATHS=(
   "$HOMEBREW_PREFIX/opt/openssl@3/bin"
   "$HOMEBREW_PREFIX/opt/unzip/bin"
   "$HOMEBREW_PREFIX/opt/ruby/bin"
-
-  # "/opt/conda/envs/default/bin"
 )
 for p in "${ENV_PATHS[@]}"; do
   [[ -d $p ]] && export PATH=$p:$PATH
@@ -36,9 +34,9 @@ done
 
 ENV_PATHS=(
   "$HOME/.local/bin"
-  "$HOME/.npm-global/bin"
+  # "$HOME/.npm-global/bin"
   "$HOME/dotbox/tools"
-  "$HOME/go/bin"
+  # "$HOME/go/bin"
   # "/nix/var/nix/profiles/default/lib/ruby/gems/2.7.0/bin"
   # "/opt/vcpkg"
   # "$HOMEBREW_PREFIX/lib/ruby/gems/3.1.0/bin"

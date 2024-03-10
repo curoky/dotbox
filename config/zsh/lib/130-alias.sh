@@ -73,3 +73,5 @@ alias dctemp="docker run --rm --tty --network=host --interactive --entrypoint /b
 
 alias py3="conda activate py3"
 alias py2="conda activate py2"
+
+alias gccinfo="gcc -E -xc++ - -v"

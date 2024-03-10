@@ -17,15 +17,22 @@
 # limitations under the License.
 set -xeuo pipefail
 
-# apt install -y libtinfo5
-# curl -sSL -o libtinfo5_6.4-2_amd64.deb http://security.ubuntu.com/ubuntu/pool/universe/n/ncurses/libtinfo5_6.4-2_amd64.deb
-
 # ln -s /nix/var/nix/profiles/default/lib/libz.so* /usr/lib/x86_64-linux-gnu/
 ln -s /nix/var/nix/profiles/default/lib/libtinfo.so* /usr/lib/x86_64-linux-gnu/
 ln -s /nix/var/nix/profiles/default/lib/libsnappy.* /usr/lib/x86_64-linux-gnu/
 ln -s /nix/var/nix/profiles/libxml2/lib/libxml2.* /usr/lib/x86_64-linux-gnu/
 ln -s /nix/var/nix/profiles/default/bin/less /usr/bin/less
 ln -s /nix/var/nix/profiles/default/bin/git /usr/bin/git
+
+# timezone
 ln -fs /nix/var/nix/profiles/default/share/zoneinfo/Singapore /etc/localtime
+
+# cert
 mkdir -p /etc/ssl/certs/
 cp /nix/var/nix/profiles/default/etc/ssl/certs/ca-bundle.crt /etc/ssl/certs/ca-certificates.crt
+ln -s /nix/var/nix/profiles/default/include/crypt.h /usr/include/crypt.h
+
+# locales
+mkdir -p /usr/lib/locale
+ln -s /nix/var/nix/profiles/default/lib/locale/locale-archive /usr/lib/locale/locale-archive
+echo 'LANG=en_US.UTF-8' >/etc/locale.conf

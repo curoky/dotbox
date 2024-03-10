@@ -57,7 +57,8 @@ pkg_list=(
   nixpkgs.jq nixpkgs.vim nixpkgs.bat nixpkgs.less nixpkgs.gnused nixpkgs.gnugrep nixpkgs.gzip
   nixpkgs.graphviz nixpkgs.asciinema nixpkgs.gdu nixpkgs.ncdu nixpkgs.silver-searcher nixpkgs.parallel
   nixpkgs.eza nixpkgs.fzf nixpkgs.cloc nixpkgs.go-task nixpkgs.krb5 nixpkgs.sqlite nixpkgs.tree
-  nixpkgs.ncurses5 nixpkgs.snappy nixpkgs.libxml2.out nixpkgs.jemalloc nixpkgs.flamegraph
+  nixpkgs.jemalloc nixpkgs.flamegraph
+  nixpkgs.ncurses5 nixpkgs.snappy nixpkgs.libxml2.out nixpkgs.libxcrypt
   # nixpkgs.gost nixpkgs.htop
   # nixpkgs.shellcheck
   # nixpkgs.mkdocs nixpkgs.sphinx nixpkgs.hugo
@@ -72,13 +73,20 @@ pkg_list=(
 nix-env -p /nix/var/nix/profiles/default -iA "${pkg_list[@]}"
 
 nix-env -iA -p /nix/var/nix/profiles/jdk19 nixpkgs.jdk19
-nix-env -iA -p /nix/var/nix/profiles/gcc9 nixpkgs.gcc9
-nix-env -iA -p /nix/var/nix/profiles/gcc13 nixpkgs.gcc13
 # nix-env -iA -p /nix/var/nix/profiles/llvm16 nixpkgs.clang_16 nixpkgs.clang-tools_16 nixpkgs.llvmPackages_16.llvm
 # nix-env -iA -p /nix/var/nix/profiles/llvm16-bintools nixpkgs.llvmPackages_16.bintools-unwrapped
 # nix-env -iA -p /nix/var/nix/profiles/inetutils nixpkgs.inetutils
 nix-env -iA -p /nix/var/nix/profiles/default2 -f default.nix conan licenseheaders dotdrop
 ln -s /nix/var/nix/profiles/default2/bin/* /nix/var/nix/profiles/default/bin/
+
+#################### gcc ####################
+nix-env -iA -p /nix/var/nix/profiles/gcc9 nixpkgs.gcc9
+nix-env -iA -p /nix/var/nix/profiles/gcc13 nixpkgs.gcc13
+
+gcc_root=$(dirname "$(/nix/var/nix/profiles/gcc13/bin/gcc -v 2>&1 | grep "COLLECT_GCC" | cut -d '=' -f 2)")/..
+wrapper_root=$(realpath /nix/var/nix/profiles/gcc13/bin)/../nix-support
+echo "-I/usr/include" >$wrapper_root/libcxx-cxxflags
+ln -s /nix/var/nix/profiles/default/include/crypt.h $gcc_root/include
 
 #################### protobuf ####################
 nix-env -iA -p /nix/var/nix/profiles/protobuf_3_8_0 -f default.nix protobuf_3_8_0

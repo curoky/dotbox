@@ -145,7 +145,7 @@ export GOENV=$CONFIG_HOME/go/env
 
 #-> nix
 # https://nixos.wiki/wiki/Locales
-export LOCALE_ARCHIVE=/usr/lib/locale/locale-archive
+# export LOCALE_ARCHIVE=/usr/lib/locale/locale-archive
 
 #-> java
 export JAVA_HOME=/nix/var/nix/profiles/jdk19

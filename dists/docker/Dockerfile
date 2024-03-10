@@ -8,26 +8,21 @@ RUN sed -i 's/deb.debian.org/archive.debian.org/g' /etc/apt/sources.list \
   && sed -i 's/deb.debian.org/archive.debian.org/g' /etc/apt/sources.list.d/backports.list \
   && apt-get update \
   && apt-get install -y --no-install-recommends \
-    curl gnupg2 ca-certificates locales tzdata sudo init systemd \
-    openssh-server rsyslog gcc g++ \
+    sudo systemd init locales openssh-server rsyslog gcc g++ \
   && apt-get autoremove -y
 
 FROM ubuntu:23.10 as base_ubuntu23.10
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
-    systemd init sudo openssh-server rsyslog \
+    sudo systemd init openssh-server rsyslog \
     # xfce4 xfce4-goodies tightvncserver
   && apt-get autoremove -y
 
 FROM base_${BASE_IMAGE}
 LABEL org.opencontainers.image.authors="cccuroky@gmail.com"
 
-ENV PATH=$PATH:/nix/var/nix/profiles/default/bin \
-  DEBIAN_FRONTEND=noninteractive \
-  LANG=en_US.UTF-8 \
-  LANGUAGE=en_US.UTF-8 \
-  LC_ALL=en_US.UTF-8 \
-  LOCALE_ARCHIVE=/usr/lib/locale/locale-archive
+ENV PATH=$PATH:/nix/var/nix/profiles/default/bin:/nix/var/nix/profiles/gcc13/bin \
+  DEBIAN_FRONTEND=noninteractive
 
 # Note: g=u doesn't really work. https://github.com/moby/buildkit/issues/1951
 # COPY --chown=1000:1000 --chmod=g=u --from=vcpkg /opt/vcpkg /opt/vcpkg

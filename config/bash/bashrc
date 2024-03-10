@@ -118,4 +118,4 @@ if ! shopt -oq posix; then
 fi
 
 # for nix
-export LOCALE_ARCHIVE=/usr/lib/locale/locale-archive
+# export LOCALE_ARCHIVE=/usr/lib/locale/locale-archive
