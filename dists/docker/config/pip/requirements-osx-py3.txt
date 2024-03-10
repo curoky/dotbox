@@ -1,6 +1,4 @@
 typer[all]
-loguru
 geopy
 gpxpy
 pytz
-licenseheaders

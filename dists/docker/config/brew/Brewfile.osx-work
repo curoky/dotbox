@@ -15,6 +15,7 @@ casks = [
   'drawio',
   'db-browser-for-sqlite',
   'adrive',
+  'miniconda',
 ]
 
 casks.each do |b|

@@ -10,7 +10,7 @@ casks = [
   'font-lxgw-wenkai',
   'iina',
   'istat-menus',
-  'notion',
+  # 'notion',
   'snipaste',
   'squirrel',
   'drawio',
@@ -19,6 +19,7 @@ casks = [
   'db-browser-for-sqlite',
   'adrive',
   'pika',
+  'miniconda'
   # 'obs',
 
   # 'android-platform-tools',
@@ -46,7 +47,7 @@ end
 
 brews = [
   'pre-commit', 'prettier', 'black', 'shfmt', 'eslint', 'clang-format', 'ruff',
-  'python@3', 'openjdk',
+  'python@3', # 'openjdk',
   # 'node', 'ruby', 'gcc', 'llvm', 'go', 'rustup-init', 'maven',
   # 'openjdk@17', # 'openjdk@8', 'openjdk@11', 'openjdk', 'thrift',
   # git
@@ -62,8 +63,9 @@ brews = [
   'eza', 'exa-wrapper', 'bat', 'the_silver_searcher', 'fzf',
   # others
   'wget', 'aria2', 'rsync', 'ncdu', 'dotdrop', 'smartmontools',
-  'cloc', 'go-task', 'krb5', 'parallel', 'fd',
+  'go-task', 'parallel', 'fd',
   'coreutils', 'rime-bundle', 'exiftool',
+  # 'cloc', 'krb5',
   # 'gdb', 'opencc', 'gdal', 'gperf', 'md5deep', 'gdu',
   # sqlite
   # 'sqlcipher', 'sqlite3', 'sqlite-utils',
