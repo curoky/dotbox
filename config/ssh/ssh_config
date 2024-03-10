@@ -16,11 +16,11 @@ Host 10.*
   GSSAPIDelegateCredentials no
   HashKnownHosts No
 
-# Host github.com
-#  IdentityFile ~/xxx/conf/ssh/github.private.id_rsa
+Host github.com
+  IdentityFile ~/.ssh/github.private.id_ed25519
 
-# Host bitbucket.org
-#   IdentityFile ~/xxx/conf/ssh/github.private.id_rsa
+Host bitbucket.org
+  IdentityFile ~/.ssh/github.private.id_ed25519
 
 # Host *.tmate.io
 #   IdentityFile ~/xxx/conf/ssh/github.private.id_rsa
