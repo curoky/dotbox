@@ -17,6 +17,10 @@
 
 #=-> oh-my-zsh
 export ZSH=$HOMEBREW_PREFIX/opt/zsh-bundle
+if [[ ! -d $ZSH ]]; then
+  export ZSH=/nix/var/nix/profiles/zsh-bundle/share/oh-my-zsh/
+fi
+
 DISABLE_AUTO_UPDATE=true
 ZSH_DISABLE_COMPFIX=true
 DISABLE_LS_COLORS=true # we use exa not ls

@@ -15,11 +15,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-if [[ -x /opt/homebrew/bin/brew ]]; then
-  export HOMEBREW_PREFIX=/opt/homebrew
-else
-  export HOMEBREW_PREFIX=/home/linuxbrew/.linuxbrew
-fi
+# just for macos
+HOMEBREW_PREFIX=/opt/homebrew
 
 if [[ -d /data/workspace ]]; then
   export WORKSPACE=/data/workspace
