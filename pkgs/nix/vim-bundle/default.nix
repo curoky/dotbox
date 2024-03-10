@@ -25,8 +25,10 @@ stdenv.mkDerivation rec {
   buildPhase = ":";
 
   installPhase = ''
-    cp -r ${vim-plug}/ $out/
+    cp -r ${vim-plug.src}/ $out/
     chmod +w $out/
+    mkdir -p $out/vim-plugin/autoload
+    ln -s $out/plug.vim $out/vim-plugin/autoload/
     mkdir -p $out/vim-plugin/plugged
     cp -r ${delimitMate}/ $out/vim-plugin/plugged/delimitMate
     cp -r ${vim-airline}/ $out/vim-plugin/plugged/vim-airline

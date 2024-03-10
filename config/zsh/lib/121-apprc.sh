@@ -76,8 +76,7 @@ export DISTCC_LOG=$XDG_CACHE_HOME/distcc.log
 # export CCACHE_DIR=$XDG_CACHE_HOME/ccache
 
 #=-> vim-plugin
-export VIM_PLUGIN_PATH=$HOMEBREW_PREFIX/opt/vim-bundle/vim-plugin
-# export VIM_PLUGIN_PATH=/opt/bundles/vim/vim-plugin/
+# export VIM_PLUGIN_PATH=$HOMEBREW_PREFIX/opt/vim-bundle/vim-plugin
 # https://stackoverflow.com/questions/4618151/how-to-reference-source-a-custom-vimrc-file
 # export VIMINIT="source ${__VIM_RC_PATH}"
 # alias vim="vim -u ${__VIM_RC_PATH}"
