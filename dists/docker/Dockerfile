@@ -8,13 +8,13 @@ RUN sed -i 's/deb.debian.org/archive.debian.org/g' /etc/apt/sources.list \
   && sed -i 's/deb.debian.org/archive.debian.org/g' /etc/apt/sources.list.d/backports.list \
   && apt-get update \
   && apt-get install -y --no-install-recommends \
-    sudo systemd init locales openssh-server rsyslog gcc g++ \
+    sudo systemd init rsyslog gcc g++ \
   && apt-get autoremove -y
 
 FROM ubuntu:23.10 as base_ubuntu23.10
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
-    sudo systemd init openssh-server rsyslog \
+    sudo systemd init rsyslog \
     # xfce4 xfce4-goodies tightvncserver
   && apt-get autoremove -y
 
