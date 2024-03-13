@@ -17,12 +17,20 @@
 # limitations under the License.
 set -xeuo pipefail
 
+# link nixpkg bin and lib
+BIN_NAMES=(curl grep sed gzip bash findutils less git)
+for n in "${BIN_NAMES[@]}"; do
+  ln -sf /nix/var/nix/profiles/default/bin/$n /bin/$n
+  ln -sf /nix/var/nix/profiles/default/bin/$n /usr/bin/$n
+done
+
 # ln -s /nix/var/nix/profiles/default/lib/libz.so* /usr/lib/x86_64-linux-gnu/
 ln -s /nix/var/nix/profiles/default/lib/libtinfo.so* /usr/lib/x86_64-linux-gnu/
 ln -s /nix/var/nix/profiles/default/lib/libsnappy.* /usr/lib/x86_64-linux-gnu/
 ln -s /nix/var/nix/profiles/libxml2/lib/libxml2.* /usr/lib/x86_64-linux-gnu/
-ln -s /nix/var/nix/profiles/default/bin/less /usr/bin/less
-ln -s /nix/var/nix/profiles/default/bin/git /usr/bin/git
+# ln -s /nix/var/nix/profiles/default/include/crypt.h /usr/include/crypt.h
+# ln -s /nix/var/nix/profiles/gcc13-lib/lib/libstdc++.so.6 /usr/lib/x86_64-linux-gnu/
+# ln -s /nix/var/nix/profiles/default/bin/perl /usr/bin/perl
 
 # timezone
 ln -fs /nix/var/nix/profiles/default/share/zoneinfo/Singapore /etc/localtime
@@ -30,7 +38,6 @@ ln -fs /nix/var/nix/profiles/default/share/zoneinfo/Singapore /etc/localtime
 # cert
 mkdir -p /etc/ssl/certs/
 cp /nix/var/nix/profiles/default/etc/ssl/certs/ca-bundle.crt /etc/ssl/certs/ca-certificates.crt
-ln -s /nix/var/nix/profiles/default/include/crypt.h /usr/include/crypt.h
 
 # locales
 mkdir -p /usr/lib/locale
