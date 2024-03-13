@@ -20,5 +20,5 @@ RUN sudo mkdir -m 0755 /nix && sudo chown nix:nix /nix
 RUN curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
 
 COPY pkgs pkgs
-COPY default.nix install.sh .
-RUN nix-channel --update && ./install.sh
+COPY default.nix install-pkgs.sh .
+RUN nix-channel --update && ./install-pkgs.sh
