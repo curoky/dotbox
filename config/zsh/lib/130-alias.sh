@@ -20,7 +20,7 @@ alias chx='chmod +x'
 alias fpath='print -l $fpath | sort'
 alias penv='env | sort'
 
-alias t='tail -f'
+alias t='task'
 
 alias ls=eza-wrapper.sh
 # alias l='ls -lFh --git'

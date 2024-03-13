@@ -42,6 +42,7 @@ ENV_PATHS=(
   # "$HOMEBREW_PREFIX/lib/ruby/gems/3.1.0/bin"
   # "$HOME/.cargo/bin" # already source in ~/.zshenv
   # "/nix/var/nix/profiles/cuda11_8/bin"
+  /nix/var/nix/profiles/gcc13/bin
 )
 for p in "${ENV_PATHS[@]}"; do
   [[ -d $p ]] && export PATH=$PATH:$p
