@@ -1,4 +1,0 @@
-typer[all]
-geopy
-gpxpy
-pytz

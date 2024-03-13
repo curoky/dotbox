@@ -26,8 +26,10 @@ function create_conda_env() {
   local env_name=$1
   local py_version=$2
   echo "create $env_name($py_version)"
-  /opt/homebrew/bin/conda env remove -y -n $env_name
-  /opt/homebrew/bin/conda create -n $env_name python=$py_version --yes
+  if [[ ! -d /opt/homebrew/Caskroom/miniconda/base/envs/$env_name ]]; then
+    # /opt/homebrew/bin/conda env remove -y -n $env_name
+    /opt/homebrew/bin/conda create -n $env_name python=$py_version --yes
+  fi
   /opt/homebrew/Caskroom/miniconda/base/envs/$env_name/bin/pip install --no-cache-dir -r $conf_path/requirements-osx-${env_name}.txt
 }
 
