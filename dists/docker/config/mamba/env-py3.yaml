@@ -1,0 +1,20 @@
+# https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#create-env-file-manually
+name: py3
+channels:
+  - defaults
+dependencies:
+  - python=3.12
+  - ipykernel=6.28.0
+  - ipywidgets=8.1.2
+  - pydantic=2.5.3
+  - requests=2.31.0
+  - typer=0.9.0
+  - icalendar=4.0.7
+  - python-snappy=0.6.1
+  - pip
+  - pip:
+      - sqlmodel==0.0.16
+      - bbpb==1.0.1
+      - locust==2.18.4
+      - notion-client==2.2.1
+      - git+https://github.com/curoky/thriftpy2@dev
