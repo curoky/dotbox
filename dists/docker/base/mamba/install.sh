@@ -18,14 +18,14 @@
 
 set -xeuo pipefail
 
-conf_path=${1:-~/dotbox/images/config/pip}
+conf_path=${1:-/data/share/dotbox/images/base/mamba/env}
 echo "use conf_path=$conf_path"
 
 function create_conda_env() {
   local env_name=$1
   echo "create $env_name"
   /o/conda/bin/mamba env remove -y -n $env_name
-  /o/conda/bin/mamba env create -f $conf_path/env-${env_name}.yaml
+  /o/conda/bin/mamba env create -f $conf_path/${env_name}.yaml
   /o/conda/bin/mamba env export -n $env_name >/o/conda/lock-env-${env_name}.yaml
 }
 
