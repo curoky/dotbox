@@ -18,8 +18,6 @@
 
 set -xeuo pipefail
 
-export PATH=/nix/var/nix/profiles/default/bin:$PATH
-
 pkg_list=(
   # system core package
   nixpkgs.tzdata.out nixpkgs.glibcLocales nixpkgs.locale
@@ -72,11 +70,17 @@ pkg_list=(
 )
 nix-env -p /nix/var/nix/profiles/default -iA "${pkg_list[@]}"
 
-nix-env -iA -p /nix/var/nix/profiles/jdk19 nixpkgs.jdk19
-# nix-env -iA -p /nix/var/nix/profiles/llvm16 nixpkgs.clang_16 nixpkgs.clang-tools_16 nixpkgs.llvmPackages_16.llvm
-# nix-env -iA -p /nix/var/nix/profiles/llvm16-bintools nixpkgs.llvmPackages_16.bintools-unwrapped
+chmod +w /nix/var/nix/profiles/default/*
 nix-env -iA -p /nix/var/nix/profiles/default2 -f default.nix conan dotdrop licenseheaders
 ln -s /nix/var/nix/profiles/default2/bin/* /nix/var/nix/profiles/default/bin/
+ln -s /nix/var/nix/profiles/default/bin/bazelisk /nix/var/nix/profiles/default/bin/bazel
+
+#################### jdk ####################
+nix-env -iA -p /nix/var/nix/profiles/jdk19 nixpkgs.jdk19
+
+#################### llvm ####################
+# nix-env -iA -p /nix/var/nix/profiles/llvm16 nixpkgs.clang_16 nixpkgs.clang-tools_16 nixpkgs.llvmPackages_16.llvm
+# nix-env -iA -p /nix/var/nix/profiles/llvm16-bintools nixpkgs.llvmPackages_16.bintools-unwrapped
 
 #################### gcc ####################
 nix-env -iA -p /nix/var/nix/profiles/gcc9 nixpkgs.gcc9
@@ -87,6 +91,7 @@ nix-env -iA -p /nix/var/nix/profiles/gcc13-lib nixpkgs.gcc13.cc.lib
 nix-env -iA -p /nix/var/nix/profiles/gcc13-unwrapper nixpkgs.gcc13.cc
 nix-env -iA -p /nix/var/nix/profiles/libgcc nixpkgs.libgcc
 
+chmod +w /nix/var/nix/profiles/gcc13-unwrapper/*
 ln -s /nix/var/nix/profiles/default/include/crypt.h /nix/var/nix/profiles/gcc13-unwrapper/include
 ln -s /nix/var/nix/profiles/default/include/backtrace.h /nix/var/nix/profiles/gcc13-unwrapper/include
 ln -s /nix/var/nix/profiles/default/lib/libbacktrace.* /nix/var/nix/profiles/gcc13-unwrapper/lib
@@ -104,6 +109,7 @@ nix-env -iA -p /nix/var/nix/profiles/protobuf_3_20 nixpkgs.protobuf3_20
 
 #################### cuda ####################
 nix-env -iA -p /nix/var/nix/profiles/cuda11_4 nixpkgs.cudaPackages_11_4.cudatoolkit nixpkgs.cudaPackages_11_4.cudatoolkit.lib
+chmod +w /nix/var/nix/profiles/cuda11_4/*
 ln -s /nix/var/nix/profiles/cuda11_4/lib/libcudart.* /nix/var/nix/profiles/cuda11_4/lib64/
 # nix-env -iA -p /nix/var/nix/profiles/cuda12_2 nixpkgs.cudaPackages_12_2.cudatoolkit nixpkgs.cudaPackages_12_2.cudatoolkit.lib
 # nix-env -iA -p /nix/var/nix/profiles/cuda11_42 nixpkgs.cudaPackages_11_4.cuda_nvcc nixpkgs.cudaPackages_11_4.cuda_cudart
@@ -120,8 +126,5 @@ nix-env -iA -p /nix/var/nix/profiles/vim-bundle -f default.nix vim-bundle
 
 #################### nix-index ####################
 # nix-index
-
-#################### post patch ####################
-ln -s /nix/var/nix/profiles/default/bin/bazelisk /nix/var/nix/profiles/default/bin/bazel
 
 nix-collect-garbage
