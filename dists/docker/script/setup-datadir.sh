@@ -35,19 +35,9 @@ function try_link_to() {
   ln -s $src $dst
 }
 
-# /data
-#   - cache
-#     - vscode-server
-#     - ...
-#   - workspace
-#   - share
-#
-
 sudo mkdir -p /data/workspace /data/share /data/cache/vscode-server
 sudo chown -R cicada:cicada /data/workspace /data/share /data/cache/vscode-server
 
 try_link_to /data/cache $HOME/.cache
 try_link_to /data/cache/vscode-server $HOME/.vscode-server
-# try_link_to /data/workspace $HOME/workspace
-try_link_to /data/workspace/dotbox $HOME/dotbox
 try_link_to /data/share/dotbox $HOME/dotbox

@@ -24,8 +24,7 @@ echo "export DEVBOX_REGION=$DEVBOX_REGION" >>/etc/zshenv
 
 sudo -i -u cicada bash <<EOF
   bash /o/dotbox/images/script/setup-datadir.sh
-  cd ~/dotbox
-  dotdrop install --force --cfg=~/dotbox/config.yaml --profile=devbox-userconf-outofbox
+  dotdrop install --force --cfg=/data/share/dotbox/config.yaml --profile=devbox-userconf-outofbox
 EOF
 
 # /home/cicada/opt/dotbox/images/script/setup-sys-change-default-gcc.sh
