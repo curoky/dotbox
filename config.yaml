@@ -218,11 +218,15 @@ dotfiles:
     dst: /etc/ssh
     link: nolink
     src: sshd/host-key
-  ssh-config:
+  ssh-user-config:
     dst: ~/.ssh/config
     actions:
       - fix-ssh_config-permissions
-    src: ssh/ssh_config
+    src: ssh/user.ssh_config
+    link: nolink
+  ssh-etc-config:
+    dst: /etc/ssh/ssh_config
+    src: ssh/etc.ssh_config
     link: nolink
   startship:
     dst: ~/.config/starship.toml
@@ -281,13 +285,10 @@ dotfiles:
 profiles:
   devbox-sysconf:
     dotfiles:
-      - docker-d
       - linux-journal
       - linux-sudoers_more_secure_path
       - linux-sysctl
-      - sshd_config
-      - ssh-systemd-socket
-      - ssh-host-key
+      - ssh-etc-config
       - zshenv-etc
 
   devbox-sysconf-proxy:
@@ -308,16 +309,10 @@ profiles:
       - bash_logout
       - bashrc
       - bat
-      - cargo
-      - ccache
       - clang-format
       - conan2
       - conda
-      - dolthub
       - gdb
-      - gradle
-      - htop
-      - isort
       - nixpkgs
       - pip
       - prettier
@@ -328,28 +323,19 @@ profiles:
       - tmux
       - vim
       - vscode-server
-      - yapf
 
   devbox-userconf-outofbox:
     include:
       - devbox-userconf-base
     dotfiles:
-      - docker
       - git-config
-      - ssh-config
-      - maven
+      - ssh-user-config
       - zshrc
 
   macos-userconf:
     dotfiles:
       - bat
-        # - cargo
-        # - clang-format
-        # - conda
       - git-config
-        # - gradle
-        # - isort
-        # - maven
       - pip
       - prettier
       - procps
@@ -357,13 +343,12 @@ profiles:
       - rime
       - snipaste
       - ssh-authorized-key
-      - ssh-config
+      - ssh-user-config
       - startship
       - vim
       - vscode-keybindings
       - vscode-settings
       - vscode-snippets
-        # - yapf
       - zshrc
 trans_install:
   _decrypt:
