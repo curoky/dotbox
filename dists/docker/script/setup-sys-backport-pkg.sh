@@ -36,3 +36,8 @@ ln -s /nix/var/nix/profiles/default/include/crypt.h /usr/include/crypt.h
 mkdir -p /usr/lib/locale
 ln -s /nix/var/nix/profiles/default/lib/locale/locale-archive /usr/lib/locale/locale-archive
 echo 'LANG=en_US.UTF-8' >/etc/locale.conf
+
+# systemd
+systemctl enable /o/dotbox/config/systemd/myssh.service
+useradd --uid 200 -g 65534 --home-dir /run/sshd --create-home --shell /usr/sbin/nologin sshd
+mkdir -p /var/empty
