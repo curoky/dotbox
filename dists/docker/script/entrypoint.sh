@@ -20,16 +20,18 @@ set -xeuo pipefail
 
 echo "export DEVBOX_PROFILE=$DEVBOX_PROFILE" >>/etc/zshenv
 echo "export DEVBOX_REGION=$DEVBOX_REGION" >>/etc/zshenv
-/o/dotbox/images/script/setup-sshd-port.sh ${DEVBOX_SSHD_PORT:-61000}
+
+mkdir -p /data/workspace /data/share /data/cache/vscode-server
+chown -R cicada:cicada /data/workspace /data/share /data/cache/vscode-server
+[[ -d /home/cicada/.cache ]] && chown -R cicada:cicada /home/cicada/.cache
 
 sudo -i -u cicada bash <<EOF
-  bash /o/dotbox/images/script/setup-datadir.sh
-  dotdrop install --force --cfg=/data/share/dotbox/config.yaml --profile=devbox-userconf-outofbox
+  [[ -d /data/cache ]] && ln -s /data/cache /home/cicada/.cache
+  [[ -d /data/cache/vscode-server ]] && ln -s /data/cache/vscode-server /home/cicada/.vscode-server
+  [[ -d /data/share/dotbox ]] && ln -s /data/share/dotbox /home/cicada/dotbox
+  [[ -d /data/share/dotbox ]] && dotdrop install --force --cfg=/data/share/dotbox/config.yaml --profile=devbox-userconf-outofbox
 EOF
 
-# /home/cicada/opt/dotbox/images/script/setup-sys-change-default-gcc.sh
-
-# Note: sometimes we want to mount ~/.cache to /dev/shm/..., so need changing owner.
-# [[ -f /home/cicada/.cache ]] && chown cicada:cicada -R /home/cicada/.cache
+/o/dotbox/images/script/setup-sshd-port.sh ${DEVBOX_SSHD_PORT:-61000}
 
 # exec /lib/systemd/systemd
