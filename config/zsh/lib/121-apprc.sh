@@ -15,6 +15,34 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+#=-> locles
+export LOCALE_ARCHIVE=/nix/var/nix/profiles/default/lib/locale/locale-archive
+
+#-> java
+export JAVA_HOME=/nix/var/nix/profiles/jdk19
+if [[ ! -d $JAVA_HOME ]]; then
+  export JAVA_HOME=/opt/homebrew/opt/openjdk@17
+fi
+
+#-> cuda
+export CUDA_HOME=/nix/var/nix/profiles/cuda11_4
+
+#=-> Krb5
+# export KRB5_CONFIG=$CONFIG_HOME/krb5/krb5.conf
+export KRB5CCNAME=/tmp/krb5_ccache
+
+#=-> go
+# https://pkg.go.dev/cmd/go#hdr-Build_and_test_caching
+# export GOCACHE=$XDG_CACHE_HOME/go-build
+export GOENV=$CONFIG_HOME/go/env
+
+#=-> npm
+# https://docs.npmjs.com/cli/v6/using-npm/config#environment-variables
+# https://reactgo.com/npm-change-cache-location/
+export NPM_CONFIG_CACHE=$XDG_CACHE_HOME/npm
+# export NPM_CONFIG_PREFIX=$HOME/.npm-global
+# export NPM_CONFIG_REGISTRY=https://registry.npm.taobao.org
+
 #=-> homebrew
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_AUTO_UPDATE=1
@@ -43,13 +71,6 @@ export HOMEBREW_GIT_PATH=/nix/var/nix/profiles/default/bin/git
 # export CC=/home/linuxbrew/.linuxbrew/opt/gcc@10/bin/gcc-10
 # export CXX=/home/linuxbrew/.linuxbrew/opt/gcc@10/bin/g++-10
 
-#=-> npm
-# https://docs.npmjs.com/cli/v6/using-npm/config#environment-variables
-# https://reactgo.com/npm-change-cache-location/
-export NPM_CONFIG_CACHE=$XDG_CACHE_HOME/npm
-# export NPM_CONFIG_PREFIX=$HOME/.npm-global
-# export NPM_CONFIG_REGISTRY=https://registry.npm.taobao.org
-
 #=-> git
 # export FILTER_BRANCH_SQUELCH_WARNING=1
 
@@ -57,15 +78,11 @@ export NPM_CONFIG_CACHE=$XDG_CACHE_HOME/npm
 # export DOCKER_CLIENT_TIMEOUT=120
 # export COMPOSE_HTTP_TIMEOUT=120
 
-#=-> Krb5
-# export KRB5_CONFIG=$CONFIG_HOME/krb5/krb5.conf
-export KRB5CCNAME=/tmp/krb5_ccache
-
 #=-> distcc
 # export DISTCC_IO_TIMEOUT=10000
 # export DISTCC_SKIP_LOCAL_RETRY=1
-export DISTCC_HOSTS="--localslots_cpp=32 --randomize 10.144.189.196/600"
-export DISTCC_LOG=$XDG_CACHE_HOME/distcc.log
+# export DISTCC_HOSTS="--localslots_cpp=32 --randomize 10.144.189.196/600"
+# export DISTCC_LOG=$XDG_CACHE_HOME/distcc.log
 # export DISTCC_DIR=$XDG_CACHE_HOME/distcc
 # export DISTCC_VERBOSE=1
 # export DISABLE_CAS=1
@@ -90,11 +107,6 @@ export DISTCC_LOG=$XDG_CACHE_HOME/distcc.log
 # export PIP_CONFIG_FILE=$CONFIG_HOME/pip/pip.conf
 # https://docs.python.org/3/using/cmdline.html#environment-variables
 # export PYTHONPATH=$p:$PYTHONPATH
-
-#=-> go
-# https://pkg.go.dev/cmd/go#hdr-Build_and_test_caching
-# export GOCACHE=$XDG_CACHE_HOME/go-build
-export GOENV=$CONFIG_HOME/go/env
 
 #=-> rubocop
 # https://docs.rubocop.org/rubocop/usage/caching.html#cache-path
@@ -146,12 +158,3 @@ export GOENV=$CONFIG_HOME/go/env
 #-> nix
 # https://nixos.wiki/wiki/Locales
 # export LOCALE_ARCHIVE=/usr/lib/locale/locale-archive
-
-#-> java
-export JAVA_HOME=/nix/var/nix/profiles/jdk19
-if [[ ! -d $JAVA_HOME ]]; then
-  export JAVA_HOME=/opt/homebrew/opt/openjdk@17
-fi
-
-#-> cuda
-export CUDA_HOME=/nix/var/nix/profiles/cuda11_4
