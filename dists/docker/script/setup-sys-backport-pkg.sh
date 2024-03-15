@@ -18,10 +18,10 @@
 set -xeuo pipefail
 
 # link nixpkg bin and lib
-BIN_NAMES=(curl grep sed gzip bash findutils less git)
+BIN_NAMES=(curl grep sed gzip bash find less git perl)
 for n in "${BIN_NAMES[@]}"; do
-  ln -sf /nix/var/nix/profiles/default/bin/$n /bin/$n
-  ln -sf /nix/var/nix/profiles/default/bin/$n /usr/bin/$n
+  [[ ! -f /bin/$n ]] && ln -s /nix/var/nix/profiles/default/bin/$n /bin/$n
+  [[ ! -f /usr/bin/$n ]] && ln -s /nix/var/nix/profiles/default/bin/$n /usr/bin/$n
 done
 
 # ln -s /nix/var/nix/profiles/default/lib/libz.so* /usr/lib/x86_64-linux-gnu/
@@ -33,7 +33,7 @@ ln -s /nix/var/nix/profiles/libxml2/lib/libxml2.* /usr/lib/x86_64-linux-gnu/
 # ln -s /nix/var/nix/profiles/default/bin/perl /usr/bin/perl
 
 # timezone
-ln -fs /nix/var/nix/profiles/default/share/zoneinfo/Singapore /etc/localtime
+ln -f /nix/var/nix/profiles/default/share/zoneinfo/Singapore /etc/localtime
 
 # cert
 mkdir -p /etc/ssl/certs/
