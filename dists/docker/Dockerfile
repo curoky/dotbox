@@ -1,16 +1,4 @@
-# syntax=docker/dockerfile:1.4
-ARG BASE_IMAGE=
-
-FROM ubuntu:23.10 as base_ubuntu23.10
-RUN apt-get update \
-  && apt-get install -y --no-install-recommends \
-    sudo systemd \
-    # xfce4 xfce4-goodies tightvncserver rsyslog
-  && apt-get remove --allow-remove-essential -y curl grep sed gzip bash findutils util-linux procps perl-base \
-    ncurses-bin ncurses-base libncursesw6 libtinfo6 \
-  && apt-get autoremove -y
-
-FROM base_${BASE_IMAGE}
+FROM curoky/dotbox:ubuntu_23.10
 LABEL org.opencontainers.image.authors="cccuroky@gmail.com"
 
 ENV PATH=$PATH:/nix/var/nix/profiles/default/bin:/nix/var/nix/profiles/gcc13/bin \

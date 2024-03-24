@@ -18,19 +18,9 @@
 
 set -xeuo pipefail
 
-function CreateUser() {
-  uid=$1
-  gid=$uid
-  name=$2
-  pass=$3
-  echo "create user $name($uid:$gid) with password: $pass"
-  groupadd -g $gid -o $name
-  useradd -m -s /nix/var/nix/profiles/default/bin/zsh -u $uid -g $gid $name
-  echo "$name:$pass" | chpasswd
-  usermod -aG adm $name
-  # usermod -aG docker $name
-  usermod -aG sudo $name
-  echo "$name ALL=(ALL:ALL) NOPASSWD:ALL" >>/etc/sudoers.d/nopasswd_user
-}
-
-CreateUser 1000 cicada 123456
+docker buildx build . \
+  --file 23.10.Dockerfile \
+  --network=host \
+  --cache-to=type=inline \
+  --cache-from=type=registry,ref=curoky/dotbox:ubuntu_23.10 \
+  --tag curoky/dotbox:ubuntu_23.10
