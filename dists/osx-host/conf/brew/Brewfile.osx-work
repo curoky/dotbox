@@ -16,6 +16,7 @@ casks = [
   'db-browser-for-sqlite',
   'adrive',
   'miniconda',
+  'keepingyouawake',
 ]
 
 casks.each do |b|

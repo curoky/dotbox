@@ -19,7 +19,8 @@ casks = [
   'db-browser-for-sqlite',
   'adrive',
   'pika',
-  'miniconda'
+  'miniconda',
+  'keepingyouawake',
   # 'obs',
 
   # 'android-platform-tools',
