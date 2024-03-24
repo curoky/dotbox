@@ -39,5 +39,6 @@ function insert_tf_ldpath() {
 
 create_conda_env py2
 create_conda_env py3
-create_conda_env tf2.15
-insert_tf_ldpath tf2.15 '3.11'
+create_conda_env tf2.15-cpu
+# create_conda_env tf2.15
+# insert_tf_ldpath tf2.15 '3.11'
