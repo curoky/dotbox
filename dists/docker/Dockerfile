@@ -5,6 +5,7 @@ ENV PATH=$PATH:/nix/var/nix/profiles/default/bin:/nix/var/nix/profiles/gcc13/bin
   DEBIAN_FRONTEND=noninteractive
 
 COPY --link --from=curoky/dotbox:nixpkg /nix /nix
+COPY --link --from=curoky/dotbox:pipx /o/pipx /o/pipx
 # COPY --link --from=curoky/dotbox:mamba /o/conda /o/conda
 COPY --chown=1000:1000 ./ /o/dotbox
 

@@ -17,11 +17,10 @@
 # limitations under the License.
 
 set -xeuo pipefail
-export PIPX_HOME=/opt/pipx
-export PIPX_BIN_DIR=/opt/pipx/bin
-export PIPX_MAN_DIR=/opt/pipx/share/man
 
-# pipx install conan==1.62.0
-pipx install licenseheaders
-pipx install dotdrop
-pipx install git+https://github.com/curoky/conan
+docker buildx build . \
+  --file Dockerfile \
+  --network=host \
+  --cache-to=type=inline \
+  --cache-from=type=registry,ref=curoky/dotbox:pipx \
+  --tag curoky/dotbox:pipx

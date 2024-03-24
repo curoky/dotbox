@@ -71,8 +71,6 @@ pkg_list=(
 nix-env -p /nix/var/nix/profiles/default -iA "${pkg_list[@]}"
 
 chmod +w /nix/var/nix/profiles/default/*
-nix-env -iA -p /nix/var/nix/profiles/default2 -f default.nix conan dotdrop licenseheaders
-ln -s /nix/var/nix/profiles/default2/bin/* /nix/var/nix/profiles/default/bin/
 ln -s /nix/var/nix/profiles/default/bin/bazelisk /nix/var/nix/profiles/default/bin/bazel
 
 #################### jdk ####################
@@ -106,6 +104,7 @@ ln -s /nix/var/nix/profiles/default/lib/libbacktrace.* /nix/var/nix/profiles/gcc
 nix-env -iA -p /nix/var/nix/profiles/protobuf_3_8_0 -f default.nix protobuf_3_8_0
 nix-env -iA -p /nix/var/nix/profiles/protobuf_3_9_2 -f default.nix protobuf_3_9_2
 nix-env -iA -p /nix/var/nix/profiles/protobuf_3_20 nixpkgs.protobuf3_20
+nix-env -iA -p /nix/var/nix/profiles/protobuf_24 nixpkgs.protobuf_24
 
 #################### cuda ####################
 nix-env -iA -p /nix/var/nix/profiles/cuda11_4 nixpkgs.cudaPackages_11_4.cudatoolkit nixpkgs.cudaPackages_11_4.cudatoolkit.lib
