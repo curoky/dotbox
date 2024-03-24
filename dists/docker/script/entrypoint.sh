@@ -27,11 +27,12 @@ chown -R cicada:cicada /data/workspace /data/share /data/cache/vscode-server
 
 sudo -i -u cicada bash <<EOF
   [[ -d /data/cache ]] && ln -s /data/cache /home/cicada/.cache
+  rm -rf /home/cicada/.vscode-server
   [[ -d /data/cache/vscode-server ]] && ln -s /data/cache/vscode-server /home/cicada/.vscode-server
   [[ -d /data/share/dotbox ]] && ln -s /data/share/dotbox /home/cicada/dotbox
-  [[ -d /data/share/dotbox ]] && dotdrop install --force --cfg=/data/share/dotbox/config.yaml --profile=devbox-userconf-outofbox
+  [[ -d /data/share/dotbox ]] && dotdrop install --force --cfg=/home/cicada/dotbox/config.yaml --profile=devbox-userconf-outofbox
 EOF
 
-/o/dotbox/images/script/setup-sshd-port.sh ${DEVBOX_SSHD_PORT:-61000}
+sed -i -e "s/Port 61000/Port ${DEVBOX_SSHD_PORT:-61000}/g" /o/dotbox/config/sshd/sshd_config.conf
 
 # exec /lib/systemd/systemd
