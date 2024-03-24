@@ -1,7 +1,7 @@
 FROM curoky/dotbox:ubuntu_23.10
 LABEL org.opencontainers.image.authors="cccuroky@gmail.com"
 
-ENV PATH=$PATH:/nix/var/nix/profiles/default/bin:/nix/var/nix/profiles/gcc13/bin \
+ENV PATH=$PATH:/nix/var/nix/profiles/default/bin:/nix/var/nix/profiles/gcc13/bin:/o/pipx/bin \
   DEBIAN_FRONTEND=noninteractive
 
 COPY --link --from=curoky/dotbox:nixpkg /nix /nix

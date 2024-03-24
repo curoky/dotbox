@@ -300,8 +300,9 @@ profiles:
       - linux-journal
       - linux-sudoers_more_secure_path
       - linux-sysctl
-      - zshenv-etc
+      - linux-environment
       - ssh-etc-config
+      - zshenv-etc
 
   devbox-userconf-base:
     dotfiles:
