@@ -25,9 +25,10 @@ for n in "${BIN_NAMES[@]}"; do
 done
 
 # ln -s /nix/var/nix/profiles/default/lib/libz.so* /usr/lib/x86_64-linux-gnu/
-ln -s /nix/var/nix/profiles/default/lib/libtinfo.so* /usr/lib/x86_64-linux-gnu/
-ln -s /nix/var/nix/profiles/default/lib/libsnappy.* /usr/lib/x86_64-linux-gnu/
-ln -s /nix/var/nix/profiles/libxml2/lib/libxml2.* /usr/lib/x86_64-linux-gnu/
+ln -s /nix/var/nix/profiles/libs/lib/libtinfo.so* /usr/lib/x86_64-linux-gnu/
+ln -s /nix/var/nix/profiles/libs/lib/libsnappy.* /usr/lib/x86_64-linux-gnu/
+ln -s /nix/var/nix/profiles/libs/lib/libxml2.* /usr/lib/x86_64-linux-gnu/
+ln -sf /nix/var/nix/profiles/default/bin/perl /usr/bin/perl
 # ln -s /nix/var/nix/profiles/default/include/crypt.h /usr/include/crypt.h
 # ln -s /nix/var/nix/profiles/gcc13-lib/lib/libstdc++.so.6 /usr/lib/x86_64-linux-gnu/
 # ln -s /nix/var/nix/profiles/default/bin/perl /usr/bin/perl
