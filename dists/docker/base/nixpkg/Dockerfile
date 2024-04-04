@@ -19,7 +19,8 @@ ENV PATH=$PATH:/nix/var/nix/profiles/default/bin:/home/nix/.nix-profile/bin:/nix
 RUN sudo mkdir -m 0755 /nix && sudo chown nix:nix /nix
 RUN curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
 
-COPY pkgs pkgs
-COPY default.nix install-pkgs.sh .
+COPY --from=nixpkg pkgs pkgs
+COPY --from=nixpkg default.nix .
+COPY install-pkgs.sh .
 RUN nix-channel --update && ./install-pkgs.sh
 RUN sudo mkdir -p /o && sudo chown 1000:1000 -R /o

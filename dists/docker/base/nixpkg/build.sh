@@ -18,9 +18,10 @@
 
 set -xeuo pipefail
 
+# --cache-to=type=inline \
+# --cache-from=type=registry,ref=curoky/dotbox:nixpkg \
 docker buildx build . \
+  --build-context nixpkg=../../../../third-party/nixpkgs \
   --file Dockerfile \
   --network=host \
-  --cache-to=type=inline \
-  --cache-from=type=registry,ref=curoky/dotbox:nixpkg \
   --tag curoky/dotbox:nixpkg

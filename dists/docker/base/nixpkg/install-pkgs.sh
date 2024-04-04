@@ -34,8 +34,8 @@ pkg_list=(
   nixpkgs.dstat nixpkgs.man nixpkgs.iptables nixpkgs.unixtools.xxd nixpkgs.util-linux
   nixpkgs.findutils nixpkgs.coreutils nixpkgs.cron nixpkgs.lsb-release nixpkgs.tree
   nixpkgs.gdu nixpkgs.ncdu nixpkgs.silver-searcher nixpkgs.diffutils
+  nixpkgs.jemalloc nixpkgs.flamegraph nixpkgs.patchelf
   # libraries
-  nixpkgs.ncurses5 nixpkgs.libxml2.out nixpkgs.libxcrypt nixpkgs.libbacktrace nixpkgs.jemalloc nixpkgs.flamegraph
   # c/c++
   nixpkgs.automake nixpkgs.autoconf nixpkgs.libtool nixpkgs.pkg-config nixpkgs.gnumake
   nixpkgs.ninja nixpkgs.distcc nixpkgs.ccache nixpkgs.scons nixpkgs.meson
@@ -45,7 +45,7 @@ pkg_list=(
   # nodejs
   nixpkgs.nodejs nixpkgs.yarn nixpkgs.nodePackages.prettier nixpkgs.nodePackages.eslint
   # java
-  nixpkgs.gradle nixpkgs.maven
+  # nixpkgs.gradle nixpkgs.maven
   # python
   nixpkgs.pipenv nixpkgs.pipx nixpkgs.ruff nixpkgs.yapf nixpkgs.black nixpkgs.poetry
   # shell
@@ -73,8 +73,12 @@ nix-env -p /nix/var/nix/profiles/default -iA "${pkg_list[@]}"
 chmod +w /nix/var/nix/profiles/default/*
 ln -s /nix/var/nix/profiles/default/bin/bazelisk /nix/var/nix/profiles/default/bin/bazel
 
+nix-env -iA -p /nix/var/nix/profiles/libs nixpkgs.python311Packages.libtorrent-rasterbar \
+  nixpkgs.ncurses5 nixpkgs.libxml2.out nixpkgs.libxcrypt nixpkgs.libbacktrace
+
 #################### jdk ####################
-nix-env -iA -p /nix/var/nix/profiles/jdk19 nixpkgs.jdk19
+# nix-env -iA -p /nix/var/nix/profiles/jdk19 nixpkgs.jdk19
+nix-env -iA -p /nix/var/nix/profiles/jdk nixpkgs.jdk
 
 #################### llvm ####################
 # nix-env -iA -p /nix/var/nix/profiles/llvm16 nixpkgs.clang_16 nixpkgs.clang-tools_16 nixpkgs.llvmPackages_16.llvm
@@ -90,9 +94,9 @@ nix-env -iA -p /nix/var/nix/profiles/gcc13-unwrapper nixpkgs.gcc13.cc
 nix-env -iA -p /nix/var/nix/profiles/libgcc nixpkgs.libgcc
 
 chmod +w /nix/var/nix/profiles/gcc13-unwrapper/*
-ln -s /nix/var/nix/profiles/default/include/crypt.h /nix/var/nix/profiles/gcc13-unwrapper/include
-ln -s /nix/var/nix/profiles/default/include/backtrace.h /nix/var/nix/profiles/gcc13-unwrapper/include
-ln -s /nix/var/nix/profiles/default/lib/libbacktrace.* /nix/var/nix/profiles/gcc13-unwrapper/lib
+ln -s /nix/var/nix/profiles/libs/include/crypt.h /nix/var/nix/profiles/gcc13-unwrapper/include
+ln -s /nix/var/nix/profiles/libs/include/backtrace.h /nix/var/nix/profiles/gcc13-unwrapper/include
+ln -s /nix/var/nix/profiles/libs/lib/libbacktrace.* /nix/var/nix/profiles/gcc13-unwrapper/lib
 # gcc13_wrapper_root=$(realpath /nix/var/nix/profiles/gcc13/bin)/../
 # echo "-I/usr/include" >$gcc13_wrapper_root/nix-support/libcxx-cxxflags
 # gcc13_root=$(dirname "$(/nix/var/nix/profiles/gcc13/bin/gcc -v 2>&1 | grep "COLLECT_GCC" | cut -d '=' -f 2)")/..
@@ -103,7 +107,7 @@ ln -s /nix/var/nix/profiles/default/lib/libbacktrace.* /nix/var/nix/profiles/gcc
 #################### protobuf ####################
 nix-env -iA -p /nix/var/nix/profiles/protobuf_3_8_0 -f default.nix protobuf_3_8_0
 nix-env -iA -p /nix/var/nix/profiles/protobuf_3_9_2 -f default.nix protobuf_3_9_2
-nix-env -iA -p /nix/var/nix/profiles/protobuf_3_20 nixpkgs.protobuf3_20
+# nix-env -iA -p /nix/var/nix/profiles/protobuf_3_20 nixpkgs.protobuf3_20
 nix-env -iA -p /nix/var/nix/profiles/protobuf_24 nixpkgs.protobuf_24
 
 #################### cuda ####################
