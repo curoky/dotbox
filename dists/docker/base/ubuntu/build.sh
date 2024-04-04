@@ -18,9 +18,11 @@
 
 set -xeuo pipefail
 
+version=${1:-23.10}
+
 docker buildx build . \
-  --file 23.10.Dockerfile \
+  --file $version.Dockerfile \
   --network=host \
   --cache-to=type=inline \
-  --cache-from=type=registry,ref=curoky/dotbox:ubuntu_23.10 \
-  --tag curoky/dotbox:ubuntu_23.10
+  --cache-from=type=registry,ref=curoky/dotbox:ubuntu_$version \
+  --tag curoky/dotbox:ubuntu_$version
