@@ -18,7 +18,7 @@
 
 set -xeuo pipefail
 
-conf_path=${1:-/data/share/dotbox/images/base/mamba/env}
+conf_path=${1:-/data/share/dotbox/dists/docker/base/mamba/env}
 echo "use conf_path=$conf_path"
 
 function create_conda_env() {
@@ -39,6 +39,10 @@ function insert_tf_ldpath() {
 
 create_conda_env py2
 create_conda_env py3
-create_conda_env tf2.15-cpu
-# create_conda_env tf2.15
-# insert_tf_ldpath tf2.15 '3.11'
+create_conda_env tf2.11
+insert_tf_ldpath tf2.11 '3.10'
+create_conda_env tf2.16-cpu
+# create_conda_env tf2.16
+# insert_tf_ldpath tf2.16 '3.11'
+
+/o/conda/bin/mamba clean --all -y

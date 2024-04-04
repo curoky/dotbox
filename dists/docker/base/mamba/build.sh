@@ -18,9 +18,9 @@
 
 set -xeuo pipefail
 
+# --cache-to=type=inline \
+# --cache-from=type=registry,ref=curoky/dotbox:mamba \
 docker buildx build . \
   --file Dockerfile \
   --network=host \
-  --cache-to=type=inline \
-  --cache-from=type=registry,ref=curoky/dotbox:mamba \
   --tag curoky/dotbox:mamba
