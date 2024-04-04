@@ -7,6 +7,6 @@ brew install dotdrop
 
 dotdrop install --cfg=~/repos/dotbox/config.yaml --force --profile=macos-userconf
 
-brew bundle --force --file ~/repos/dotbox/images/config/brew/Brewfile.osx-persional --cleanup --verbose
+brew bundle --force --file ~/repos/dotbox/dists/docker/config/brew/Brewfile.osx-persional --cleanup --verbose
 
-/Users/curoky/repos/dotbox/images/script/setup-pkg-conda-osx.sh
+/Users/curoky/repos/dotbox/dists/docker/script/setup-pkg-conda-osx.sh
