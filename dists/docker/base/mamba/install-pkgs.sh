@@ -18,6 +18,7 @@
 
 set -xeuo pipefail
 
+export PIP_CACHE_DIR=/tmp/pip
 conf_path=${1:-/data/share/dotbox/dists/docker/base/mamba/env}
 echo "use conf_path=$conf_path"
 
