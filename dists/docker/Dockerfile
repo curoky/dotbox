@@ -1,4 +1,4 @@
-FROM curoky/dotbox:ubuntu_23.10
+FROM curoky/dotbox:debian_10
 LABEL org.opencontainers.image.authors="cccuroky@gmail.com"
 
 ENV PATH=$PATH:/nix/var/nix/profiles/default/bin:/nix/var/nix/profiles/gcc13/bin:/o/pipx/bin \
