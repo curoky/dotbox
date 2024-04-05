@@ -27,6 +27,8 @@ jobs:
       - uses: docker/build-push-action@v5
         with:
           context: dists/docker/base/nixpkg
+          build-contexts: |
+            nixpkg=third-party/nixpkgs
           file: dists/docker/base/nixpkg/Dockerfile
           push: false
           no-cache: true
