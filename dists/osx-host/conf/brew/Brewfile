@@ -17,7 +17,8 @@ casks = [
   'pika',
   'miniconda',
   'keepingyouawake',
-  
+  'orbstack',
+
   # 'db-browser-for-sqlite',
   # 'obs',
   # 'android-platform-tools',

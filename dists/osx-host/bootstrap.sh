@@ -15,7 +15,7 @@ function setup-dotfiles() {
 function setup-brew-pkgs() {
   mkdir -p /opt/homebrew/Library/Taps/curoky/
   ln -sf ~/dotbox/third-party/homebrew/ /opt/homebrew/Library/Taps/curoky/homebrew-tap
-  # brew bundle --force --file ~/dotbox/dists/docker/config/brew/Brewfile --cleanup --verbose
+  brew bundle --force --file ~/dotbox/dists/osx-host/conf/brew/Brewfile --cleanup --verbose
 }
 
 function setup-conda-pkgs() {
