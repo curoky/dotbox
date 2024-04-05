@@ -18,7 +18,39 @@ jobs:
 
       - uses: docker/build-push-action@v5
         with:
-          context: dists/docker
+          context: dists/docker/base/debian
+          file: dists/docker/base/debian/10.Dockerfile
+          push: false
+          no-cache: true
+          tags: curoky/dotbox:debian10
+
+      - uses: docker/build-push-action@v5
+        with:
+          context: dists/docker/base/mamba/
+          file: dists/docker/base/mamba/Dockerfile
+          push: false
+          no-cache: true
+          tags: curoky/dotbox:conda
+
+      - uses: docker/build-push-action@v5
+        with:
+          context: dists/docker/base/nixpkg
+          file: dists/docker/base/nixpkg/Dockerfile
+          push: false
+          no-cache: true
+          tags: curoky/dotbox:nixpkg
+
+      - uses: docker/build-push-action@v5
+        with:
+          context: dists/docker/base/pipx
+          file: dists/docker/base/pipx/Dockerfile
+          push: false
+          no-cache: true
+          tags: curoky/dotbox:pipx
+
+      - uses: docker/build-push-action@v5
+        with:
+          context: .
           file: dists/docker/Dockerfile
           push: false
           no-cache: true
