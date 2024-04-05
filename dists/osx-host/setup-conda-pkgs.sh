@@ -18,21 +18,17 @@
 
 set -xeuo pipefail
 
-# $(readlink -f
-conf_path=${1:-~/dotbox/dists/docker/config/pip}
+export PIP_CACHE_DIR=/tmp/pip
+conf_path=${1:-~/dotbox/dists/osx-host/conf/conan}
 echo "use conf_path=$conf_path"
 
 function create_conda_env() {
   local env_name=$1
-  local py_version=$2
-  echo "create $env_name($py_version)"
-  if [[ ! -d /opt/homebrew/Caskroom/miniconda/base/envs/$env_name ]]; then
-    # /opt/homebrew/bin/conda env remove -y -n $env_name
-    /opt/homebrew/bin/conda create -n $env_name python=$py_version --yes
-  fi
-  /opt/homebrew/Caskroom/miniconda/base/envs/$env_name/bin/pip install --no-cache-dir -r $conf_path/requirements-osx-${env_name}.txt
+  echo "create $env_name"
+  /opt/homebrew/bin/conda env remove -y -n $env_name
+  /opt/homebrew/bin/conda env create -f $conf_path/${env_name}.yaml
 }
 
-create_conda_env py3 '3.12'
+create_conda_env py3
 
 /opt/homebrew/bin/conda clean --all -y

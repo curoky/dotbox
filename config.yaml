@@ -327,21 +327,27 @@ profiles:
       - ssh-user-config
       - zshrc
 
-  macos-userconf:
+  macos-user-base:
     dotfiles:
       - bat
-      - git-config
       - prettier
       - procps
       - rime
       - snipaste
-      - ssh-user-config
       - startship
       - vim
       - vscode-keybindings
       - vscode-settings
       - vscode-snippets
+
+  macos-user-final:
+    include:
+      - macos-user-base
+    dotfiles:
       - zshrc
+      - git-config
+      - ssh-user-config
+
 trans_install:
   _decrypt:
     openssl enc -aes-256-cbc -nosalt -d -pbkdf2 -in {0} -out {1} -pass pass:{{@@

@@ -1,0 +1,22 @@
+# https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#create-env-file-manually
+name: py3
+channels:
+  - defaults
+dependencies:
+  - python=3.12
+  - pip
+  - pip:
+      - ipykernel
+      - ipywidgets
+      - pydantic
+      - requests
+      - typer
+      - icalendar
+      - sqlmodel
+      - notion-client
+      - geopy
+      - gpxpy
+      - pytz
+      - numpy
+      - plotly
+      - pandas
