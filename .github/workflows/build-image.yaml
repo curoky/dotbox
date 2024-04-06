@@ -11,17 +11,18 @@ jobs:
       - uses: actions/checkout@v4
       - uses: docker/setup-qemu-action@v3
       - uses: docker/setup-buildx-action@v3
-      # - uses: docker/login-action@v3
-      #   with:
-      #     username: curoky
-      #     password: ${{ secrets.DOCKER_TOKEN }}
+      - uses: docker/login-action@v3
+        with:
+          username: curoky
+          password: ${{ secrets.DOCKER_TOKEN }}
 
       - uses: docker/build-push-action@v5
         with:
           context: dists/docker/base/debian
           file: dists/docker/base/debian/10.Dockerfile
-          push: false
-          no-cache: true
+          push: true
+          cache-from: type=registry,ref=curoky/dotbox:debian10
+          cache-to: type=inline
           tags: curoky/dotbox:debian10
 
       - uses: docker/build-push-action@v5
@@ -30,30 +31,34 @@ jobs:
           build-contexts: |
             nixpkg=third-party/nixpkgs
           file: dists/docker/base/nixpkg/Dockerfile
-          push: false
-          no-cache: true
+          push: true
+          cache-from: type=registry,ref=curoky/dotbox:nixpkg
+          cache-to: type=inline
           tags: curoky/dotbox:nixpkg
 
       - uses: docker/build-push-action@v5
         with:
           context: dists/docker/base/mamba
           file: dists/docker/base/mamba/Dockerfile
-          push: false
-          no-cache: true
+          push: true
+          cache-from: type=registry,ref=curoky/dotbox:conda
+          cache-to: type=inline
           tags: curoky/dotbox:conda
 
       - uses: docker/build-push-action@v5
         with:
           context: dists/docker/base/pipx
           file: dists/docker/base/pipx/Dockerfile
-          push: false
-          no-cache: true
+          push: true
+          cache-from: type=registry,ref=curoky/dotbox:pipx
+          cache-to: type=inline
           tags: curoky/dotbox:pipx
 
       - uses: docker/build-push-action@v5
         with:
           context: .
           file: dists/docker/Dockerfile
-          push: false
-          no-cache: true
-          tags: curoky/dotbox:debian10
+          push: true
+          cache-from: type=registry,ref=curoky/dotbox:latest
+          cache-to: type=inline
+          tags: curoky/dotbox:latest
