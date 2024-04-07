@@ -19,7 +19,7 @@ RUN /o/dotbox/dists/docker/script/setup-sys-user.sh \
 
 USER cicada
 COPY --link --from=curoky/dotbox:nixpkg /home/nix/.local/state/nix /home/cicada/.local/state/nix
-RUN sudo chown -R cicada:cicada /home/cicada/.local/ \
+RUN sudo chown -R cicada:cicada ~ \
   && mkdir ~/.nix-defexpr \
   && ln -s ~/.local/state/nix/profiles/profile ~/.nix-profile \
   && ln -s ~/.local/state/nix/profiles/channels ~/.nix-defexpr/channels \
