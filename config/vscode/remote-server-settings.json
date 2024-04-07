@@ -42,7 +42,7 @@
     }
   ],
   "java.import.gradle.home": "/nix/var/nix/profiles/default",
-  "java.jdt.ls.java.home": "/nix/var/nix/profiles/jdk19/lib/openjdk",
+  "java.jdt.ls.java.home": "/nix/var/nix/profiles/jdk/lib/openjdk",
   "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx16G -Xms4G",
   "java.trace.server": "verbose",
   "jupyter.widgetScriptSources": ["jsdelivr.com", "unpkg.com"],
@@ -59,7 +59,13 @@
   "shellformat.path": "/nix/var/nix/profiles/default/bin/shfmt",
   "sqlite.sqlite3": "/nix/var/nix/profiles/default/bin/sqlite3",
   "typescript.npm": "/nix/var/nix/profiles/default/bin/npm",
-  "xml.java.home": "/nix/var/nix/profiles/jdk19/lib/openjdk",
+  "xml.java.home": "/nix/var/nix/profiles/jdk/lib/openjdk",
   "xml.server.vmargs": "-Xmx5G",
-  "black-formatter.path": ["/nix/var/nix/profiles/default/bin/black"]
+  "black-formatter.path": ["/nix/var/nix/profiles/default/bin/black"],
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "files.watcherExclude": {
+    "**/build64_release/**": true
+  }
 }
