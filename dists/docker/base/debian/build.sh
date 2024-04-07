@@ -25,4 +25,4 @@ docker buildx build . \
   --network=host \
   --cache-to=type=inline \
   --cache-from=type=registry,ref=curoky/dotbox:debian_$version \
-  --tag curoky/dotbox:debian_$version
+  --tag curoky/dotbox:debian$version

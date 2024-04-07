@@ -1,4 +1,4 @@
-FROM curoky/dotbox:debian_10
+FROM curoky/dotbox:debian10
 LABEL org.opencontainers.image.authors="cccuroky@gmail.com"
 
 ENV PATH=$PATH:/nix/var/nix/profiles/default/bin:/nix/var/nix/profiles/gcc13/bin:/o/pipx/bin \
@@ -6,7 +6,7 @@ ENV PATH=$PATH:/nix/var/nix/profiles/default/bin:/nix/var/nix/profiles/gcc13/bin
 
 COPY --link --from=curoky/dotbox:nixpkg /nix /nix
 COPY --link --from=curoky/dotbox:pipx /o/pipx /o/pipx
-# COPY --link --from=curoky/dotbox:mamba /o/conda /o/conda
+# COPY --link --from=curoky/dotbox:conda /o/conda /o/conda
 COPY --chown=1000:1000 ./ /o/dotbox
 
 RUN /o/dotbox/dists/docker/script/setup-sys-user.sh \
