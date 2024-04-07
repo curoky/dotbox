@@ -8,7 +8,9 @@ function setup-brew() {
 }
 
 function setup-dotfiles() {
-  brew install dotdrop
+  if [[ -f /opt/homebrew/bin/dotdrop ]]; then
+    brew install dotdrop
+  fi
   dotdrop install --cfg=~/dotbox/config.yaml --force --profile=macos-user-base
 }
 
@@ -16,6 +18,8 @@ function setup-brew-pkgs() {
   mkdir -p /opt/homebrew/Library/Taps/curoky/
   ln -sf ~/dotbox/third-party/homebrew/ /opt/homebrew/Library/Taps/curoky/homebrew-tap
   brew bundle --force --file ~/dotbox/dists/osx-host/conf/brew/Brewfile --cleanup --verbose
+  brew link krb5 --force
+  brew cleanup --prune=all
 }
 
 function setup-conda-pkgs() {
