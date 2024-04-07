@@ -36,6 +36,9 @@ source "${ZSH}/oh-my-zsh.sh"
 if [[ -f /o/conda/bin/conda ]]; then
   eval "$(/o/conda/bin/conda shell.zsh hook 2>/dev/null)"
 fi
+if [[ -f /opt/homebrew/Caskroom/miniconda/base/bin/conda ]]; then
+  eval "$(/opt/homebrew/Caskroom/miniconda/base/bin/conda shell.zsh hook 2>/dev/null)"
+fi
 
 #=-> mamba
 if [ -f "/o/conda/etc/profile.d/mamba.sh" ]; then
