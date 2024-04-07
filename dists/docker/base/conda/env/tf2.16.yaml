@@ -1,0 +1,27 @@
+# https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#create-env-file-manually
+name: tf2.16
+channels:
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+      # common
+      - ipykernel
+      - ipywidgets
+      - pydantic
+      - requests
+      - typer
+      # - python-snappy==0.6.1
+      # others
+      - numpy
+      - pandas
+      - plotly
+      - protobuf
+      - scikit-learn=
+      - scipy
+      - statsmodels
+      - tensorboard==2.16.2
+      - nvidia-cudnn-cu11==8.9.6.50
+      - tensorrt==8.6.1.post1
+      - tensorflow[and-cuda]==2.16.1

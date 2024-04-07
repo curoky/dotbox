@@ -18,9 +18,9 @@
 
 set -xeuo pipefail
 
+# --cache-to=type=inline \
+# --cache-from=type=registry,ref=curoky/dotbox:conda \
 docker buildx build . \
   --file Dockerfile \
   --network=host \
-  --cache-to=type=inline \
-  --cache-from=type=registry,ref=curoky/dotbox:conan \
-  --tag curoky/dotbox:conan
+  --tag curoky/dotbox:conda
