@@ -22,5 +22,5 @@ docker buildx build . \
   --file Dockerfile \
   --network=host \
   --cache-to=type=inline \
-  --cache-from=type=registry,ref=curoky/dotbox:pipx \
-  --tag curoky/dotbox:pipx
+  --cache-from=type=registry,ref=curoky/dotbox:stage_pipx \
+  --tag curoky/dotbox:stage_pipx

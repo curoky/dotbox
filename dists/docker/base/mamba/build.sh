@@ -23,4 +23,4 @@ set -xeuo pipefail
 docker buildx build . \
   --file Dockerfile \
   --network=host \
-  --tag curoky/dotbox:mamba
+  --tag curoky/dotbox:stage_mamba
