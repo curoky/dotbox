@@ -266,12 +266,9 @@
     ".Building.lock": true,
     ".blade_tools": true
   },
-  "files.insertFinalNewline": false,
-  "files.trimFinalNewlines": false,
-  "files.trimTrailingWhitespace": false,
-  "files.watcherExclude": {
-    "**/build64_release/**": true
-  },
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
   "git-graph.date.format": "ISO Date & Time",
   "git-graph.maxDepthOfRepoSearch": 4,
   "git.autofetch": true,
@@ -406,7 +403,7 @@
   "sqltools.useNodeRuntime": true,
   "svg.preview.mode": "svg",
   "tabby.api.endpoint": "http://[fdbd:dc53:4:135::21]:9898",
-  "tabby.usage.anonymousUsageTracking": true,
+  "tabby.usage.anonymousUsageTracking": false,
   "task.slowProviderWarning": ["typescript"],
   "taskExplorer.pathToMake": "make",
   "telemetry.telemetryLevel": "off",
