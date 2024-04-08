@@ -78,7 +78,7 @@ jobs:
     strategy:
       matrix:
         version:
-          - debian9
+          # - debian9
           - debian10
           - ubuntu24.04
     steps:
