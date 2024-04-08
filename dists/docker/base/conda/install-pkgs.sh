@@ -17,24 +17,25 @@
 # limitations under the License.
 
 set -xeuo pipefail
-
+export CONAN_ROOT=/o/conda
+export PATH=$CONAN_ROOT/bin:$PATH
 export PIP_CACHE_DIR=/tmp/pip
+
 conf_path=${1:-/data/share/dotbox/dists/docker/base/conda/env}
 echo "use conf_path=$conf_path"
 
 function create_conda_env() {
   local env_name=$1
   echo "create $env_name"
-  /o/conda/bin/conda env remove -y -n $env_name
-  /o/conda/bin/conda env create -f $conf_path/${env_name}.yaml
+  conda env remove -y -n $env_name
+  conda env create -f $conf_path/${env_name}.yaml
 }
 
 function insert_tf_ldpath() {
   local env_name=$1
   local py_version=$2
-  # echo "export LD_LIBRARY_PATH=/o/conda/envs/ml/lib/:/nix/var/nix/profiles/cuda11_8/lib:/o/conda/envs/ml/lib/python3.11/site-packages/nvidia/cudnn/lib:$LD_LIBRARY_PATH" >> /o/conda/envs/$env_name/etc/conda/activate.d/env_vars.sh
-  mkdir -p /o/conda/envs/$env_name/etc/conda/activate.d
-  echo "export LD_LIBRARY_PATH=/o/conda/envs/$env_name/lib/python$py_version/site-packages/nvidia/cudnn/lib:/nix/var/nix/profiles/cuda11_4/lib:\$LD_LIBRARY_PATH" >>/o/conda/envs/$env_name/etc/conda/activate.d/env_vars.sh
+  mkdir -p $CONAN_ROOT/envs/$env_name/etc/conda/activate.d
+  echo "export LD_LIBRARY_PATH=$CONAN_ROOT/envs/$env_name/lib/python$py_version/site-packages/nvidia/cudnn/lib:/nix/var/nix/profiles/cuda11_4/lib:\$LD_LIBRARY_PATH" >>$CONAN_ROOT/envs/$env_name/etc/conda/activate.d/env_vars.sh
 }
 
 create_conda_env py2
@@ -45,4 +46,4 @@ create_conda_env tf2.16-cpu
 # create_conda_env tf2.16
 # insert_tf_ldpath tf2.16 '3.11'
 
-/o/conda/bin/conda clean --all -y
+conda clean --all -y

@@ -107,7 +107,7 @@ ln -s /nix/var/nix/profiles/libs/lib/libbacktrace.* /nix/var/nix/profiles/gcc13-
 #################### protobuf ####################
 nix-env -iA -p /nix/var/nix/profiles/protobuf_3_8_0 -f default.nix protobuf_3_8_0
 nix-env -iA -p /nix/var/nix/profiles/protobuf_3_9_2 -f default.nix protobuf_3_9_2
-# nix-env -iA -p /nix/var/nix/profiles/protobuf_3_20 nixpkgs.protobuf3_20
+nix-env -iA -p /nix/var/nix/profiles/protobuf_3_20 nixpkgs.protobuf3_20
 nix-env -iA -p /nix/var/nix/profiles/protobuf_24 nixpkgs.protobuf_24
 
 #################### cuda ####################

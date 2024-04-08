@@ -18,8 +18,8 @@
 
 set -xeuo pipefail
 export PIPX_HOME=/o/pipx
-export PIPX_BIN_DIR=/o/pipx/bin
-export PIPX_MAN_DIR=/o/pipx/share/man
+export PIPX_BIN_DIR=$PIPX_HOME/bin
+export PIPX_MAN_DIR=$PIPX_HOME/share/man
 
 pipx install licenseheaders
 pipx install thrift-pyi
