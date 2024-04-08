@@ -1,4 +1,4 @@
-FROM curoky/dotbox:nixpkg
+FROM curoky/dotbox:stage_nixpkg
 LABEL org.opencontainers.image.authors="cccuroky@gmail.com"
 
 COPY env env
