@@ -1,9 +1,4 @@
 {
-  "[cpp]": {
-    "editor.tabSize": 2
-  },
-  "bazel.buildifierExecutable": "/nix/var/nix/profiles/default/bin/buildifier",
-  "bazel.executable": "/nix/var/nix/profiles/default/bin/bazel",
   "C_Cpp.clang_format_path": "/nix/var/nix/profiles/default/bin/clang-format",
   "C_Cpp.codeAnalysis.maxConcurrentThreads": 32,
   "C_Cpp.codeAnalysis.maxMemory": 50000,
@@ -14,12 +9,24 @@
   "C_Cpp.maxCachedProcesses": 120,
   "C_Cpp.maxConcurrentThreads": 32,
   "C_Cpp.maxMemory": 50000,
+  "[cpp]": {
+    "editor.tabSize": 2
+  },
+  "bazel.buildifierExecutable": "/nix/var/nix/profiles/default/bin/buildifier",
+  "bazel.executable": "/nix/var/nix/profiles/default/bin/bazel",
+  "black-formatter.path": ["/nix/var/nix/profiles/default/bin/black"],
   "clang-format.executable": "/nix/var/nix/profiles/default/bin/clang-format",
   "clang-format.fallbackStyle": "Google",
   "cmake.cmakePath": "/nix/var/nix/profiles/default/bin/cmake",
   "cmake.ctestPath": "/nix/var/nix/profiles/default/bin/ctest",
   "cmakeFormat.exePath": "/nix/var/nix/profiles/default/bin/cmake-format",
   "cpplint.cpplintPath": "/nix/var/nix/profiles/default/bin/cpplint",
+  "files.insertFinalNewline": false,
+  "files.trimFinalNewlines": false,
+  "files.trimTrailingWhitespace": false,
+  "files.watcherExclude": {
+    "**/build64_release/**": true
+  },
   "git.path": "/nix/var/nix/profiles/default/bin/git",
   "go.alternateTools": {
     "go": "/nix/var/nix/profiles/default/bin/go"
@@ -60,12 +67,5 @@
   "sqlite.sqlite3": "/nix/var/nix/profiles/default/bin/sqlite3",
   "typescript.npm": "/nix/var/nix/profiles/default/bin/npm",
   "xml.java.home": "/nix/var/nix/profiles/jdk/lib/openjdk",
-  "xml.server.vmargs": "-Xmx5G",
-  "black-formatter.path": ["/nix/var/nix/profiles/default/bin/black"],
-  "files.insertFinalNewline": true,
-  "files.trimFinalNewlines": true,
-  "files.trimTrailingWhitespace": true,
-  "files.watcherExclude": {
-    "**/build64_release/**": true
-  }
+  "xml.server.vmargs": "-Xmx5G"
 }
