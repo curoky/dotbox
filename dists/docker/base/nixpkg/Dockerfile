@@ -23,4 +23,4 @@ COPY --from=nixpkg pkgs pkgs
 COPY --from=nixpkg default.nix .
 COPY install-pkgs.sh .
 RUN nix-channel --update && ./install-pkgs.sh
-RUN sudo mkdir -p /o && sudo chown 1000:1000 -R /o
+RUN sudo mkdir -p /app && sudo chown 1000:1000 -R /app
