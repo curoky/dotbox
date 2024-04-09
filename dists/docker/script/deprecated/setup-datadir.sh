@@ -36,7 +36,7 @@ function try_link_to() {
 }
 
 sudo mkdir -p /data/workspace /data/share /data/cache/vscode-server
-sudo chown -R cicada:cicada /data/workspace /data/share /data/cache/vscode-server
+sudo chown -R x:x /data/workspace /data/share /data/cache/vscode-server
 
 try_link_to /data/cache $HOME/.cache
 try_link_to /data/cache/vscode-server $HOME/.vscode-server

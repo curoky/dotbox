@@ -5,10 +5,10 @@
   vars:
     users:
       - {
-          name: cicada,
+          name: x,
           id: 1000,
           groups: 'sudo,adm', # docker
-          dotbox: /home/cicada/dotbox,
+          dotbox: /home/x/dotbox,
         }
 
   environment:

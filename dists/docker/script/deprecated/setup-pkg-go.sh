@@ -28,4 +28,4 @@ done < <(grep -o '^[^#]*' $requirements)
 
 go clean -cache
 # we only need binaries not packages
-# sudo rm -rf /home/cicada/go/pkg
+# sudo rm -rf /home/x/go/pkg

@@ -22,15 +22,15 @@ echo "export DEVBOX_PROFILE=$DEVBOX_PROFILE" >>/etc/zshenv
 echo "export DEVBOX_REGION=$DEVBOX_REGION" >>/etc/zshenv
 
 mkdir -p /data/workspace /data/share /data/cache/vscode-server
-chown -R cicada:cicada /data/workspace /data/share /data/cache/vscode-server
-[[ -d /home/cicada/.cache ]] && chown -R cicada:cicada /home/cicada/.cache
+chown -R x:x /data/workspace /data/share /data/cache/vscode-server
+[[ -d /home/x/.cache ]] && chown -R x:x /home/x/.cache
 
-sudo -i -u cicada bash <<EOF
-  [[ -d /data/cache ]] && ln -s /data/cache /home/cicada/.cache
-  rm -rf /home/cicada/.vscode-server
-  [[ -d /data/cache/vscode-server ]] && ln -s /data/cache/vscode-server /home/cicada/.vscode-server
-  [[ -d /data/share/dotbox ]] && ln -s /data/share/dotbox /home/cicada/dotbox
-  [[ -d /data/share/dotbox ]] && dotdrop install --force --cfg=/home/cicada/dotbox/config.yaml --profile=devbox-userconf-outofbox
+sudo -i -u x bash <<EOF
+  [[ -d /data/cache ]] && ln -s /data/cache /home/x/.cache
+  rm -rf /home/x/.vscode-server
+  [[ -d /data/cache/vscode-server ]] && ln -s /data/cache/vscode-server /home/x/.vscode-server
+  [[ -d /data/share/dotbox ]] && ln -s /data/share/dotbox /home/x/dotbox
+  [[ -d /data/share/dotbox ]] && dotdrop install --force --cfg=/home/x/dotbox/config.yaml --profile=devbox-userconf-outofbox
 EOF
 
 sed -i -e "s/Port 61000/Port ${DEVBOX_SSHD_PORT:-61000}/g" /app/dotbox/config/sshd/sshd_config.conf

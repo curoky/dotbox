@@ -9,7 +9,7 @@ ENV PATH=$PATH:/nix/var/nix/profiles/default/bin:/nix/var/nix/profiles/gcc13/bin
 COPY --link --from=curoky/dotbox:stage_nixpkg /nix /nix
 COPY --link --from=curoky/dotbox:stage_pipx /app/pipx /app/pipx
 COPY --link --from=curoky/dotbox:stage_conda /app/conda /app/conda
-COPY --link --from=curoky/dotbox:stage_nixpkg /home/nix/.local/state/nix /home/cicada/.local/state/nix
+COPY --link --from=curoky/dotbox:stage_nixpkg /home/nix/.local/state/nix /home/x/.local/state/nix
 COPY --chown=1000:1000 ./ /app/dotbox
 
 RUN /app/dotbox/dists/docker/script/setup-sys-backport-pkg.sh \
@@ -17,9 +17,9 @@ RUN /app/dotbox/dists/docker/script/setup-sys-backport-pkg.sh \
   && dotdrop install --cfg=/app/dotbox/config.yaml --force --profile=devbox-sysconf \
   && dotdrop install --cfg=/app/dotbox/config.yaml --force --profile=devbox-userconf-outofbox
 
-USER cicada
+USER x
 RUN sudo mkdir -p /data/share /data/cache /data/workspace \
-  && sudo chown -R cicada:cicada ~ /data \
+  && sudo chown -R x:x ~ /data \
   && mkdir ~/.nix-defexpr \
   && ln -s ~/.local/state/nix/profiles/profile ~/.nix-profile \
   && ln -s ~/.local/state/nix/profiles/channels ~/.nix-defexpr/channels \

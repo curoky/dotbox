@@ -33,4 +33,4 @@ function CreateUser() {
   echo "$name ALL=(ALL:ALL) NOPASSWD:ALL" >>/etc/sudoers.d/nopasswd_user
 }
 
-CreateUser 1000 cicada 123456
+CreateUser 1000 x 123456
