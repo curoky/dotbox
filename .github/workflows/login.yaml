@@ -13,5 +13,13 @@ jobs:
           sudo apt-get update -y
           sudo apt-get install -y ncdu
 
+      - run: tools/free-github-action-disk-space.sh
+
+      - name: save ncdu result
+        uses: actions/upload-artifact@v4
+        with:
+          name: ncdu-result
+          path: info.txt
+
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3

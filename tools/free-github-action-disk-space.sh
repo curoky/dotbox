@@ -81,4 +81,4 @@ df -h
 
 free
 
-sudo ncdu -o info.txt /
+# sudo ncdu -o info.txt /
