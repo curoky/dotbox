@@ -23,6 +23,7 @@ set -xeuo pipefail
 df -h
 
 sudo apt-get update -y
+sudo apt-get install -y ncdu
 sudo apt purge -y \
   aspnetcore* ant* apache2 azure-cli dotnet* firefox g++-{7,8,9,10,11,12} gcc-{7,8,9,10,11,12} \
   gh google-* libllvm* linux-azure-* lldb-* llvm-* microsoft-* \
@@ -68,3 +69,5 @@ sudo rm -rf \
 df -h
 
 free
+
+sudo ncdu -o info.txt /

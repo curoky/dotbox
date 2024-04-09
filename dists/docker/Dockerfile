@@ -15,12 +15,11 @@ COPY --chown=1000:1000 ./ /o/dotbox
 RUN /o/dotbox/dists/docker/script/setup-sys-backport-pkg.sh \
   && /o/dotbox/dists/docker/script/installer/nvidia-ns.sh \
   && dotdrop install --cfg=/o/dotbox/config.yaml --force --profile=devbox-sysconf \
-  && dotdrop install --cfg=/o/dotbox/config.yaml --force --profile=devbox-userconf-outofbox \
-  && mkdir -p /data/share /data/cache /data/workspace \
-  && chown cicada:cicada /data/share /data/cache /data/workspace /opt /home/cicada
+  && dotdrop install --cfg=/o/dotbox/config.yaml --force --profile=devbox-userconf-outofbox
 
 USER cicada
-RUN sudo chown -R cicada:cicada ~ \
+RUN sudo mkdir -p /data/share /data/cache /data/workspace \
+  && sudo chown -R cicada:cicada ~ /data \
   && mkdir ~/.nix-defexpr \
   && ln -s ~/.local/state/nix/profiles/profile ~/.nix-profile \
   && ln -s ~/.local/state/nix/profiles/channels ~/.nix-defexpr/channels \
