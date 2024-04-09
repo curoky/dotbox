@@ -24,4 +24,4 @@ listen_port=${1:-61001}
 #   /etc/ssh/sshd_config.d/custom.conf \
 #   /etc/systemd/system/ssh.socket.d/custom.conf
 
-sed -i -e "s/Port 61000/Port ${listen_port}/g" /o/dotbox/config/sshd/sshd_config.conf
+sed -i -e "s/Port 61000/Port ${listen_port}/g" /app/dotbox/config/sshd/sshd_config.conf

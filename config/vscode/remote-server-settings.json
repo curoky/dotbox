@@ -55,7 +55,7 @@
   "jupyter.widgetScriptSources": ["jsdelivr.com", "unpkg.com"],
   "markdown-preview-enhanced.pandocPath": "/nix/var/nix/profiles/default/bin/pandoc",
   "prettier.prettierPath": "/nix/var/nix/profiles/default/lib/node_modules/prettier/index.cjs",
-  "python.defaultInterpreterPath": "/o/conda/envs/py3/bin/python3",
+  "python.defaultInterpreterPath": "/app/conda/envs/py3/bin/python3",
   // "python.formatting.yapfPath": "/nix/var/nix/profiles/default/bin/yapf",
   "remote.autoForwardPortsSource": "output",
   "ruby.interpreter.commandPath": "/nix/var/nix/profiles/default/bin/ruby",

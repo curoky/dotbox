@@ -13,7 +13,7 @@
 # Global Order: zshenv, zprofile, zshrc, zlogin
 
 if [[ ! "$PATH" == *"pipx"* ]]; then
-  export PATH=$PATH:/nix/var/nix/profiles/default/bin:/o/pipx/bin
+  export PATH=$PATH:/nix/var/nix/profiles/default/bin:/app/pipx/bin
 fi
 
 export LC_ALL=en_US.UTF-8

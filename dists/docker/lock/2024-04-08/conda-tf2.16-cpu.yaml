@@ -112,4 +112,4 @@ dependencies:
       - werkzeug==3.0.2
       - widgetsnbextension==4.0.10
       - wrapt==1.16.0
-prefix: /o/conda/envs/tf2.16-cpu
+prefix: /app/conda/envs/tf2.16-cpu

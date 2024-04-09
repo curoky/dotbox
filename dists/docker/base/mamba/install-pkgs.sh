@@ -17,7 +17,7 @@
 # limitations under the License.
 
 set -xeuo pipefail
-export CONAN_ROOT=/o/conda
+export CONAN_ROOT=/app/conda
 export PATH=$CONAN_ROOT/bin:$PATH
 export PIP_CACHE_DIR=/tmp/pip
 

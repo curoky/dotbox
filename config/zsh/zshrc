@@ -33,17 +33,17 @@ source_if_exists ~/.nix-profile/etc/profile.d/nix.sh
 source "${ZSH}/oh-my-zsh.sh"
 
 #=-> conda
-if [[ -f /o/conda/bin/conda ]]; then
-  eval "$(/o/conda/bin/conda shell.zsh hook 2>/dev/null)"
+if [[ -f /app/conda/bin/conda ]]; then
+  eval "$(/app/conda/bin/conda shell.zsh hook 2>/dev/null)"
 fi
 if [[ -f /opt/homebrew/Caskroom/miniconda/base/bin/conda ]]; then
   eval "$(/opt/homebrew/Caskroom/miniconda/base/bin/conda shell.zsh hook 2>/dev/null)"
 fi
 
 #=-> mamba
-if [ -f "/o/conda/etc/profile.d/mamba.sh" ]; then
-  . "/o/conda/etc/profile.d/mamba.sh"
-fi
+# if [ -f "/app/conda/etc/profile.d/mamba.sh" ]; then
+#   . "/app/conda/etc/profile.d/mamba.sh"
+# fi
 
 # TODO: remove -u
 # why: why add -u to compinit?

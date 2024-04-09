@@ -33,6 +33,6 @@ sudo -i -u cicada bash <<EOF
   [[ -d /data/share/dotbox ]] && dotdrop install --force --cfg=/home/cicada/dotbox/config.yaml --profile=devbox-userconf-outofbox
 EOF
 
-sed -i -e "s/Port 61000/Port ${DEVBOX_SSHD_PORT:-61000}/g" /o/dotbox/config/sshd/sshd_config.conf
+sed -i -e "s/Port 61000/Port ${DEVBOX_SSHD_PORT:-61000}/g" /app/dotbox/config/sshd/sshd_config.conf
 
 # exec /lib/systemd/systemd
