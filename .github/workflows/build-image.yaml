@@ -24,6 +24,15 @@ jobs:
       - uses: docker/build-push-action@v5
         with:
           context: dists/docker/base/debian
+          file: dists/docker/base/debian/9.Dockerfile
+          push: true
+          cache-from: type=registry,ref=curoky/dotbox:cache_stage_debian9
+          cache-to: type=registry,ref=curoky/dotbox:cache_stage_debian9,mode=max
+          tags: curoky/dotbox:stage_debian9
+
+      - uses: docker/build-push-action@v5
+        with:
+          context: dists/docker/base/debian
           file: dists/docker/base/debian/10.Dockerfile
           push: true
           cache-from: type=registry,ref=curoky/dotbox:cache_stage_debian10
