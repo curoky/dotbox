@@ -15,7 +15,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-set -xeuo pipefail
+set -x
 
 # https://raw.githubusercontent.com/apache/flink/master/tools/azure-pipelines/free_disk_space.sh
 # https://github.com/marketplace/actions/free-disk-space-ubuntu
