@@ -24,11 +24,26 @@ df -h
 
 sudo apt-get update -y
 sudo apt-get install -y ncdu
-sudo apt purge -y \
-  aspnetcore* ant* apache2 azure-cli dotnet* firefox g++-{7,8,9,10,11,12} gcc-{7,8,9,10,11,12} \
-  gh google-* libllvm* linux-azure-* lldb-* llvm-* microsoft-* \
-  mongodb-* mono-* mysql-* nginx openjdk-* php* postgresql* powershell \
-  r-* snapd temurin-* podman
+# dump original disk info, too slow
+# sudo ncdu -o info.txt /
+
+# gcc
+for i in {4..14}; do
+  sudo apt-get purge -y {gcc,g++,cpp}-$i
+done
+sudo apt-get purge -y llvm* libllvm*
+df -h
+
+# dpkg-query -W -f='${Installed-Size;8}  ${Package}\n' | sort -n
+
+# database
+sudo apt-get purge -y mysql* postgresql* mongodb*
+df -h
+
+# other apps
+sudo apt-get purge -y openjdk* php* powershell mono* nginx* r-* snapd temurin* podman \
+  aspnetcore* ant* apache2 azure* dotnet* firefox gh google* linux-azure* microsoft* \
+  libicu* heroku fonts* kubectl mercurial mssql* ruby* xdg* x11*
 df -h
 
 sudo apt-get autoremove
@@ -41,31 +56,27 @@ docker system prune -a -f
 df -h
 
 sudo rm -rf \
-  /home/runneradmin/.cargo \
-  /home/runneradmin/.rustup \
-  /imagegeneration/installers \
   /opt/hostedtoolcache \
   /opt/pipx \
-  /opt/runner/provisioner \
-  /root/.sbt \
-  /usr/local/.ghcup \
-  /usr/local/bin/oc \
-  /usr/local/bin/packer \
-  /usr/local/bin/pulumi \
-  /usr/local/julia* \
-  /usr/local/graalvm \
+  /opt/runner-cache \
+  /opt/actionarchivecache \
   /usr/local/lib/android \
-  /usr/local/lib/heroku \
   /usr/local/lib/node_modules \
+  /home/linuxbrew \
+  /usr/local/.ghcup \
   /usr/local/share/chromium \
   /usr/local/share/powershell \
-  /usr/share/az_* \
-  /usr/share/dotnet \
-  /usr/share/gradle-* \
-  /usr/share/kotlinc \
+  /usr/local/share/vcpkg \
+  /usr/local/julia* \
+  /usr/local/aws* \
+  /usr/share/swift \
   /usr/share/miniconda \
+  /usr/share/az_* \
+  /usr/share/gradle-* \
   /usr/share/sbt \
-  /usr/share/swift
+  /usr/share/kotlinc \
+  /etc/skel
+
 df -h
 
 free

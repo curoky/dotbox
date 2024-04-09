@@ -3,6 +3,7 @@ name: Build images
 on:
   push:
     paths:
+      - .github/workflows/build-image.yaml
       - dists/docker/*
       - third-party/*
   workflow_dispatch:
