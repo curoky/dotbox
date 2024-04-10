@@ -1,4 +1,4 @@
-{ lib, stdenv, fetchurl }:
+{ lib, stdenv, fetchurl, perl }:
 
 stdenv.mkDerivation rec {
   version = "1.0.0";
@@ -9,6 +9,7 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-XILhK7PisdyVJSowqzoXno+xwGV/tO9COuEnlFzd62A=";
   };
 
+  buildInputs = [ perl ];
   unpackPhase = ''
     cp $src nsightsystems_linux.run
   '';
@@ -16,7 +17,7 @@ stdenv.mkDerivation rec {
     chmod +x nsightsystems_linux.run
     sed -i 's|/dev/tty|/dev/null|' nsightsystems_linux.run
     ./nsightsystems_linux.run --accept --noexec --target . || echo ignore
-    ./install-linux.pl -targetpath=$out -noprompt
+    perl ./install-linux.pl -targetpath=$out -noprompt
     rm -rf nsightsystems_linux.run
   '';
 
