@@ -13,7 +13,6 @@ COPY --link --from=curoky/dotbox:stage_nixpkg /home/nix/.local/state/nix /home/x
 COPY --chown=1000:1000 ./ /app/dotbox
 
 RUN /app/dotbox/dists/docker/script/setup-sys-backport-pkg.sh \
-  && /app/dotbox/dists/docker/script/installer/nvidia-ns.sh \
   && dotdrop install --cfg=/app/dotbox/config.yaml --force --profile=devbox-sysconf \
   && dotdrop install --cfg=/app/dotbox/config.yaml --force --profile=devbox-userconf-outofbox
 

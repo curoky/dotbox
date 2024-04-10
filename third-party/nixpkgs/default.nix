@@ -13,11 +13,11 @@
   protobuf_3_9_2 = pkgs.callPackage ./pkgs/nix/protobuf/3.9.2.nix { };
   zsh-bundle = pkgs.callPackage ./pkgs/nix/zsh-bundle/default.nix { };
   vim-bundle = pkgs.callPackage ./pkgs/nix/vim-bundle/default.nix { };
+  nsight-systems = pkgs.callPackage ./pkgs/nix/nsight-systems/default.nix { };
 
   dotdrop = pkgs.python3Packages.callPackage ./pkgs/nix/dotdrop/default.nix { };
   licenseheaders = pkgs.python3Packages.callPackage ./pkgs/nix/licenseheaders/default.nix { };
   conan = pkgs.python3Packages.callPackage ./pkgs/nix/conan/default.nix { };
-
   libxml2_dev = pkgs.libxml2.override {
     enableShared = true;
     enableStatic = false;

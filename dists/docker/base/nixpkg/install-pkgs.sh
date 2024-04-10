@@ -114,6 +114,7 @@ nix-env -iA -p /nix/var/nix/profiles/protobuf_24 nixpkgs.protobuf_24
 nix-env -iA -p /nix/var/nix/profiles/cuda11_4 nixpkgs.cudaPackages_11_4.cudatoolkit nixpkgs.cudaPackages_11_4.cudatoolkit.lib
 chmod +w /nix/var/nix/profiles/cuda11_4/*
 ln -s /nix/var/nix/profiles/cuda11_4/lib/libcudart.* /nix/var/nix/profiles/cuda11_4/lib64/
+nix-env -iA -p /nix/var/nix/profiles/nsight-systems -f default.nix nsight-systems
 # nix-env -iA -p /nix/var/nix/profiles/cuda12_2 nixpkgs.cudaPackages_12_2.cudatoolkit nixpkgs.cudaPackages_12_2.cudatoolkit.lib
 # nix-env -iA -p /nix/var/nix/profiles/cuda11_42 nixpkgs.cudaPackages_11_4.cuda_nvcc nixpkgs.cudaPackages_11_4.cuda_cudart
 # nixpkgs.cudaPackages.nsight_systems nsight_compute cuda_nvvp
