@@ -32,33 +32,30 @@ pkg_list=(
   nixpkgs.iproute2 nixpkgs.iputils nixpkgs.netcat nixpkgs.lsof nixpkgs.connect nixpkgs.procps
   nixpkgs.nettools nixpkgs.fd nixpkgs.ethtool nixpkgs.gdb nixpkgs.file nixpkgs.eza nixpkgs.fzf
   nixpkgs.dstat nixpkgs.man nixpkgs.iptables nixpkgs.unixtools.xxd nixpkgs.util-linux
-  nixpkgs.findutils nixpkgs.coreutils nixpkgs.cron nixpkgs.lsb-release nixpkgs.tree
+  nixpkgs.findutils nixpkgs.coreutils nixpkgs.lsb-release nixpkgs.tree
   nixpkgs.gdu nixpkgs.ncdu nixpkgs.silver-searcher nixpkgs.diffutils
   nixpkgs.jemalloc nixpkgs.flamegraph nixpkgs.patchelf
   # libraries
   # c/c++
   nixpkgs.automake nixpkgs.autoconf nixpkgs.libtool nixpkgs.pkg-config nixpkgs.gnumake
   nixpkgs.ninja nixpkgs.distcc nixpkgs.ccache nixpkgs.scons nixpkgs.meson
-  nixpkgs.clang-tools_16 nixpkgs.lld_16 nixpkgs.mold
-  nixpkgs.cmake nixpkgs.cmake-format nixpkgs.buildifier
-  nixpkgs.bazelisk # nixpkgs.conan
+  nixpkgs.clang-tools_16 nixpkgs.cmake nixpkgs.cmake-format nixpkgs.buildifier
+  nixpkgs.bazelisk # nixpkgs.conan nixpkgs.mold nixpkgs.lld_16
   # nodejs
   nixpkgs.nodejs nixpkgs.yarn nixpkgs.nodePackages.prettier nixpkgs.nodePackages.eslint
   # java
   # nixpkgs.gradle nixpkgs.maven
   # python
-  nixpkgs.pipenv nixpkgs.pipx nixpkgs.ruff nixpkgs.yapf nixpkgs.black nixpkgs.poetry
+  nixpkgs.pipenv nixpkgs.pipx nixpkgs.ruff nixpkgs.poetry # nixpkgs.yapf nixpkgs.black
   # shell
   nixpkgs.zsh nixpkgs.bash nixpkgs.shfmt nixpkgs.starship nixpkgs.tmux nixpkgs.asciinema
   # other lang
-  nixpkgs.go
-  nixpkgs.perl
-  nixpkgs.ruby
-  nixpkgs.nix-index nixpkgs.nixpkgs-fmt
+  nixpkgs.go nixpkgs.perl nixpkgs.ruby
   # git
   nixpkgs.git nixpkgs.git-absorb nixpkgs.git-extras nixpkgs.git-lfs nixpkgs.git-filter-repo nixpkgs.gnupatch
   # other tools
-  nixpkgs.pre-commit nixpkgs.gperf nixpkgs.openssh nixpkgs.pandoc nixpkgs.graphviz
+  nixpkgs.nix-index nixpkgs.nixpkgs-fmt nixpkgs.pre-commit nixpkgs.gperf
+  nixpkgs.openssh nixpkgs.pandoc nixpkgs.graphviz
   nixpkgs.parallel nixpkgs.cloc nixpkgs.go-task nixpkgs.krb5 nixpkgs.sqlite
 
   # nixpkgs.gost nixpkgs.htop nixpkgs.tcpdump nixpkgs.shellcheck
@@ -67,6 +64,7 @@ pkg_list=(
   # nixpkgs.earthly nixpkgs.vultr-cli nixpkgs.qemu
   # nixpkgs.dolt nixpkgs.watchman nixpkgs.opencc nixpkgs.lcov nixpkgs.gcovr nixpkgs.ghq
   # nixpkgs.sqlcipher nixpkgs.sqlite nixpkgs.zoxide
+  # nixpkgs.cron
 )
 nix-env -p /nix/var/nix/profiles/default -iA "${pkg_list[@]}"
 
