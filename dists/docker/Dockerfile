@@ -14,7 +14,8 @@ COPY --link --from=curoky/dotbox:stage_conda /app/conda /app/conda
 COPY --link --from=curoky/dotbox:stage_nixpkg /home/nix/.local/state/nix /home/x/.local/state/nix
 COPY --chown=1000:1000 ./ /app/dotbox
 
-RUN dotdrop install --cfg=/app/dotbox/config.yaml --force --profile=devbox-sysconf \
+RUN /o/dotbox/images/script/setup-sys-backport-pkg.sh \
+  && dotdrop install --cfg=/app/dotbox/config.yaml --force --profile=devbox-sysconf \
   && dotdrop install --cfg=/app/dotbox/config.yaml --force --profile=devbox-userconf-outofbox
 
 USER x
