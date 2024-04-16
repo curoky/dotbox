@@ -3,8 +3,10 @@ ARG BASE_IMAGE=ubuntu24.04
 FROM curoky/dotbox:stage_${BASE_IMAGE}
 LABEL org.opencontainers.image.authors="cccuroky@gmail.com"
 
-ENV PATH=$PATH:/nix/var/nix/profiles/default/bin:/nix/var/nix/profiles/gcc13/bin:/app/pipx/bin \
-  DEBIAN_FRONTEND=noninteractive
+ENV PATH=$PATH:/nix/var/nix/profiles/default/bin:/nix/var/nix/profiles/gcc13/bin:/app/pipx/bin:/home/x/.nix-profile/bin \
+  DEBIAN_FRONTEND=noninteractive \
+  SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt \
+  NIX_SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 
 COPY --link --from=curoky/dotbox:stage_nixpkg /nix /nix
 COPY --link --from=curoky/dotbox:stage_pipx /app/pipx /app/pipx
