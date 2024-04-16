@@ -17,7 +17,7 @@ RUN dotdrop install --cfg=/app/dotbox/config.yaml --force --profile=devbox-sysco
 
 USER x
 RUN sudo mkdir -p /data/share /data/cache /data/workspace \
-  && sudo chown -R x:x ~ /data \
+  && sudo chown x:x ~ /data /app \
   && mkdir ~/.nix-defexpr \
   && ln -s ~/.local/state/nix/profiles/profile ~/.nix-profile \
   && ln -s ~/.local/state/nix/profiles/channels ~/.nix-defexpr/channels \
