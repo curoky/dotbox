@@ -21,7 +21,7 @@ set -xeuo pipefail
 curl -sSL -o /tmp/cuda_linux.run \
   https://developer.download.nvidia.com/compute/cuda/11.4.0/local_installers/cuda_11.4.0_470.42.01_linux.run
 chmod +x /tmp/cuda_linux.run
-/tmp/cuda_linux.run --silent --toolkit
+/tmp/cuda_linux.run --silent --toolkit --override
 rm -f /tmp/cuda_linux.run
 
 # install cuda driver
