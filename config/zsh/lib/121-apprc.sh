@@ -19,13 +19,20 @@
 export LOCALE_ARCHIVE=/nix/var/nix/profiles/default/lib/locale/locale-archive
 
 #-> java
-export JAVA_HOME=/nix/var/nix/profiles/jdk19
-if [[ ! -d $JAVA_HOME ]]; then
+if [[ -d /nix/var/nix/profiles/jdk19 ]]; then
+  export JAVA_HOME=/nix/var/nix/profiles/jdk19
+elif [[ -d /nix/var/nix/profiles/jdk ]]; then
+  export JAVA_HOME=/nix/var/nix/profiles/jdk
+elif [[ -d /opt/homebrew/opt/openjdk@17 ]]; then
   export JAVA_HOME=/opt/homebrew/opt/openjdk@17
 fi
 
 #-> cuda
-export CUDA_HOME=/nix/var/nix/profiles/cuda11_4
+if [[ -d /usr/local/cuda-11.4 ]]; then
+  export CUDA_HOME=/usr/local/cuda-11.4
+elif [[ -d /nix/var/nix/profiles/cuda11_4 ]]; then
+  export CUDA_HOME=/nix/var/nix/profiles/cuda11_4
+fi
 
 #=-> Krb5
 # export KRB5_CONFIG=$CONFIG_HOME/krb5/krb5.conf
@@ -44,19 +51,21 @@ export NPM_CONFIG_CACHE=$XDG_CACHE_HOME/npm
 # export NPM_CONFIG_REGISTRY=https://registry.npm.taobao.org
 
 #=-> homebrew
-export HOMEBREW_NO_ANALYTICS=1
-export HOMEBREW_NO_AUTO_UPDATE=1
-export HOMEBREW_BOOTSNAP=1
-export HOMEBREW_BAT=1
-export HOMEBREW_BAT_CONFIG_PATH=$HOME/.config/bat/config
-export HOMEBREW_CC=gcc
-export HOMEBREW_GIT_PATH=/nix/var/nix/profiles/default/bin/git
-# export HOMEBREW_PATCHELF_RB_WRITE=1
-# export HOMEBREW_EDITOR=code
-# export HOMEBREW_TEMP=$XDG_CACHE_HOME/brew  # default: ~/tmp
-# export HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1
-# export HOMEBREW_CACHE=$XDG_CACHE_HOME/homebrew # get with brew --cache
-# export HOMEBREW_INSTALL_FROM_API=1
+if [[ -d $HOMEBREW_PREFIX ]]; then
+  export HOMEBREW_NO_ANALYTICS=1
+  export HOMEBREW_NO_AUTO_UPDATE=1
+  export HOMEBREW_BOOTSNAP=1
+  export HOMEBREW_BAT=1
+  export HOMEBREW_BAT_CONFIG_PATH=$HOME/.config/bat/config
+  export HOMEBREW_CC=gcc
+  export HOMEBREW_GIT_PATH=/nix/var/nix/profiles/default/bin/git
+  # export HOMEBREW_PATCHELF_RB_WRITE=1
+  # export HOMEBREW_EDITOR=code
+  # export HOMEBREW_TEMP=$XDG_CACHE_HOME/brew  # default: ~/tmp
+  # export HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1
+  # export HOMEBREW_CACHE=$XDG_CACHE_HOME/homebrew # get with brew --cache
+  # export HOMEBREW_INSTALL_FROM_API=1
+fi
 
 #=-> flutter
 # export PUB_HOSTED_URL="https://mirrors.tuna.tsinghua.edu.cn/dart-pub/"
