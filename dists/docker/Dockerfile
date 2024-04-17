@@ -20,7 +20,7 @@ RUN /app/dotbox/dists/docker/script/setup-sys-backport-pkg.sh \
 
 USER x
 RUN sudo mkdir -p /data/share /data/cache /data/workspace \
-  && sudo chown x:x ~ /data /app \
+  && sudo chown x:x ~ /data /app ~/.local /app/conda /app/pipx \
   && mkdir ~/.nix-defexpr \
   && ln -s ~/.local/state/nix/profiles/profile ~/.nix-profile \
   && ln -s ~/.local/state/nix/profiles/channels ~/.nix-defexpr/channels \
