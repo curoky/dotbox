@@ -83,6 +83,9 @@ nix-env -iA -p /nix/var/nix/profiles/jdk nixpkgs.jdk
 # nix-env -iA -p /nix/var/nix/profiles/llvm16-bintools nixpkgs.llvmPackages_16.bintools-unwrapped
 
 #################### gcc ####################
+nix-env -iA -p /nix/var/nix/profiles/gcc8 nixpkgs.gcc8
+nix-env -iA -p /nix/var/nix/profiles/gcc8-lib nixpkgs.gcc8.cc.lib
+nix-env -iA -p /nix/var/nix/profiles/gcc8-unwrapper nixpkgs.gcc8.cc
 nix-env -iA -p /nix/var/nix/profiles/gcc9 nixpkgs.gcc9
 nix-env -iA -p /nix/var/nix/profiles/gcc9-lib nixpkgs.gcc9.cc.lib
 nix-env -iA -p /nix/var/nix/profiles/gcc9-unwrapper nixpkgs.gcc9.cc
