@@ -39,8 +39,8 @@ pkg_list=(
   # c/c++
   nixpkgs.automake nixpkgs.autoconf nixpkgs.libtool nixpkgs.pkg-config nixpkgs.gnumake
   nixpkgs.ninja nixpkgs.distcc nixpkgs.ccache nixpkgs.scons nixpkgs.meson
-  nixpkgs.clang-tools_16 nixpkgs.cmake nixpkgs.cmake-format nixpkgs.buildifier
-  nixpkgs.bazelisk # nixpkgs.conan nixpkgs.mold nixpkgs.lld_16
+  nixpkgs.cmake nixpkgs.cmake-format nixpkgs.buildifier nixpkgs.bazelisk
+  # nixpkgs.clang-tools_16 nixpkgs.conan nixpkgs.mold nixpkgs.lld_16
   # nodejs
   nixpkgs.nodejs nixpkgs.yarn nixpkgs.nodePackages.prettier nixpkgs.nodePackages.eslint
   # java
@@ -83,21 +83,21 @@ nix-env -iA -p /nix/var/nix/profiles/jdk nixpkgs.jdk
 # nix-env -iA -p /nix/var/nix/profiles/llvm16-bintools nixpkgs.llvmPackages_16.bintools-unwrapped
 
 #################### gcc ####################
-nix-env -iA -p /nix/var/nix/profiles/gcc8 nixpkgs.gcc8
-nix-env -iA -p /nix/var/nix/profiles/gcc8-lib nixpkgs.gcc8.cc.lib
-nix-env -iA -p /nix/var/nix/profiles/gcc8-unwrapper nixpkgs.gcc8.cc
-nix-env -iA -p /nix/var/nix/profiles/gcc9 nixpkgs.gcc9
-nix-env -iA -p /nix/var/nix/profiles/gcc9-lib nixpkgs.gcc9.cc.lib
-nix-env -iA -p /nix/var/nix/profiles/gcc9-unwrapper nixpkgs.gcc9.cc
-nix-env -iA -p /nix/var/nix/profiles/gcc13 nixpkgs.gcc13
-nix-env -iA -p /nix/var/nix/profiles/gcc13-lib nixpkgs.gcc13.cc.lib
-nix-env -iA -p /nix/var/nix/profiles/gcc13-unwrapper nixpkgs.gcc13.cc
-nix-env -iA -p /nix/var/nix/profiles/libgcc nixpkgs.libgcc
+function install_gcc() {
+  version=${1:-13}
+  nix-env -iA -p /nix/var/nix/profiles/gcc$version nixpkgs.gcc$version
+  nix-env -iA -p /nix/var/nix/profiles/gcc$version-lib nixpkgs.gcc$version.cc.lib
+  nix-env -iA -p /nix/var/nix/profiles/gcc$version-unwrapper nixpkgs.gcc$version.cc
+  chmod +w /nix/var/nix/profiles/gcc$version-unwrapper/*
+  ln -s /nix/var/nix/profiles/libs/include/crypt.h /nix/var/nix/profiles/gcc$version-unwrapper/include
+  ln -s /nix/var/nix/profiles/libs/include/backtrace.h /nix/var/nix/profiles/gcc$version-unwrapper/include
+  ln -s /nix/var/nix/profiles/libs/lib/libbacktrace.* /nix/var/nix/profiles/gcc$version-unwrapper/lib
+}
+install_gcc 8
+install_gcc 10
+install_gcc 13
 
-chmod +w /nix/var/nix/profiles/gcc13-unwrapper/*
-ln -s /nix/var/nix/profiles/libs/include/crypt.h /nix/var/nix/profiles/gcc13-unwrapper/include
-ln -s /nix/var/nix/profiles/libs/include/backtrace.h /nix/var/nix/profiles/gcc13-unwrapper/include
-ln -s /nix/var/nix/profiles/libs/lib/libbacktrace.* /nix/var/nix/profiles/gcc13-unwrapper/lib
+nix-env -iA -p /nix/var/nix/profiles/libgcc nixpkgs.libgcc
 # gcc13_wrapper_root=$(realpath /nix/var/nix/profiles/gcc13/bin)/../
 # echo "-I/usr/include" >$gcc13_wrapper_root/nix-support/libcxx-cxxflags
 # gcc13_root=$(dirname "$(/nix/var/nix/profiles/gcc13/bin/gcc -v 2>&1 | grep "COLLECT_GCC" | cut -d '=' -f 2)")/..
