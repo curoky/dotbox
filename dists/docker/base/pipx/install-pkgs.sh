@@ -25,3 +25,4 @@ pipx install licenseheaders
 pipx install thrift-pyi
 pipx install git+https://github.com/curoky/conan
 pipx install dotdrop
+pipx install netron

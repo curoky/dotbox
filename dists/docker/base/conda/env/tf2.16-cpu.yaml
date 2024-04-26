@@ -20,7 +20,7 @@ dependencies:
       - numpy
       - pandas
       - plotly
-      - protobuf
+      - protobuf==4.24.4
       - scikit-learn
       - scipy
       - statsmodels
