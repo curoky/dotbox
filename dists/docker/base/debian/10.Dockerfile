@@ -1,6 +1,10 @@
 FROM debian:buster-backports
 
-RUN apt-get update \
+RUN sed -i 's/deb.debian.org/archive.debian.org/g' /etc/apt/sources.list \
+  && sed -i '/debian stretch-updates/d' /etc/apt/sources.list \
+  && sed -i 's|archive.debian.org/debian-security|security.debian.org|g' /etc/apt/sources.list \
+  && sed -i 's/deb.debian.org/archive.debian.org/g' /etc/apt/sources.list.d/backports.list \
+  && apt-get update \
   && apt-get remove --allow-remove-essential -y curl grep sed gzip findutils procps \
     ncurses-bin ncurses-base libncursesw6 libtinfo6 \
     iproute2 iputils-ping tzdata \
