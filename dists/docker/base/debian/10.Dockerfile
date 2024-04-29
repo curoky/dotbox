@@ -6,7 +6,7 @@ RUN sed -i 's/deb.debian.org/archive.debian.org/g' /etc/apt/sources.list \
   && sed -i 's/deb.debian.org/archive.debian.org/g' /etc/apt/sources.list.d/backports.list \
   && apt-get update \
   && apt-get remove --allow-remove-essential -y curl grep sed gzip findutils procps \
-    ncurses-bin ncurses-base libncursesw6 libtinfo6 \
+    ncurses-bin ncurses-base libncursesw6 \
     iproute2 iputils-ping tzdata \
   && apt-get install -y --no-install-recommends \
     sudo systemd \
