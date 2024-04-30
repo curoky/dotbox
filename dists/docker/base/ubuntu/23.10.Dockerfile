@@ -1,7 +1,7 @@
 FROM ubuntu:23.10
 
 RUN apt-get update \
-  && apt-get remove --allow-remove-essential -y curl grep sed gzip findutils util-linux procps \
+  && apt-get remove --allow-remove-essential -y curl grep gzip findutils util-linux procps \
     ncurses-bin ncurses-base libncursesw6 \
   && apt-get install -y --no-install-recommends \
     sudo systemd \
