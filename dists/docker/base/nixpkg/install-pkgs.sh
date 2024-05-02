@@ -34,7 +34,7 @@ pkg_list=(
   nixpkgs.dstat nixpkgs.man nixpkgs.iptables nixpkgs.unixtools.xxd nixpkgs.util-linux
   nixpkgs.findutils nixpkgs.coreutils nixpkgs.lsb-release nixpkgs.tree
   nixpkgs.gdu nixpkgs.ncdu nixpkgs.silver-searcher nixpkgs.diffutils
-  nixpkgs.jemalloc nixpkgs.flamegraph nixpkgs.patchelf
+  nixpkgs.jemalloc nixpkgs.flamegraph nixpkgs.patchelf nixpkgs.strace
   # libraries
   # c/c++
   nixpkgs.automake nixpkgs.autoconf nixpkgs.libtool nixpkgs.pkg-config nixpkgs.gnumake

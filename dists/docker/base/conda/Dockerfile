@@ -8,5 +8,6 @@ RUN curl -sSL -o /tmp/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda
   && bash /tmp/miniconda.sh -b -u -p /app/conda \
   && ./setup-conda-env.sh env/py2.yaml \
   && ./setup-conda-env.sh env/py3.yaml \
+  && ./setup-conda-env.sh env/tf1.15.yaml 1 \
   && ./setup-conda-env.sh env/tf2.11.yaml 1 \
   && ./setup-conda-env.sh env/tf2.16-cpu.yaml

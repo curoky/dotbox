@@ -38,5 +38,5 @@ conda env update -f ${env_file}
 
 if [[ $add_tf_env -eq 1 ]]; then
   mkdir -p $CONAN_ROOT/envs/$env_name/etc/conda/activate.d
-  echo "export LD_LIBRARY_PATH=$CONAN_ROOT/envs/$env_name/lib/python$python_short_version/site-packages/nvidia/cudnn/lib:/usr/local/cuda-11.4/lib64:/nix/var/nix/profiles/cuda11_4/lib:\$LD_LIBRARY_PATH" >$CONAN_ROOT/envs/$env_name/etc/conda/activate.d/env_vars.sh
+  echo "export LD_LIBRARY_PATH=$CONAN_ROOT/envs/$env_name/lib/python$python_short_version/site-packages/nvidia/cudnn/lib:/usr/local/cuda-11.4/lib64:/usr/local/cuda-11.4/extras/CUPTI/lib64/:/nix/var/nix/profiles/cuda11_4/lib:\$LD_LIBRARY_PATH" >$CONAN_ROOT/envs/$env_name/etc/conda/activate.d/env_vars.sh
 fi

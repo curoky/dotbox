@@ -1,0 +1,14 @@
+# https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#create-env-file-manually
+name: tf1.15
+channels:
+  - defaults
+dependencies:
+  - python=2.7.18
+  - pip
+  - pip:
+      - requests
+      - protobuf==3.8.0 # 3.20
+      - grpcio==1.39.0
+      # - nvidia-cudnn-cu11
+      # - tensorflow-gpu==1.15
+      - tensorflow==1.15
