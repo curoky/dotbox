@@ -10,4 +10,3 @@ version: '1'
 import_tables:
   - ../../../../../../../opt/homebrew/opt/rime-bundle/dicts/rime-ice/en_dicts/en_ext
   - ../../../../../../../opt/homebrew/opt/rime-bundle/dicts/rime-ice/en_dicts/en
-  - ../../../../../../../opt/homebrew/opt/rime-bundle/dicts/rime-ice/en_dicts/cn_en
