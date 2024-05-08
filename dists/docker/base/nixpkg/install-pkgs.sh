@@ -112,6 +112,7 @@ nix-env -iA -p /nix/var/nix/profiles/protobuf_3_20 nixpkgs.protobuf3_20
 nix-env -iA -p /nix/var/nix/profiles/protobuf_24 nixpkgs.protobuf_24
 
 #################### cuda ####################
+# nix-env -iA -p /nix/var/nix/profiles/cuda11_0 nixpkgs.cudaPackages_11_0.cudatoolkit
 # nix-env -iA -p /nix/var/nix/profiles/cuda11_4 nixpkgs.cudaPackages_11_4.cudatoolkit nixpkgs.cudaPackages_11_4.cudatoolkit.lib
 # chmod +w /nix/var/nix/profiles/cuda11_4/*
 # ln -s /nix/var/nix/profiles/cuda11_4/lib/libcudart.* /nix/var/nix/profiles/cuda11_4/lib64/

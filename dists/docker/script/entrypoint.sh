@@ -26,11 +26,19 @@ chown -R x:x /data/workspace /data/share /data/cache/vscode-server /data/cache
 [[ -d /home/x/.cache ]] && chown -R x:x /home/x/.cache
 
 sudo -i -u x bash <<EOF
-  [[ -d /data/cache ]] && ln -s /data/cache /home/x/.cache
-  rm -rf /home/x/.vscode-server
-  [[ -d /data/cache/vscode-server ]] && ln -s /data/cache/vscode-server /home/x/.vscode-server
-  [[ -d /data/share/dotbox ]] && ln -s /data/share/dotbox /home/x/dotbox
-  [[ -d /data/share/dotbox ]] && dotdrop install --force --cfg=/home/x/dotbox/config.yaml --profile=devbox-userconf-outofbox
+  if [[ -d /data/cache ]]; then
+    rm -rf /home/x/.cache
+    ln -s /data/cache /home/x/.cache
+  fi
+  if [[ -d /data/cache/vscode-server ]]; then
+    rm -rf /home/x/.vscode-server
+    ln -s /data/cache/vscode-server /home/x/.vscode-server
+  fi
+  if [[ -d /data/share/dotbox ]]; then
+    rm -rf /home/x/dotbox
+    ln -s /data/share/dotbox /home/x/dotbox
+    dotdrop install --force --cfg=/home/x/dotbox/config.yaml --profile=devbox-userconf-outofbox
+  fi
 EOF
 
 sed -i -e "s/Port 61000/Port ${DEVBOX_SSHD_PORT:-61000}/g" /app/dotbox/config/sshd/sshd_config.conf
