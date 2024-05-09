@@ -112,14 +112,17 @@ nix-env -iA -p /nix/var/nix/profiles/protobuf_3_20 nixpkgs.protobuf3_20
 nix-env -iA -p /nix/var/nix/profiles/protobuf_24 nixpkgs.protobuf_24
 
 #################### cuda ####################
+nix-env -iA -p /nix/var/nix/profiles/nsight-systems -f default.nix nsight-systems
+nix-env -iA -p /nix/var/nix/profiles/cu12_cudnn_8_9_7_29 nixpkgs.cudaPackages_12.cudnn_8_9
+nix-env -iA -p /nix/var/nix/profiles/cu11_cudnn_8_9_7_29 nixpkgs.cudaPackages_11.cudnn_8_9
 # nix-env -iA -p /nix/var/nix/profiles/cuda11_0 nixpkgs.cudaPackages_11_0.cudatoolkit
 # nix-env -iA -p /nix/var/nix/profiles/cuda11_4 nixpkgs.cudaPackages_11_4.cudatoolkit nixpkgs.cudaPackages_11_4.cudatoolkit.lib
 # chmod +w /nix/var/nix/profiles/cuda11_4/*
 # ln -s /nix/var/nix/profiles/cuda11_4/lib/libcudart.* /nix/var/nix/profiles/cuda11_4/lib64/
-nix-env -iA -p /nix/var/nix/profiles/nsight-systems -f default.nix nsight-systems
 # nix-env -iA -p /nix/var/nix/profiles/cuda12_2 nixpkgs.cudaPackages_12_2.cudatoolkit nixpkgs.cudaPackages_12_2.cudatoolkit.lib
 # nix-env -iA -p /nix/var/nix/profiles/cuda11_42 nixpkgs.cudaPackages_11_4.cuda_nvcc nixpkgs.cudaPackages_11_4.cuda_cudart
 # nixpkgs.cudaPackages.nsight_systems nsight_compute cuda_nvvp
+# nix-env -iA -p /nix/var/nix/profiles/cu12_tensorrt_8_6 nixpkgs.cudaPackages.tensorrt
 
 #################### zsh-bundle ####################
 nix-env -iA -p /nix/var/nix/profiles/zsh-bundle -f default.nix zsh-bundle

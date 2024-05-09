@@ -18,11 +18,11 @@ dependencies:
       - pandas
       - plotly
       - protobuf
-      - scikit-learn
-      - scipy
-      - statsmodels
+      # - scikit-learn
+      # - scipy
+      # - statsmodels
       - tensorboard==2.16.*
       - tensorboard-plugin-profile
-      - nvidia-cudnn-cu12
+      # - nvidia-cudnn-cu12
       # - tensorrt
-      - tensorflow[and-cuda]==2.16.*
+      - tensorflow==2.16.* # tensorflow[and-cuda]

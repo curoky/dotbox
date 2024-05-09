@@ -38,7 +38,16 @@ conda env update -f ${env_file}
 
 if [[ $add_tf_env -eq 1 ]]; then
   mkdir -p $CONAN_ROOT/envs/$env_name/etc/conda/activate.d
-  echo "export LD_LIBRARY_PATH=$CONAN_ROOT/envs/$env_name/lib/python$python_short_version/site-packages/nvidia/cudnn/lib:\$LD_LIBRARY_PATH" >$CONAN_ROOT/envs/$env_name/etc/conda/activate.d/env_vars.sh
-  echo 'export LD_LIBRARY_PATH=/usr/local/cuda-11.4/lib64:/usr/local/cuda-11.4/extras/CUPTI/lib64/:/nix/var/nix/profiles/cuda11_4/lib:$LD_LIBRARY_PATH' >>$CONAN_ROOT/envs/$env_name/etc/conda/activate.d/env_vars.sh
-  echo 'export LD_LIBRARY_PATH=/usr/local/cuda-12.3/lib64:/usr/local/cuda-12.3/extras/CUPTI/lib64/:/nix/var/nix/profiles/cuda12_3/lib:$LD_LIBRARY_PATH' >>$CONAN_ROOT/envs/$env_name/etc/conda/activate.d/env_vars.sh
+  target_env_file=$CONAN_ROOT/envs/$env_name/etc/conda/activate.d/env_vars.sh
+  echo '' >$target_env_file
+
+  ###### for cuda
+  # echo 'export LD_LIBRARY_PATH=/nix/var/nix/profiles/cuda11_4/lib:$LD_LIBRARY_PATH' >>$target_env_file
+  echo 'export LD_LIBRARY_PATH=/usr/local/cuda-11.4/lib64:/usr/local/cuda-11.4/extras/CUPTI/lib64/:$LD_LIBRARY_PATH' >>$target_env_file
+  echo 'export LD_LIBRARY_PATH=/usr/local/cuda-12.3/lib64:/usr/local/cuda-12.3/extras/CUPTI/lib64/:$LD_LIBRARY_PATH' >>$target_env_file
+
+  ###### for cudnn
+  # echo "export LD_LIBRARY_PATH=$CONAN_ROOT/envs/$env_name/lib/python$python_short_version/site-packages/nvidia/cudnn/lib:\$LD_LIBRARY_PATH" >>$target_env_file
+  # echo 'export LD_LIBRARY_PATH=/nix/var/nix/profiles/cu12_cudnn_8_9_7_29/lib:$LD_LIBRARY_PATH' >>$target_env_file
+
 fi
