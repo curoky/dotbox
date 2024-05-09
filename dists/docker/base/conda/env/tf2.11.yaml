@@ -21,7 +21,8 @@ dependencies:
       - scikit-learn
       - scipy
       - statsmodels
-      # - tensorboard
+      - tensorboard==2.11.*
+      - tensorboard-plugin-profile
       - nvidia-cudnn-cu11==8.9.6.50
       # - tensorrt-cu11
       # - tensorrt==8.6.1.post1
