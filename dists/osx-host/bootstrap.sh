@@ -27,7 +27,7 @@ function setup-dotfiles() {
   if [[ -f /opt/homebrew/bin/dotdrop ]]; then
     brew install dotdrop
   fi
-  dotdrop install --cfg=~/dotbox/config.yaml --force --profile=macos-user-base
+  dotdrop install --cfg=~/dotbox/config/config.yaml --force --profile=macos-user-base
 }
 
 function setup-brew-pkgs() {

@@ -37,7 +37,7 @@ sudo -i -u x bash <<EOF
   if [[ -d /data/share/dotbox ]]; then
     rm -rf /home/x/dotbox
     ln -s /data/share/dotbox /home/x/dotbox
-    dotdrop install --force --cfg=/home/x/dotbox/config.yaml --profile=devbox-userconf-outofbox
+    dotdrop install --force --cfg=/home/x/dotbox/config/config.yaml --profile=devbox-userconf-outofbox
   fi
 EOF
 
