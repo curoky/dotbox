@@ -122,7 +122,6 @@ jobs:
   final:
     runs-on: ubuntu-latest
     needs:
-      - stage
       - stage-debian
       - stage-ubuntu
       - stage-nixpkg
