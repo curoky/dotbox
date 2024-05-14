@@ -308,7 +308,6 @@ profiles:
     dotfiles:
       - bashrc
       - bat
-      - conan2
       - conda
       - gdb
       - nixpkgs
@@ -319,7 +318,7 @@ profiles:
       - vim
       - vscode-server
 
-  devbox-userconf-outofbox:
+  devbox-userconf-final:
     include:
       - devbox-userconf-base
     dotfiles:

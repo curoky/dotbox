@@ -37,10 +37,10 @@ sudo -i -u x bash <<EOF
   if [[ -d /data/share/dotbox ]]; then
     rm -rf /home/x/dotbox
     ln -s /data/share/dotbox /home/x/dotbox
-    dotdrop install --force --cfg=/home/x/dotbox/config/config.yaml --profile=devbox-userconf-outofbox
   fi
 EOF
 
 sed -i -e "s/Port 61000/Port ${DEVBOX_SSHD_PORT:-61000}/g" /app/dotbox/config/sshd/sshd_config.conf
 
+# dotdrop install --force --cfg=/home/x/dotbox/config/config.yaml --profile=devbox-userconf-final
 # exec /lib/systemd/systemd

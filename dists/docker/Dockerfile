@@ -17,7 +17,7 @@ COPY --chown=1000:1000 ./ /app/dotbox
 RUN /app/dotbox/dists/docker/script/setup-sys-conf.sh \
   && /app/dotbox/dists/docker/script/link-tools-to-usr.sh \
   && dotdrop install --cfg=/app/dotbox/config/config.yaml --force --profile=devbox-sysconf \
-  && dotdrop install --cfg=/app/dotbox/config/config.yaml --force --profile=devbox-userconf-outofbox
+  && dotdrop install --cfg=/app/dotbox/config/config.yaml --force --profile=devbox-userconf-final
 
 USER x
 RUN sudo mkdir -p /data/share /data/cache /data/workspace \
