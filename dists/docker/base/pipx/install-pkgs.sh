@@ -23,6 +23,6 @@ export PIPX_MAN_DIR=$PIPX_HOME/share/man
 
 pipx install licenseheaders
 pipx install thrift-pyi
-pipx install git+https://github.com/curoky/conan
+# pipx install git+https://github.com/curoky/conan
 pipx install dotdrop
 pipx install netron

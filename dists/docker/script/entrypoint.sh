@@ -22,8 +22,8 @@ echo "export DEVBOX_PROFILE=$DEVBOX_PROFILE" >>/etc/zshenv
 echo "export DEVBOX_REGION=$DEVBOX_REGION" >>/etc/zshenv
 
 mkdir -p /data/workspace /data/share /data/cache/vscode-server /data/cache
-chown -R x:x /data/workspace /data/share /data/cache/vscode-server /data/cache
-[[ -d /home/x/.cache ]] && chown -R x:x /home/x/.cache
+chown x:x /data/workspace /data/share /data/cache/vscode-server /data/cache
+[[ -d /home/x/.cache ]] && chown x:x /home/x/.cache
 
 sudo -i -u x bash <<EOF
   if [[ -d /data/cache ]]; then
