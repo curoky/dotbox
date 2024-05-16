@@ -4,7 +4,7 @@ actions:
   fix-user-ssh-config-permissions: chmod 600 ~/.ssh/config
 config:
   banner: false
-  dotpath: config
+  dotpath: .
   link_dotfile_default: link
   link_on_import: link
   template_dotfile_default: false
