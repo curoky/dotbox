@@ -12,10 +12,7 @@
 #
 # Global Order: zshenv, zprofile, zshrc, zlogin
 
-if [[ ! "$PATH" == *"nix"* ]]; then
-  export PATH=$PATH:/nix/var/nix/profiles/default/bin
-fi
-
+export PATH=/nix/var/nix/profiles/default/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
