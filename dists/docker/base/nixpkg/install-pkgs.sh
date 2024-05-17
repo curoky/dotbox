@@ -93,11 +93,11 @@ function install_gcc() {
   ln -s /nix/var/nix/profiles/libs/include/backtrace.h /nix/var/nix/profiles/gcc$version-unwrapper/include
   ln -s /nix/var/nix/profiles/libs/lib/libbacktrace.* /nix/var/nix/profiles/gcc$version-unwrapper/lib
 }
-install_gcc 8
-install_gcc 10
-install_gcc 13
+# install_gcc 8
+# install_gcc 10
+# install_gcc 13
 
-nix-env -iA -p /nix/var/nix/profiles/libgcc nixpkgs.libgcc
+# nix-env -iA -p /nix/var/nix/profiles/libgcc nixpkgs.libgcc
 # gcc13_wrapper_root=$(realpath /nix/var/nix/profiles/gcc13/bin)/../
 # echo "-I/usr/include" >$gcc13_wrapper_root/nix-support/libcxx-cxxflags
 # gcc13_root=$(dirname "$(/nix/var/nix/profiles/gcc13/bin/gcc -v 2>&1 | grep "COLLECT_GCC" | cut -d '=' -f 2)")/..
