@@ -40,7 +40,7 @@ pkg_list=(
   nixpkgs.automake nixpkgs.autoconf nixpkgs.libtool nixpkgs.pkg-config nixpkgs.gnumake
   nixpkgs.ninja nixpkgs.distcc nixpkgs.ccache nixpkgs.scons nixpkgs.meson
   nixpkgs.cmake nixpkgs.cmake-format nixpkgs.buildifier nixpkgs.bazelisk
-  # nixpkgs.clang-tools_16 nixpkgs.conan nixpkgs.mold nixpkgs.lld_16
+  nixpkgs.clang-tools_16 # nixpkgs.conan nixpkgs.mold nixpkgs.lld_16
   # nodejs
   nixpkgs.nodejs nixpkgs.yarn nixpkgs.nodePackages.prettier nixpkgs.nodePackages.eslint
   # java
@@ -113,7 +113,7 @@ nix-env -iA -p /nix/var/nix/profiles/protobuf_24 nixpkgs.protobuf_24
 
 #################### cuda ####################
 nix-env -iA -p /nix/var/nix/profiles/nsight-systems -f default.nix nsight-systems
-nix-env -iA -p /nix/var/nix/profiles/cu12_cudnn_8_9_7_29 nixpkgs.cudaPackages_12.cudnn_8_9
+# nix-env -iA -p /nix/var/nix/profiles/cu12_cudnn_8_9_7_29 nixpkgs.cudaPackages_12.cudnn_8_9
 nix-env -iA -p /nix/var/nix/profiles/cu11_cudnn_8_9_7_29 nixpkgs.cudaPackages_11.cudnn_8_9
 # nix-env -iA -p /nix/var/nix/profiles/cuda11_0 nixpkgs.cudaPackages_11_0.cudatoolkit
 # nix-env -iA -p /nix/var/nix/profiles/cuda11_4 nixpkgs.cudaPackages_11_4.cudatoolkit nixpkgs.cudaPackages_11_4.cudatoolkit.lib
