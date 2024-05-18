@@ -1,5 +1,8 @@
-FROM curoky/dotbox:stage_nixpkg
+FROM debian:bullseye-backports
 LABEL org.opencontainers.image.authors="cccuroky@gmail.com"
+
+RUN apt-get update -y \
+  && apt-get install -y curl gcc g++ git
 
 COPY env env
 COPY setup-conda-env.sh .
