@@ -15,3 +15,8 @@ RUN curl -sSL -o /tmp/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda
   && ./setup-conda-env.sh env/tf2.11.yaml 1 \
   && ./setup-conda-env.sh env/tf2.16.yaml 1 \
   && rm -rf /tmp/*
+
+COPY --from=pipx install-pkgs.sh install-pipx-pkgs.sh
+ENV PATH=${PATH}:/app/conda/bin
+RUN pip install pipx \
+  && ./install-pipx-pkgs.sh

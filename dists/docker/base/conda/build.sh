@@ -21,6 +21,7 @@ set -xeuo pipefail
 # --cache-to=type=inline \
 # --cache-from=type=registry,ref=curoky/dotbox:stage_conda \
 docker buildx build . \
+  --build-context pipx=../pipx \
   --file Dockerfile \
   --network=host \
   --tag curoky/dotbox:stage_conda
