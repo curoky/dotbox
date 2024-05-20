@@ -75,3 +75,5 @@ alias py3="conda activate py3"
 alias py2="conda activate py2"
 
 alias gccinfo="gcc -E -xc++ - -v"
+
+alias show_coredump_pattern="sysctl kernel.core_pattern"
