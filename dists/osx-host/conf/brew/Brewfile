@@ -1,4 +1,4 @@
-tap 'homebrew/cask-fonts'
+# tap 'homebrew/cask-fonts'
 # tap 'curoky/dotbox', 'https://github.com/curoky/dotbox'
 
 # brew list --cask | xargs -n 1 | sort -u | awk '{ print "\x27"$1"\x27""," }'

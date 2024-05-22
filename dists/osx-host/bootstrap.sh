@@ -24,10 +24,12 @@ function setup-brew() {
 }
 
 function setup-dotfiles() {
-  if [[ -f /opt/homebrew/bin/dotdrop ]]; then
+  if [[ ! -f /opt/homebrew/bin/dotdrop ]]; then
     brew install dotdrop
   fi
-  dotdrop install --cfg=~/dotbox/config/config.yaml --force --profile=macos-user-base
+  rm -rf ~/dotbox
+  ln -s ~/workspace/dotbox ~/dotbox
+  dotdrop install --cfg=~/dotbox/config/config.yaml --force --profile=macos-user-final
 }
 
 function setup-brew-pkgs() {
@@ -46,6 +48,7 @@ function setup-conda-pkgs() {
 if [[ ! -f /opt/homebrew/bin/brew ]]; then
   setup-brew
 fi
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 setup-dotfiles
 setup-brew-pkgs
