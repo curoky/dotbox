@@ -1,8 +1,8 @@
 distribution_code_name: Squirrel
-distribution_name: '鼠鬚管'
-distribution_version: 0.16.2
-install_time: 'Sat Jan 30 03:37:53 2021'
+distribution_name: "鼠鬚管"
+distribution_version: 0.18
+install_time: "Sat Jan 30 03:37:53 2021"
 installation_id: rime
-rime_version: 1.8.5
-sync_dir: '/Users/curoky/My Drive/CKYData/010-backup'
-update_time: 'Sat Feb 25 12:34:48 2023'
+rime_version: 1.11.2
+sync_dir: "/Users/m/Library/Mobile Documents/com~apple~CloudDocs/backup"
+update_time: "Mon May  6 17:12:28 2024"
