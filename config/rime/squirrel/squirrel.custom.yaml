@@ -6,9 +6,10 @@
 patch:
   style:
     color_scheme: psionics # 方案命名，不能有空格
-    horizontal: true # 候选条横向显示
+    # horizontal: false # 候选条横向显示
+    text_orientation: horizontal
     inline_preedit: true # 单行显示，false双行显示
-
+    candidate_list_layout: linear
     # line_spacing: 100 # 候选条竖向才生效
     # spacing: 3 # 在非内嵌编码模式下，预编辑和候选词之间的间距
 
