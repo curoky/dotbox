@@ -16,18 +16,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-function generate-conda-lockfile() {
-  output_path=$1
-  env_name=$2
-  conda env export -n $env_name >$output_path/conda-$env_name.yaml
-}
+env_names=$(conda env list | awk 'NR>2 {print $1}')
 
-function lock() {
-  root="$1"
-  rm -rf $root
-  mkdir -p $root
-  generate-conda-lockfile $root py3
-}
-
-lock "$(date +%Y-%m-%d)"
-lock "latest"
+for env in $env_names; do
+  echo "process $env"
+  conda env export -n $env >conf/conda/$env-lockfile.yaml
+done

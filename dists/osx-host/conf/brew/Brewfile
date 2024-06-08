@@ -18,8 +18,8 @@ casks = [
   'miniconda',
   'keepingyouawake',
   'orbstack',
+  'db-browser-for-sqlite',
 
-  # 'db-browser-for-sqlite',
   # 'obs',
   # 'android-platform-tools',
   # 'charles',
@@ -57,7 +57,7 @@ brews = [
   # others
   'wget', 'aria2', 'rsync', 'ncdu', 'dotdrop', 'smartmontools',
   'go-task', 'krb5', 'parallel', 'fd', 'git',
-  'coreutils', 'rime-bundle', 'exiftool',
+  'coreutils', 'rime-bundle', 'exiftool', 'gost',
   'git-absorb', 'git-extras', 'git-lfs', 'git-mv-with-history', 'git-filter-repo',
 ]
 

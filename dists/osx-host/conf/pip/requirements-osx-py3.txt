@@ -1,9 +1,0 @@
-typer[all]
-geopy
-gpxpy
-pytz
-numpy
-plotly
-ipykernel
-nbformat
-pandas
