@@ -10,8 +10,9 @@ on:
     inputs:
       disable_docker_cache:
         description: 'disable docker cache'
-        default: 'false'
+        default: false
         required: false
+        type: boolean
 
 jobs:
   stage-nixpkg:
@@ -33,7 +34,7 @@ jobs:
           push: true
           cache-from: type=registry,ref=curoky/dotbox:cache_stage_nixpkg
           cache-to: type=registry,ref=curoky/dotbox:cache_stage_nixpkg,mode=max
-          no-cache: ${{ inputs.disable_docker_cache }}
+          no-cache: ${{ github.event_name == 'workflow_dispatch' && inputs.disable_docker_cache == true }}
           tags: curoky/dotbox:stage_nixpkg
 
   stage-conda:
