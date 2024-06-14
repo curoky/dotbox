@@ -10,9 +10,8 @@ on:
     inputs:
       disable_docker_cache:
         description: 'disable docker cache'
-        default: false
+        default: 'false'
         required: false
-        type: boolean
 
 jobs:
   stage-nixpkg:
