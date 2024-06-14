@@ -1,9 +1,9 @@
 # https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#create-env-file-manually
-name: tf2.16
+name: tf2.5
 channels:
   - defaults
 dependencies:
-  - python=3.11
+  - python=3.8
   - pip
   - pip:
       # common
@@ -16,13 +16,14 @@ dependencies:
       # others
       - numpy
       - pandas
-      - plotly
-      - protobuf #==4.24.4
+      # - plotly
+      - protobuf
       # - scikit-learn
       # - scipy
       # - statsmodels
-      - tensorboard==2.16.*
-      - tensorboard-plugin-profile
-      # - nvidia-cudnn-cu12
-      # - tensorrt
-      - tensorflow==2.16.1 # tensorflow[and-cuda]
+      - tensorboard==2.5.*
+      # - tensorboard-plugin-profile
+      # - nvidia-cudnn-cu11==8.9.6.50
+      # - tensorrt-cu11
+      # - tensorrt==8.6.1.post1
+      - tensorflow==2.5.0 # tensorflow[and-cuda]

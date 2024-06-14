@@ -1,3 +1,5 @@
+startup --host_jvm_args=-Djava.net.preferIPv6Addresses=true
+
 # bzlmod
 # build --enable_bzlmod
 # build --registry=https://bcr.bazel.build
@@ -5,16 +7,16 @@
 # build --registry=https://raw.githubusercontent.com/curoky/bazel-curoky-registry/master/
 
 # optimize options
-build --remote_download_toplevel
-build --spawn_strategy=local
-build --experimental_remote_cache_compression
-build --experimental_remote_build_event_upload=minimal
-build --noslim_profile --experimental_profile_include_target_label --experimental_profile_include_primary_output
-build --nolegacy_important_outputs
+# build --remote_download_toplevel
+# build --spawn_strategy=local
+# build --experimental_remote_cache_compression
+# build --experimental_remote_build_event_upload=minimal
+# build --noslim_profile --experimental_profile_include_target_label --experimental_profile_include_primary_output
+# build --nolegacy_important_outputs
 
 # compiler options
-build --dynamic_mode=off
-build --compilation_mode=dbg
+# build --dynamic_mode=off
+# build --compilation_mode=dbg
 # build --cxxopt=-std=c++17 --host_cxxopt=-std=c++17
 
 # remote executor
@@ -33,12 +35,12 @@ build --compilation_mode=dbg
 # build --disk_cache="~/.cache/bazel/disk_cache"
 
 # others
-build --check_visibility=false
-startup --host_jvm_args=-XX:-UseParallelGC
-query --keep_going
-build --show_timestamps
-build --keep_going # --jobs 180
-build --color=yes
+# build --check_visibility=false
+# startup --host_jvm_args=-XX:-UseParallelGC
+# query --keep_going
+# build --show_timestamps
+# build --keep_going # --jobs 180
+# build --color=yes
 # startup --output_base="~/.cache/bazel/base"
 # startup --output_user_root="~/.cache/bazel/user_root"
 # build --sandbox_base="/dev/shm/"
