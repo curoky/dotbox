@@ -55,7 +55,7 @@ pkg_list=(
   nixpkgs.git nixpkgs.git-absorb nixpkgs.git-extras nixpkgs.git-lfs nixpkgs.git-filter-repo nixpkgs.gnupatch
   # other tools
   nixpkgs.nix-index nixpkgs.nixpkgs-fmt nixpkgs.pre-commit nixpkgs.gperf
-  nixpkgs.openssh nixpkgs.pandoc nixpkgs.graphviz
+  nixpkgs.openssh_gssapi nixpkgs.pandoc nixpkgs.graphviz
   nixpkgs.parallel nixpkgs.cloc nixpkgs.go-task nixpkgs.krb5 nixpkgs.sqlite
 
   # nixpkgs.gost nixpkgs.htop nixpkgs.tcpdump nixpkgs.shellcheck
