@@ -16,8 +16,8 @@ COPY --chown=1000:1000 ./ /app/dotbox
 
 RUN /app/dotbox/dists/docker/script/setup-sys-conf.sh \
   && /app/dotbox/dists/docker/script/link-tools-to-usr.sh \
-  && dotdrop install --cfg=/app/dotbox/config/config.yaml --force --profile=devbox-sysconf \
-  && dotdrop install --cfg=/app/dotbox/config/config.yaml --force --profile=devbox-userconf-final
+  && dotdrop install --cfg=/app/dotbox/config/config.yaml --force --profile=docker-sysconf \
+  && dotdrop install --cfg=/app/dotbox/config/config.yaml --force --profile=docker-userconf-final
 
 USER x
 RUN sudo mkdir -p /data/share /data/cache /data/workspace \
@@ -25,7 +25,7 @@ RUN sudo mkdir -p /data/share /data/cache /data/workspace \
   && mkdir ~/.nix-defexpr \
   && ln -s ~/.local/state/nix/profiles/profile ~/.nix-profile \
   && ln -s ~/.local/state/nix/profiles/channels ~/.nix-defexpr/channels \
-  && dotdrop install --cfg=/app/dotbox/config/config.yaml --force --profile=devbox-userconf-base
+  && dotdrop install --cfg=/app/dotbox/config/config.yaml --force --profile=docker-userconf-base
 
 USER root
 ENTRYPOINT ["/app/dotbox/dists/docker/script/entrypoint.sh"]

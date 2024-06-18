@@ -285,12 +285,12 @@ dotfiles:
     dst: ~/.zshrc
     src: zsh/zshrc
 profiles:
-  # devbox-sysconf-proxy:
+  # docker-sysconf-proxy:
   #   dotfiles:
   #     - apt-proxy
   #     - docker-proxy
 
-  # devbox-sysconf-mirror-cn:
+  # docker-sysconf-mirror-cn:
   #   dotfiles:
   #     - apt-ubuntu-mirror-cn
   #     - nix-mirror-cn
@@ -298,7 +298,7 @@ profiles:
   #     - zshenv-etc-homebrew-mirror-cn
   #     - zshenv-etc-golang-proxy-cn
 
-  devbox-sysconf:
+  docker-sysconf:
     dotfiles:
       - linux-journal
       - linux-sudoers_more_secure_path
@@ -307,7 +307,7 @@ profiles:
       - ssh-etc-config
       - zshenv-etc
 
-  devbox-userconf-base:
+  docker-userconf-base:
     dotfiles:
       - bashrc
       - bat
@@ -323,9 +323,9 @@ profiles:
       - vim
       - vscode-server
 
-  devbox-userconf-final:
+  docker-userconf-final:
     include:
-      - devbox-userconf-base
+      - docker-userconf-base
     dotfiles:
       - git-config
       - ssh-user-config

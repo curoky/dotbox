@@ -20,8 +20,8 @@ set -xeuo pipefail
 cp -r /opt/dotbox ~/
 git -C ~/dotbox remote set-url origin git@github.com:curoky/dotbox
 
-dotdrop install --cfg=~/dotbox/config/config.yaml --force --profile=devbox-userconf
+dotdrop install --cfg=~/dotbox/config/config.yaml --force --profile=docker-userconf
 
 if [[ "$(id -un)" == "root" ]]; then
-  dotdrop install --cfg=~/dotbox/config/config.yaml --force --profile=devbox-sysconf
+  dotdrop install --cfg=~/dotbox/config/config.yaml --force --profile=docker-sysconf
 fi

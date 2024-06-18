@@ -11,7 +11,7 @@ jobs:
 
       - run: pip install dotdrop
 
-      - run: dotdrop install --cfg=config/config.yaml --force --profile=devbox-userconf-final
+      - run: dotdrop install --cfg=config/config.yaml --force --profile=docker-userconf-final
 
       - uses: pre-commit/action@v3.0.0
         with:

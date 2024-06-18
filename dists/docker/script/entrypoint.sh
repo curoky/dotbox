@@ -42,5 +42,5 @@ EOF
 
 sed -i -e "s/Port 61000/Port ${DEVBOX_SSHD_PORT:-61000}/g" /app/dotbox/config/sshd/sshd_config.conf
 
-# dotdrop install --force --cfg=/home/x/dotbox/config/config.yaml --profile=devbox-userconf-final
+# dotdrop install --force --cfg=/home/x/dotbox/config/config.yaml --profile=docker-userconf-final
 # exec /lib/systemd/systemd
