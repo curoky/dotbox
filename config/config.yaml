@@ -51,6 +51,9 @@ dotfiles:
   conda:
     dst: ~/.config/conda/condarc
     src: conda/condarc
+  croc:
+    dst: ~/.config/croc
+    src: croc
   crontab:
     dst: /etc/cron.d/custom.crontab
     link: nolink
@@ -309,6 +312,7 @@ profiles:
       - bashrc
       - bat
       - conda
+      - croc
       - gdb
       - nixpkgs
       - prettier
