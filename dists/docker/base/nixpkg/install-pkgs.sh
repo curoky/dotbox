@@ -25,6 +25,7 @@ pkg_list=(
   nixpkgs.bzip2 nixpkgs.xz nixpkgs.zstd nixpkgs.zip nixpkgs.unzip nixpkgs.gnutar nixpkgs.zlib nixpkgs.zlib-ng nixpkgs.gzip nixpkgs.snappy
   # download
   nixpkgs.gnupg nixpkgs.cacert nixpkgs.curl nixpkgs.wget nixpkgs.aria2 nixpkgs.rsync
+  nixpkgs.croc
   # edit
   nixpkgs.less nixpkgs.gnused nixpkgs.gnugrep nixpkgs.vim nixpkgs.bat nixpkgs.jq
   nixpkgs.flex nixpkgs.bison nixpkgs.gettext nixpkgs.m4
@@ -60,7 +61,7 @@ pkg_list=(
 
   # nixpkgs.gost nixpkgs.htop nixpkgs.tcpdump nixpkgs.shellcheck
   # nixpkgs.mkdocs nixpkgs.sphinx nixpkgs.hugo nixpkgs.inetutils
-  # nixpkgs.tmuxinator nixpkgs.direnv nixpkgs.ansible nixpkgs.croc
+  # nixpkgs.tmuxinator nixpkgs.direnv nixpkgs.ansible
   # nixpkgs.earthly nixpkgs.vultr-cli nixpkgs.qemu
   # nixpkgs.dolt nixpkgs.watchman nixpkgs.opencc nixpkgs.lcov nixpkgs.gcovr nixpkgs.ghq
   # nixpkgs.sqlcipher nixpkgs.sqlite nixpkgs.zoxide
