@@ -311,6 +311,7 @@ profiles:
     dotfiles:
       - bashrc
       - bat
+      - bazel
       - conda
       - croc
       - gdb
