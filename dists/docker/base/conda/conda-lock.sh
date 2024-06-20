@@ -20,5 +20,5 @@ env_names=$(conda env list | awk 'NR>2 {print $1}')
 
 for env in $env_names; do
   echo "process $env"
-  conda env export -n $env >conda/env/$env-lockfile.yaml
+  conda env export -n $env >env/$env-lockfile.yaml
 done

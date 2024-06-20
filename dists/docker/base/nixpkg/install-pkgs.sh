@@ -35,7 +35,8 @@ pkg_list=(
   nixpkgs.dstat nixpkgs.man nixpkgs.iptables nixpkgs.unixtools.xxd nixpkgs.util-linux
   nixpkgs.findutils nixpkgs.coreutils nixpkgs.lsb-release nixpkgs.tree
   nixpkgs.gdu nixpkgs.ncdu nixpkgs.silver-searcher nixpkgs.diffutils
-  nixpkgs.jemalloc nixpkgs.flamegraph nixpkgs.patchelf nixpkgs.strace
+  nixpkgs.jemalloc nixpkgs.flamegraph nixpkgs.patchelf nixpkgs.strace nixpkgs.zoxide
+  nixpkgs.procs nixpkgs.gping nixpkgs.broot
   # libraries
   # c/c++
   nixpkgs.automake nixpkgs.autoconf nixpkgs.libtool nixpkgs.pkg-config nixpkgs.gnumake
@@ -64,7 +65,7 @@ pkg_list=(
   # nixpkgs.tmuxinator nixpkgs.direnv nixpkgs.ansible
   # nixpkgs.earthly nixpkgs.vultr-cli nixpkgs.qemu
   # nixpkgs.dolt nixpkgs.watchman nixpkgs.opencc nixpkgs.lcov nixpkgs.gcovr nixpkgs.ghq
-  # nixpkgs.sqlcipher nixpkgs.sqlite nixpkgs.zoxide
+  # nixpkgs.sqlcipher nixpkgs.sqlite
   # nixpkgs.cron
 )
 nix-env -p /nix/var/nix/profiles/default -iA "${pkg_list[@]}"

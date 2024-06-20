@@ -26,3 +26,4 @@ dependencies:
       # - nvidia-cudnn-cu12
       # - tensorrt
       - tensorflow==2.16.1 # tensorflow[and-cuda]
+      - nvtabular
