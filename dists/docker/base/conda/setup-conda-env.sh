@@ -24,6 +24,7 @@ export PIP_CACHE_DIR=/tmp/pip
 
 env_file=${1}
 add_tf_env=${2:-0}
+cuda_version=${3:-11.4}
 env_name=$(grep -oP "name: \K\S+" $env_file)
 python_version=$(grep -oP " python=\K\S+" $env_file)
 # python_short_version=$(conda run -n $env_name python --version 2>&1 | awk '{print $2}' | cut -d '.' -f1,2)
@@ -41,13 +42,15 @@ if [[ $add_tf_env -eq 1 ]]; then
   target_env_file=$CONAN_ROOT/envs/$env_name/etc/conda/activate.d/env_vars.sh
   echo '' >$target_env_file
 
-  ###### for cuda
-  # echo 'export LD_LIBRARY_PATH=/nix/var/nix/profiles/cuda11_4/lib:$LD_LIBRARY_PATH' >>$target_env_file
-  echo 'export LD_LIBRARY_PATH=/usr/local/cuda-11.4/lib64:/usr/local/cuda-11.4/extras/CUPTI/lib64/:$LD_LIBRARY_PATH' >>$target_env_file
-  echo 'export LD_LIBRARY_PATH=/usr/local/cuda-12.3/lib64:/usr/local/cuda-12.3/extras/CUPTI/lib64/:$LD_LIBRARY_PATH' >>$target_env_file
+  if [[ $cuda_version == 11.4 ]]; then
+    echo 'export LD_LIBRARY_PATH=/usr/local/cuda-11.4/lib64:/usr/local/cuda-11.4/extras/CUPTI/lib64/:$LD_LIBRARY_PATH' >>$target_env_file
+    echo 'export LD_LIBRARY_PATH=/nix/var/nix/profiles/cu11_cudnn_8_9_7_29/lib:$LD_LIBRARY_PATH' >>$target_env_file
+    echo 'export CUDNN_INSTALL_PATH=/nix/var/nix/profiles/cu11_cudnn_8_9_7_29' >>$target_env_file
 
-  ###### for cudnn
-  # echo "export LD_LIBRARY_PATH=$CONAN_ROOT/envs/$env_name/lib/python$python_short_version/site-packages/nvidia/cudnn/lib:\$LD_LIBRARY_PATH" >>$target_env_file
-  # echo 'export LD_LIBRARY_PATH=/nix/var/nix/profiles/cu12_cudnn_8_9_7_29/lib:$LD_LIBRARY_PATH' >>$target_env_file
+  elif [[ $cuda_version == 12.3 ]]; then
+    echo 'export LD_LIBRARY_PATH=/usr/local/cuda-12.3/lib64:/usr/local/cuda-12.3/extras/CUPTI/lib64/:$LD_LIBRARY_PATH' >>$target_env_file
+    # echo 'export LD_LIBRARY_PATH=/nix/var/nix/profiles/cu12_cudnn_8_9_7_29/lib:$LD_LIBRARY_PATH' >>$target_env_file
+    # echo "export LD_LIBRARY_PATH=$CONAN_ROOT/envs/$env_name/lib/python$python_short_version/site-packages/nvidia/cudnn/lib:\$LD_LIBRARY_PATH" >>$target_env_file
+  fi
 
 fi
