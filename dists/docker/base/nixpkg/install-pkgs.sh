@@ -97,7 +97,7 @@ function install_gcc() {
 }
 # install_gcc 8
 # install_gcc 10
-# install_gcc 13
+install_gcc 13
 
 # nix-env -iA -p /nix/var/nix/profiles/libgcc nixpkgs.libgcc
 # gcc13_wrapper_root=$(realpath /nix/var/nix/profiles/gcc13/bin)/../
