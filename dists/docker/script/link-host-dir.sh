@@ -15,14 +15,25 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-set -xeuo pipefail
 
-BIN_NAMES=(curl grep sed gzip find less git) # perl bash
-for n in "${BIN_NAMES[@]}"; do
-  if [[ ! -e /usr/bin/$n ]]; then
-    ln -s /nix/var/nix/profiles/default/bin/$n /usr/bin/$n
-  fi
-done
+if [[ -d /data/cache ]]; then
+  rm -rf /home/x/.cache
+  ln -s /data/cache /home/x/.cache
+  chown x:x /data/cache
+fi
 
-ln -s /app/pipx/bin/{dotdrop,netron,licenseheaders} /usr/local/bin
-ln -s /nix/var/nix/profiles/default/bin/{curl,grep,sed,gzip,find,less,git,zsh} /usr/local/bin
+if [[ -d /data/cache/vscode-server ]]; then
+  rm -rf /home/x/.vscode-server
+  ln -s /data/cache/vscode-server /home/x/.vscode-server
+  chown x:x /data/cache/vscode-server
+fi
+
+if [[ -d /data/share/dotbox ]]; then
+  rm -rf /home/x/dotbox
+  ln -s /data/share/dotbox /home/x/dotbox
+  chown x:x /data/share/dotbox
+fi
+
+if [[ -d /data/workspace ]]; then
+  chown x:x /data/workspace
+fi

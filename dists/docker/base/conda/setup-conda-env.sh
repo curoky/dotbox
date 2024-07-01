@@ -44,12 +44,12 @@ if [[ $add_tf_env -eq 1 ]]; then
 
   if [[ $cuda_version == 11.4 ]]; then
     echo 'export LD_LIBRARY_PATH=/usr/local/cuda-11.4/lib64:/usr/local/cuda-11.4/extras/CUPTI/lib64/:$LD_LIBRARY_PATH' >>$target_env_file
-    echo 'export LD_LIBRARY_PATH=/nix/var/nix/profiles/cu11_cudnn_8_9_7_29/lib:$LD_LIBRARY_PATH' >>$target_env_file
-    echo 'export CUDNN_INSTALL_PATH=/nix/var/nix/profiles/cu11_cudnn_8_9_7_29' >>$target_env_file
+    echo 'export LD_LIBRARY_PATH=/usr/local/cudnn8-cu11.4/lib:$LD_LIBRARY_PATH' >>$target_env_file
+    echo 'export CUDNN_INSTALL_PATH=/usr/local/cudnn8-cu11.4' >>$target_env_file
 
   elif [[ $cuda_version == 12.3 ]]; then
     echo 'export LD_LIBRARY_PATH=/usr/local/cuda-12.3/lib64:/usr/local/cuda-12.3/extras/CUPTI/lib64/:$LD_LIBRARY_PATH' >>$target_env_file
-    # echo 'export LD_LIBRARY_PATH=/nix/var/nix/profiles/cu12_cudnn_8_9_7_29/lib:$LD_LIBRARY_PATH' >>$target_env_file
+    echo 'export LD_LIBRARY_PATH=/usr/local/cudnn9-cu12.3/lib:$LD_LIBRARY_PATH' >>$target_env_file
     # echo "export LD_LIBRARY_PATH=$CONAN_ROOT/envs/$env_name/lib/python$python_short_version/site-packages/nvidia/cudnn/lib:\$LD_LIBRARY_PATH" >>$target_env_file
   fi
 
